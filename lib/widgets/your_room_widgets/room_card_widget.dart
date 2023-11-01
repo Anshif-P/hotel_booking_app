@@ -1,15 +1,43 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/model/get_rooms_model.dart';
+import 'package:hotel_booking_app/view/screen_add_room.dart';
+import 'package:hotel_booking_app/view/screen_details.dart';
+import 'package:hotel_booking_app/view_model/addroom_controller.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
+import 'package:hotel_booking_app/widgets/your_room_widgets/delete_diolog.dart';
+import 'package:shimmer/shimmer.dart';
 
 import 'card_text_widget.dart';
 
 class RoomCardWidget extends StatelessWidget {
+  final VendorController controller;
+  final String propertyName;
+  final String location;
+  final String propertyType;
+  final String category;
+  final String price;
+  final VendorRoomModel data;
   final double widthMedia;
   final double heightMedia;
-  const RoomCardWidget(
-      {super.key, required this.heightMedia, required this.widthMedia});
+  final String image;
+  Rx<bool> imageLoadingCheck = false.obs;
+  RoomCardWidget(
+      {super.key,
+      required this.controller,
+      required this.data,
+      required this.heightMedia,
+      required this.widthMedia,
+      required this.location,
+      required this.category,
+      required this.price,
+      required this.propertyName,
+      required this.image,
+      required this.propertyType});
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +50,51 @@ class RoomCardWidget extends StatelessWidget {
             // height: 120,
             height: heightMedia * 0.15,
             decoration: BoxDecoration(
-                // color: Colors.yellow,
+                //color: Colors.yellow,
                 borderRadius: BorderRadius.circular(9),
                 border: Border.all(color: CustomColors.lightGreyColor)),
             child: Row(children: [
               Expanded(
-                  flex: 1,
-                  child: Container(
-                    //  color: Colors.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.blue[900],
-                              borderRadius: BorderRadius.circular(7)),
-                          width: widthMedia * 0.24,
-                          height: heightMedia * 0.12,
-                        ),
-                      ],
+                flex: 3,
+                child: Row(
+                  //  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: widthMedia * 0.03,
                     ),
-                  )),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(7),
+                      child: CachedNetworkImage(
+                        width: widthMedia * 0.24,
+                        height: heightMedia * 0.12,
+                        imageUrl: data.imageList![0],
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Shimmer.fromColors(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.blue[900],
+                                image: data.imageList?[0] != null
+                                    ? DecorationImage(
+                                        image: NetworkImage(image),
+                                        fit: BoxFit.cover)
+                                    : null,
+                                borderRadius: BorderRadius.circular(7)),
+                            width: widthMedia * 0.24,
+                            height: heightMedia * 0.12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Expanded(
-                  flex: 1,
-                  child: SizedBox(
+                  flex: 4,
+                  child: Container(
                     width: widthMedia * 0.12,
-                    //  color: Colors.yellow,
+                    //color: Colors.yellow,
                     height: heightMedia * 0.12,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
@@ -58,7 +105,7 @@ class RoomCardWidget extends StatelessWidget {
                             height: heightMedia * 0.006,
                           ),
                           Text(
-                            'Greeny',
+                            propertyName,
                             style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
                                     color: Colors.black,
@@ -76,7 +123,7 @@ class RoomCardWidget extends StatelessWidget {
                                 size: 16,
                               ),
                               Text(
-                                'Kerala , India',
+                                location,
                                 style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                   color: Color(0xFFA19B9B),
@@ -88,12 +135,11 @@ class RoomCardWidget extends StatelessWidget {
                           SizedBox(
                             height: heightMedia * 0.006,
                           ),
-                          const CardText(
-                              text1: 'Property type', text2: "Hotel"),
+                          CardText(text1: 'Property type', text2: propertyType),
                           SizedBox(
                             height: heightMedia * 0.006,
                           ),
-                          const CardText(text1: 'Category', text2: "Classic"),
+                          CardText(text1: 'Category', text2: category),
                           SizedBox(
                             height: heightMedia * 0.006,
                           ),
@@ -108,7 +154,7 @@ class RoomCardWidget extends StatelessWidget {
                                 )),
                               ),
                               Text(
-                                '₹1200',
+                                '₹$price',
                                 style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                   color: CustomColors.greenColor,
@@ -122,65 +168,94 @@ class RoomCardWidget extends StatelessWidget {
                       ),
                     ),
                   )),
-              Expanded(
-                  flex: 1,
-                  child: SizedBox(
-                    width: widthMedia * 0.12,
-                    //    color: Colors.green,
-                    height: heightMedia * 0.14,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              height: heightMedia * 0.016,
-                            ),
-                            Icon(
-                              Icons.delete,
-                              color: CustomColors.mainColor,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              height: heightMedia * 0.016,
-                            ),
-                            Text(
-                              'View',
-                              style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                color: Colors.blue,
+              Container(
+                width: widthMedia * 0.2,
+                //color: Colors.green,
+                // height: heightMedia * 0.14,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: heightMedia * 0.016,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DeleteDialog(
+                                    controller: controller,
+                                    id: data.id!,
+                                  );
+                                });
+                          },
+                          child: Icon(
+                            Icons.delete,
+                            color: CustomColors.mainColor,
+                            size: 20,
+                          ),
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.016,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => ScreenRoomDetails(
+                                  data: data,
+                                  propertyName: propertyName,
+                                ));
+                          },
+                          child: Text(
+                            'View',
+                            style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 9,
+                            )),
+                          ),
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.014,
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            alignment: (Alignment.center), // Center-align text,
+                            elevation: MaterialStateProperty.all(0),
+                            minimumSize:
+                                MaterialStateProperty.all(Size(60, 25)),
+                            padding: MaterialStateProperty.all(
+                                EdgeInsets.all(0)), // Set padding to 0
+                            backgroundColor: MaterialStateProperty.all(
+                                CustomColors.greenColor),
+                          ),
+                          onPressed: () {
+                            print('before navig');
+                            print(data);
+                            Get.to(() => ScreenAddRoom(
+                                  editCheck: true,
+                                  data: data,
+                                ));
+                          },
+                          child: Text(
+                            'Edit',
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 9,
-                              )),
-                            ),
-                            SizedBox(
-                              height: heightMedia * 0.01,
-                            ),
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                elevation: MaterialStateProperty.all(0),
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(10, 25)),
-                                backgroundColor: MaterialStateProperty.all(
-                                    CustomColors.greenColor),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'Edit',
-                                style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 9,
-                                )),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ))
+                  ),
+                ),
+              )
             ])),
       ],
     );

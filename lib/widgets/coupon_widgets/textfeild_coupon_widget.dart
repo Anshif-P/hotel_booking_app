@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CouponTextFeildWidget extends StatelessWidget {
   final String text;
@@ -26,6 +27,7 @@ class CouponTextFeildWidget extends StatelessWidget {
         ),
         SizedBox(
           child: TextFormField(
+            style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 14)),
             onEditingComplete: () {
               FocusScope.of(context)
                   .nextFocus(); // Move focus to the next field

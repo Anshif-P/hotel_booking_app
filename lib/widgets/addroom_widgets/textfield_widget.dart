@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 
 class TextFeildAddRoomWidget extends StatelessWidget {
   final String text;
@@ -44,47 +46,49 @@ class TextFeildAddRoomWidget extends StatelessWidget {
           height:
               descriptionSizeCheck ? heightMedia * 0.14 : heightMedia * 0.054,
           width: textFieldSizeCheck ? widthMedia * 0.41 : widthMedia * 0.889,
-          child: TextFormField(
-            onEditingComplete: () {
-              FocusScope.of(context).nextFocus();
-            },
-            validator: validationFunction,
-            maxLines: descriptionSizeCheck ? 5 : 1,
-            controller: controller,
-            decoration: InputDecoration(
-              constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
-                borderRadius: BorderRadius.circular(4),
+          child: GetBuilder<AddRoomController>(
+            builder: (controllers) => TextFormField(
+              onEditingComplete: () {
+                FocusScope.of(context).nextFocus();
+              },
+              validator: validationFunction,
+              maxLines: descriptionSizeCheck ? 5 : 1,
+              controller: controller,
+              decoration: InputDecoration(
+                constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Colors.red), // Set the border color when focused
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Colors.red), // Set the border color when focused
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Colors.black), // Set the border color when focused
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Color(
+                          0xFFD1D1D1)), // Set the border color when not focused
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                contentPadding: descriptionSizeCheck
+                    ? const EdgeInsets.only(top: 20, left: 15)
+                    : const EdgeInsets.only(
+                        left: 10,
+                      ),
+                hintText: hintText,
+                hintStyle: GoogleFonts.inter(
+                    textStyle: const TextStyle(
+                  color: Color(0xFF999999),
+                  fontSize: 14,
+                )),
               ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
-                borderRadius: BorderRadius.circular(4),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.black), // Set the border color when focused
-                borderRadius: BorderRadius.circular(4),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Color(
-                        0xFFD1D1D1)), // Set the border color when not focused
-                borderRadius: BorderRadius.circular(4),
-              ),
-              contentPadding: descriptionSizeCheck
-                  ? const EdgeInsets.only(top: 20, left: 15)
-                  : const EdgeInsets.only(
-                      left: 10,
-                    ),
-              hintText: hintText,
-              hintStyle: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                color: Color(0xFF999999),
-                fontSize: 14,
-              )),
             ),
           ),
         )

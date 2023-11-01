@@ -1,24 +1,28 @@
 class VendorRoomModel {
-  final String roomNo;
-  final String price;
-  final String adultRate;
-  final String OneRoom;
-  final String capacity;
-  final String address;
-  final String city;
-  final String state;
-  final String zip;
-  final String description;
-  final String amenities;
-  final String image;
-  final String category;
-  final String location;
+  final String? id;
+  final String? propertyType;
+  final String? totalRoom;
+  final String? price;
+  final String? adultRate;
+  final bool isApproved;
+  final String? capacity;
+  final String? address;
+  final String? city;
+  final String? state;
+  final String? zip;
+  final String? description;
+  final List? amenities;
+  final List? imageList;
+  final String? category;
+  final String? location;
 
   VendorRoomModel(
-      {required this.roomNo,
+      {required this.totalRoom,
+      required this.id,
+      required this.isApproved,
+      required this.propertyType,
       required this.price,
       required this.adultRate,
-      required this.OneRoom,
       required this.capacity,
       required this.address,
       required this.city,
@@ -26,15 +30,20 @@ class VendorRoomModel {
       required this.zip,
       required this.description,
       required this.amenities,
-      required this.image,
+      required this.imageList,
       required this.category,
       required this.location});
-  factory VendorRoomModel.toJson(Map<String, dynamic> map) {
+  factory VendorRoomModel.toJson(map) {
+    print('this. is in Model');
+
+    print(map['_id']);
     return VendorRoomModel(
-        roomNo: map['roomNo'],
+        id: map['_id'],
+        isApproved: map['isApproved'],
+        propertyType: map['propertyType'],
+        totalRoom: map['totalrooms'],
         price: map['price'],
-        adultRate: map['adultRate'],
-        OneRoom: map['OneRoom'],
+        adultRate: map['AdultsRate'],
         capacity: map['capacity'],
         address: map['address'],
         city: map['city'],
@@ -42,7 +51,7 @@ class VendorRoomModel {
         zip: map['zip'],
         description: map['description'],
         amenities: map['amenities'],
-        image: map['image'],
+        imageList: map['img'],
         category: map['category'],
         location: map['location']);
   }

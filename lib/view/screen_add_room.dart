@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 
 import 'package:hotel_booking_app/widgets/addroom_widgets/map_select_location.dart';
@@ -14,10 +15,15 @@ import '../widgets/addroom_widgets/select_photos_widget.dart';
 import '../widgets/comman/heading_text.dart';
 
 class ScreenAddRoom extends StatelessWidget {
-  final addRoomController = Get.put<AddRoomController>(AddRoomController());
-  ScreenAddRoom({super.key});
+  final VendorRoomModel? data;
+  const ScreenAddRoom({super.key, this.editCheck = false, this.data});
+  final bool editCheck;
+
   @override
   Widget build(BuildContext context) {
+    final addRoomController =
+        Get.put(AddRoomController(roomObjForEdit: data), permanent: false);
+
     double heightMedia = MediaQuery.sizeOf(context).height;
     double widthMedia = MediaQuery.sizeOf(context).width;
     return Scaffold(
@@ -25,76 +31,77 @@ class ScreenAddRoom extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
-            key: addRoomController.formKey,
-            child: ListView(
-              children: [
-                SizedBox(
-                  height: heightMedia * 0.03,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+            key: addRoomController.addRoomFormKey,
+            child: GetBuilder<AddRoomController>(
+              builder: (controller) => ListView(
+                children: [
+                  SizedBox(height: heightMedia * 0.03),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Row(children: [
+                      InkWell(
+                          onTap: () => Get.back(),
+                          child: const Icon(Icons.arrow_back)),
+                      SizedBox(width: widthMedia * 0.2)
+                    ]),
                     HeadingTextWidget(
                       text: 'Add your room',
                     )
-                  ],
-                ),
-                SizedBox(
-                  height: heightMedia * 0.027,
-                ),
-                Text(
-                  'Select photos',
-                  style: GoogleFonts.inter(
-                      textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 19,
-                  )),
-                ),
-                const SizedBox(
-                  height: 17,
-                ),
-                GetBuilder<AddRoomController>(
-                  builder: (controller) {
-                    return Row(
-                      children: [
-                        SelectPhotosWidgts(
-                          caseNo: 1,
-                          addRoomController: addRoomController,
-                          image: addRoomController.image1,
-                          heightMedia: heightMedia,
-                          widthMedia: widthMedia,
-                        ),
-                        SizedBox(width: 26),
-                        SelectPhotosWidgts(
-                          caseNo: 2,
-                          addRoomController: addRoomController,
-                          image: addRoomController.image2,
-                          heightMedia: heightMedia,
-                          widthMedia: widthMedia,
-                        ),
-                        SizedBox(width: 26),
-                        SelectPhotosWidgts(
-                          caseNo: 3,
-                          addRoomController: addRoomController,
-                          image: addRoomController.image3,
-                          heightMedia: heightMedia,
-                          widthMedia: widthMedia,
-                        ),
-                        SizedBox(width: 26),
-                        SelectPhotosWidgts(
-                          caseNo: 4,
-                          addRoomController: addRoomController,
-                          image: addRoomController.image4,
-                          heightMedia: heightMedia,
-                          widthMedia: widthMedia,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                const SizedBox(height: 17),
-                Row(
-                  children: [
+                  ]),
+                  SizedBox(height: heightMedia * 0.027),
+                  Text(
+                    'Select photos',
+                    style: GoogleFonts.inter(
+                        textStyle:
+                            const TextStyle(color: Colors.black, fontSize: 19)),
+                  ),
+                  const SizedBox(height: 17),
+                  Row(children: [
+                    SelectPhotosWidgts(
+                      netWorkImage: data?.imageList?[0],
+                      editCheck: editCheck,
+                      data: data,
+                      caseNo: 1,
+                      addRoomController: addRoomController,
+                      imagePath: addRoomController.image1,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
+                    const SizedBox(width: 26),
+                    SelectPhotosWidgts(
+                      netWorkImage: data?.imageList?[1],
+                      editCheck: editCheck,
+                      data: data,
+                      caseNo: 2,
+                      addRoomController: addRoomController,
+                      imagePath: addRoomController.image2,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
+                    SizedBox(width: 26),
+                    SelectPhotosWidgts(
+                      netWorkImage: data?.imageList?[2],
+                      editCheck: editCheck,
+                      data: data,
+                      caseNo: 3,
+                      addRoomController: addRoomController,
+                      imagePath: addRoomController.image3,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
+                    SizedBox(width: 26),
+                    SelectPhotosWidgts(
+                      netWorkImage: data?.imageList?[3],
+                      editCheck: editCheck,
+                      data: data,
+                      caseNo: 4,
+                      addRoomController: addRoomController,
+                      imagePath: addRoomController.image4,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
+                  ]),
+                  const SizedBox(height: 17),
+                  Row(children: [
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -105,9 +112,7 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                    SizedBox(
-                      width: widthMedia * 0.066,
-                    ),
+                    SizedBox(width: widthMedia * 0.066),
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -118,13 +123,9 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: heightMedia * 0.01,
-                ),
-                Row(
-                  children: [
+                  ]),
+                  SizedBox(height: heightMedia * 0.01),
+                  Row(children: [
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -135,9 +136,7 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                    SizedBox(
-                      width: widthMedia * 0.066,
-                    ),
+                    SizedBox(width: widthMedia * 0.066),
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -148,13 +147,9 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: heightMedia * 0.01,
-                ),
-                Row(
-                  children: [
+                  ]),
+                  SizedBox(height: heightMedia * 0.01),
+                  Row(children: [
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -165,9 +160,7 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                    SizedBox(
-                      width: widthMedia * 0.066,
-                    ),
+                    SizedBox(width: widthMedia * 0.066),
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -178,25 +171,19 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: heightMedia * 0.01,
-                ),
-                TextFeildAddRoomWidget(
-                  validationFunction: (value) =>
-                      addRoomController.textFieldValidation(value),
-                  text: 'Property Address',
-                  hintText: 'enter your property address',
-                  controller: addRoomController.propertyAddressController,
-                  heightMedia: heightMedia,
-                  widthMedia: widthMedia,
-                ),
-                SizedBox(
-                  height: heightMedia * 0.01,
-                ),
-                Row(
-                  children: [
+                  ]),
+                  SizedBox(height: heightMedia * 0.01),
+                  TextFeildAddRoomWidget(
+                    validationFunction: (value) =>
+                        addRoomController.textFieldValidation(value),
+                    text: 'Property Address',
+                    hintText: 'enter your property address',
+                    controller: addRoomController.propertyAddressController,
+                    heightMedia: heightMedia,
+                    widthMedia: widthMedia,
+                  ),
+                  SizedBox(height: heightMedia * 0.01),
+                  Row(children: [
                     TextFeildAddRoomWidget(
                       validationFunction: (value) =>
                           addRoomController.textFieldValidation(value),
@@ -207,9 +194,7 @@ class ScreenAddRoom extends StatelessWidget {
                       heightMedia: heightMedia,
                       widthMedia: widthMedia,
                     ),
-                    SizedBox(
-                      width: widthMedia * 0.066,
-                    ),
+                    SizedBox(width: widthMedia * 0.066),
                     DropDownButton(
                       addRoomController: addRoomController,
                       heightMedia: heightMedia,
@@ -218,103 +203,89 @@ class ScreenAddRoom extends StatelessWidget {
                       hintText: 'Select State',
                       textButtonCheck: true,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: heightMedia * 0.01,
-                ),
-                Row(
-                  children: [
-                    TextFeildAddRoomWidget(
-                      validationFunction: (value) =>
-                          addRoomController.textFieldValidation(value),
-                      text: 'Pin code',
-                      hintText: 'enter your pin code',
-                      controller: addRoomController.pinCodeController,
-                      textFieldSizeCheck: true,
-                      heightMedia: heightMedia,
-                      widthMedia: widthMedia,
-                    ),
-                    SizedBox(
-                      width: widthMedia * 0.066,
-                    ),
-                    DropDownButton(
-                      addRoomController: addRoomController,
-                      heightMedia: heightMedia,
-                      widthMedia: widthMedia,
-                      text: 'Choose Category',
-                      hintText: 'Select Type',
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                Text(
-                  'Room Amenities',
-                  style: GoogleFonts.inter(
-                      textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                  )),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CheckBoxWidget(
-                  addRoomController: addRoomController,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFeildAddRoomWidget(
-                  validationFunction: (value) =>
-                      addRoomController.textFieldValidation(value),
-                  controller: addRoomController.descriptionController,
-                  heightMedia: heightMedia,
-                  hintText: 'Enter your room description',
-                  text: 'Room Description',
-                  widthMedia: widthMedia,
-                  descriptionSizeCheck: true,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Select Your Location',
-                  style: GoogleFonts.inter(
-                      textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 12,
-                  )),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MapWidget(),
-                const SizedBox(
-                  height: 20,
-                ),
-                LoginSignButton(
-                    loadingCheck: addRoomController.loadingCheck,
-                    onpressFunction: () =>
-                        addRoomController.addRoomButtonFunction(),
-                    // getxController: addRoomController,
-                    text: 'Submit',
-                    colorCheck: true),
-                const SizedBox(
-                  height: 40,
-                ),
-                ElevatedButton(
-                    onPressed: () async {
-                      SharedPreferences share =
-                          await SharedPreferences.getInstance();
+                  ]),
+                  SizedBox(height: heightMedia * 0.01),
+                  Row(
+                    children: [
+                      TextFeildAddRoomWidget(
+                        validationFunction: (value) =>
+                            addRoomController.textFieldValidation(value),
+                        text: 'Pin code',
+                        hintText: 'enter your pin code',
+                        controller: addRoomController.pinCodeController,
+                        textFieldSizeCheck: true,
+                        heightMedia: heightMedia,
+                        widthMedia: widthMedia,
+                      ),
+                      SizedBox(width: widthMedia * 0.066),
+                      DropDownButton(
+                        addRoomController: addRoomController,
+                        heightMedia: heightMedia,
+                        widthMedia: widthMedia,
+                        text: 'Choose Category',
+                        hintText: 'Select Type',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Text('Room Amenities',
+                      style: GoogleFonts.inter(
+                          textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                      ))),
+                  const SizedBox(height: 10),
+                  CheckBoxWidget(
+                    addRoomController: addRoomController,
+                  ),
+                  const SizedBox(height: 10),
+                  TextFeildAddRoomWidget(
+                    validationFunction: (value) =>
+                        addRoomController.textFieldValidation(value),
+                    controller: addRoomController.descriptionController,
+                    heightMedia: heightMedia,
+                    hintText: 'Enter your room description',
+                    text: 'Room Description',
+                    widthMedia: widthMedia,
+                    descriptionSizeCheck: true,
+                  ),
+                  const SizedBox(height: 10),
+                  Text('Select Your Location',
+                      style: GoogleFonts.inter(
+                          textStyle: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                      ))),
+                  const SizedBox(height: 10),
+                  MapWidget(),
+                  const SizedBox(height: 20),
+                  editCheck
+                      ? LoginSignButton(
+                          loadingCheck: addRoomController.loadingCheck,
+                          onpressFunction: () =>
+                              addRoomController.addEditRoomButtonFunction(data),
+                          // getxController: addRoomController,
+                          text: 'Update',
+                          colorCheck: true)
+                      : LoginSignButton(
+                          loadingCheck: addRoomController.loadingCheck,
+                          onpressFunction: () =>
+                              addRoomController.addEditRoomButtonFunction(data),
+                          // getxController: addRoomController,
+                          text: 'Submit',
+                          colorCheck: true),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                      onPressed: () async {
+                        SharedPreferences share =
+                            await SharedPreferences.getInstance();
 
-                      final token = await share.getString('token');
-                      print(token);
-                    },
-                    child: Text('hai'))
-              ],
+                        final token = await share.getString('token');
+                        print(token);
+                      },
+                      child: Text('hai'))
+                ],
+              ),
             ),
           ),
         ),

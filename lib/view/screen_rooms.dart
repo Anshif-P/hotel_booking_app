@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
 import 'package:hotel_booking_app/widgets/comman/heading_text.dart';
 import 'package:hotel_booking_app/widgets/your_room_widgets/waittiing_approval_room.dart';
@@ -7,6 +9,7 @@ import 'package:hotel_booking_app/widgets/your_room_widgets/waittiing_approval_r
 import '../widgets/your_room_widgets/confirmed_room_widget.dart';
 
 class ScreenRooms extends StatelessWidget {
+  final VendorController vendorController = Get.put(VendorController());
   @override
   Widget build(BuildContext context) {
     double heightMedia = MediaQuery.sizeOf(context).height;
@@ -59,10 +62,12 @@ class ScreenRooms extends StatelessWidget {
               child: TabBarView(
                 children: [
                   ScreenApprovedRoom(
+                    vendorController: vendorController,
                     heightMedia: heightMedia,
                     widthMedia: widthMedia,
                   ),
                   ScreenPendingApproval(
+                    vendorController: vendorController,
                     heightMedia: heightMedia,
                     widthMedia: widthMedia,
                   ),

@@ -55,7 +55,7 @@ class Api {
 
     final response = await http.get(uri, headers: {'vendortoken': '$token'});
     print('heoloooo');
-    print(response.body);
+
     return response;
   }
 
@@ -66,6 +66,37 @@ class Api {
     final response = await http.get(uri, headers: {'vendortoken': '$token'});
     print(response.statusCode);
     print('get vendor fnc');
+
+    return response;
+  }
+
+  Future<http.Response> deleteRoom(id) async {
+    final url = '${Urls.baseUrl}${Urls.deleteRoon}$id';
+    final uri = Uri.parse(url);
+    final token = SharedPrefModel.instance.getData('token');
+    final header = {'vendortoken': '$token'};
+    final response = await http.delete(
+      uri,
+      headers: header,
+    );
+    print(response.body);
+    return response;
+  }
+
+  Future<http.Response> updateRoom(Map<String, dynamic> map, String id) async {
+    print('in api fnc');
+    final token = SharedPrefModel.instance.getData('token');
+    http.Response response;
+    final url = '${Urls.baseUrl}${Urls.editRoom}$id';
+    final uri = Uri.parse(url);
+    print(map);
+    final body = jsonEncode(map);
+    response = await http.put(
+      uri,
+      body: body,
+      headers: {'Content-Type': 'application/json', 'vendortoken': '$token'},
+    );
+    print(map);
     print(response.body);
     return response;
   }

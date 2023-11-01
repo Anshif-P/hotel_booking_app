@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
@@ -28,6 +27,7 @@ class CouponCardWidget extends StatelessWidget {
                   flex: 1,
                   child: Container(
                     height: heightMedia * 0.13,
+
                     //color: Colors.blue,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +51,7 @@ class CouponCardWidget extends StatelessWidget {
                 flex: 2,
                 child: Container(
                   height: heightMedia * 0.1,
-                  //   color: Colors.yellow,
+                  //  color: Colors.yellow,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

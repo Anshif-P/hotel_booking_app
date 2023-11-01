@@ -14,19 +14,9 @@ class AmentiesWidget extends StatelessWidget {
     'Meeting Room': Icon(Icons.meeting_room_outlined),
     'Elevator': Icon(Icons.elevator_outlined)
   };
-  List itemsName = [
-    'Wifi',
-    'Restaurant',
-    'Ac',
-    'Power backup',
-    'Fitness Center',
-    'Tv',
-    'Swimming Pool',
-    'Meeting Room',
-    'Elevator'
-  ];
-  AmentiesWidget({super.key});
-
+  List? itemsName;
+  AmentiesWidget({super.key, required this.itemsName});
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -35,16 +25,18 @@ class AmentiesWidget extends StatelessWidget {
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4, crossAxisSpacing: 10, childAspectRatio: 1.3),
-      itemCount: itemsName.length,
+      itemCount: itemsName!.length,
       itemBuilder: (context, index) {
+        print(itemsName![index]);
+        print(itemsIcon[itemsName![index]]);
         return Container(
           //   color: Colors.red,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              itemsIcon[itemsName[index]],
+              itemsIcon[itemsName![index]],
               Text(
-                itemsName[index],
+                itemsName![index],
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                     textStyle: TextStyle(

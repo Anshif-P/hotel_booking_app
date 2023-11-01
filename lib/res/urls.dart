@@ -5,4 +5,7 @@ class Urls {
   static String addRoomEndPoint = '/api/vendor/addRoom';
   static String getVendorRooms = '/api/vendor/getRoomview';
   static String getVendorDetails = '/api/vendor/vendorData';
+  static String getVendorOneRoomDetails = '/api/vendor/getVendorRoom/:roomId';
+  static String deleteRoon = '/api/vendor/delteRoom/';
+  static String editRoom = '/api/vendor/editRoomDetails/';
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class DatePickingWidget extends StatelessWidget {
   final String text;
@@ -35,10 +37,12 @@ class DatePickingWidget extends StatelessWidget {
         ),
         SizedBox(
           child: TextFormField(
+            readOnly: true,
             onEditingComplete: () {
               FocusScope.of(context)
                   .nextFocus(); // Move focus to the next field
             },
+            style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 13.6)),
             validator: validator,
             controller: controller,
             decoration: InputDecoration(
@@ -47,6 +51,11 @@ class DatePickingWidget extends StatelessWidget {
                 maxHeight: 70,
                 minHeight: 35,
               ),
+              suffixIcon: IconButton(
+                  onPressed: () {
+                    _showDate1(context, controller);
+                  },
+                  icon: Icon(Icons.date_range)),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                     color: Colors.red), // Set the border color when focused
@@ -77,5 +86,20 @@ class DatePickingWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _showDate1(BuildContext context, TextEditingController date) async {
+    await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2025),
+    ).then((value) {
+      if (value == null) {
+        return;
+      } else {
+        date.text = DateFormat('E, d MMM y').format(value);
+      }
+    });
   }
 }

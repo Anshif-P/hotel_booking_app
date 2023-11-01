@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 
@@ -16,9 +17,10 @@ class HotelDetailsTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.inter(
           textStyle: TextStyle(
-        color: colorCheck ? Colors.grey[400] : Colors.black,
+        color: colorCheck ? CustomColors.lightGreyColor : Colors.black,
         fontSize: sizeCheck ? 20 : 14,
       )),
     );

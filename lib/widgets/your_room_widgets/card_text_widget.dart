@@ -15,6 +15,7 @@ class CardText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text1 : $text2',
+      overflow: TextOverflow.ellipsis,
       style: GoogleFonts.inter(
           textStyle: TextStyle(
         color: colorCheck ? const Color(0xFFA19B9B) : Colors.black,

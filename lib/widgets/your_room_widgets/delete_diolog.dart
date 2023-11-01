@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking_app/model/sharepref_model.dart';
-import 'package:hotel_booking_app/view/screen_login.dart';
+import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
-import '../../constance/colors.dart';
-
-class LogoutDialog extends StatelessWidget {
-  LogoutDialog({
-    Key? key,
-  }) : super(key: key);
+class DeleteDialog extends StatelessWidget {
+  final VendorController controller;
+  final String id;
+  const DeleteDialog({super.key, required this.controller, required this.id});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text(
-        'Sign Out ',
+        'Delete',
         style: TextStyle(
           fontWeight: FontWeight.bold,
         ),
       ),
       content: Text(
-        'Do you want to sign out',
+        'Do you want to Delete',
         style: TextStyle(color: Color(0xFF6D6D6D)),
       ),
       actions: <Widget>[
@@ -38,11 +36,11 @@ class LogoutDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () async {
-            SharedPrefModel.instance.removeData('token');
-            Get.to(() => ScreenLogin());
+            controller.deleteRoom(id);
+            Get.back();
           },
           child: Text(
-            'Sign out',
+            'Delete',
             style: TextStyle(
               color: CustomColors.mainColor,
               fontWeight: FontWeight.bold,

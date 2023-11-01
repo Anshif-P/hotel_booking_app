@@ -8,12 +8,16 @@ import 'package:hotel_booking_app/view/screen_bottom_navigation.dart';
 import 'package:hotel_booking_app/view/screen_login.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
+import 'screen_temp_bottom_navigation.dart';
+
 class ScreenSplash extends StatefulWidget {
   ScreenSplash({super.key});
 
   @override
   State<ScreenSplash> createState() => _ScreenSplashState();
 }
+
+Rx<bool> loadingCheck = false.obs;
 
 class _ScreenSplashState extends State<ScreenSplash> {
   @override
@@ -71,6 +75,18 @@ class _ScreenSplashState extends State<ScreenSplash> {
               child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Obx(
+                () => SizedBox(
+                    child: loadingCheck.value
+                        ? SizedBox()
+                        : Transform.scale(
+                            scale: .5,
+                            child: const CircularProgressIndicator(
+                              strokeWidth: 7,
+                              color: Colors.white,
+                            ),
+                          )),
+              ),
               Text(
                 'Vendor',
                 style: GoogleFonts.inter(
@@ -93,7 +109,10 @@ class _ScreenSplashState extends State<ScreenSplash> {
     if (token != null) {
       await venderController.getVendorDetails();
 
-      Get.to(() => ScreenBottomNavigation());
+      await venderController.getVndorRooms();
+      loadingCheck.value = true;
+
+      Get.to(() => TempBottomNavigation());
     } else {
       Get.to(() => ScreenLogin());
     }

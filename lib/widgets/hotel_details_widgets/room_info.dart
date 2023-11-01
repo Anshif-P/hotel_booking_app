@@ -2,13 +2,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/model/get_rooms_model.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/hotel_details_widgets/hotel_details_text_widget.dart';
 
 class RoomInfoWidget extends StatelessWidget {
   final double widthMedia;
   final double heightMedia;
+  final VendorRoomModel data;
   const RoomInfoWidget(
-      {super.key, required this.heightMedia, required this.widthMedia});
+      {super.key,
+      required this.heightMedia,
+      required this.widthMedia,
+      required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +30,13 @@ class RoomInfoWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HotelDetailsTextWidget(text: 'Property type :Hotel'),
+                      HotelDetailsTextWidget(
+                          text: 'Property type : ${data.propertyType}'),
                       SizedBox(
                         height: heightMedia * 0.01,
                       ),
-                      HotelDetailsTextWidget(text: 'Capacity : 3'),
+                      HotelDetailsTextWidget(
+                          text: 'Capacity : ${data.capacity}'),
                       SizedBox(
                         height: heightMedia * 0.01,
                       ),
@@ -36,7 +44,7 @@ class RoomInfoWidget extends StatelessWidget {
                         children: [
                           HotelDetailsTextWidget(text: 'Adult rate :'),
                           Text(
-                            ' ₹400',
+                            ' ₹${data.adultRate}',
                             style: GoogleFonts.inter(
                                 textStyle: TextStyle(
                               color: CustomColors.greenColor,
@@ -56,19 +64,20 @@ class RoomInfoWidget extends StatelessWidget {
             ),
             Expanded(
                 child: Container(
-              height: heightMedia * 0.1,
+              height: heightMedia * 0.09,
               //  color: Colors.red,
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                HotelDetailsTextWidget(text: 'Property type :Hotel'),
+                HotelDetailsTextWidget(
+                    text: 'Room Category : ${data.category}'),
                 SizedBox(
                   height: heightMedia * 0.01,
                 ),
-                HotelDetailsTextWidget(text: 'Capacity : 3'),
+                HotelDetailsTextWidget(text: 'Total room : ${data.totalRoom}'),
                 SizedBox(
                   height: heightMedia * 0.01,
                 ),
-                HotelDetailsTextWidget(text: 'Adult rate :400')
+                HotelDetailsTextWidget(text: 'Extra : Parking')
               ]),
             ))
           ],
@@ -83,11 +92,11 @@ class RoomInfoWidget extends StatelessWidget {
         SizedBox(
           height: heightMedia * 0.01,
         ),
-        HotelDetailsTextWidget(text: 'State : Tamil Nadu'),
+        HotelDetailsTextWidget(text: 'State : ${data.state}'),
         SizedBox(
           height: heightMedia * 0.01,
         ),
-        HotelDetailsTextWidget(text: 'City : India, Kerala,Kozhikode'),
+        HotelDetailsTextWidget(text: 'City : ${data.city}'),
         SizedBox(
           height: heightMedia * 0.01,
         ),
@@ -95,7 +104,7 @@ class RoomInfoWidget extends StatelessWidget {
           children: [
             HotelDetailsTextWidget(text: 'Zip :'),
             Text(
-              ' 647393',
+              ' ${data.zip}',
               style: GoogleFonts.inter(
                   textStyle: TextStyle(
                 color: CustomColors.blueColor,
@@ -111,7 +120,7 @@ class RoomInfoWidget extends StatelessWidget {
           children: [
             HotelDetailsTextWidget(text: 'Price :'),
             Text(
-              ' ₹1200',
+              ' ₹${data.price}',
               style: GoogleFonts.inter(
                   textStyle: TextStyle(
                 color: CustomColors.greenColor,

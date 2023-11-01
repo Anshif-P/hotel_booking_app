@@ -17,6 +17,7 @@ class BookingCardWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
+              //    color: Colors.yellow,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: CustomColors.lightGreyColor)),
           width: widthMedia * 0.9,
@@ -24,7 +25,7 @@ class BookingCardWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  flex: 1,
+                  flex: 4,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -38,70 +39,74 @@ class BookingCardWidget extends StatelessWidget {
                     ],
                   )),
               Expanded(
-                  flex: 1,
+                  flex: 4,
                   child: Container(
-                      //  color: Colors.yellow,
+                      alignment: Alignment.center,
+                      //     color: Colors.green,
                       child: SizedBox(
-                    width: widthMedia * 0.12,
-                    //  color: Colors.yellow,
-                    height: heightMedia * 0.12,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: heightMedia * 0.006,
-                          ),
-                          Text(
-                            'Booking ID : 583028',
-                            style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                            )),
-                          ),
-                          SizedBox(
-                            height: heightMedia * 0.006,
-                          ),
-                          Row(
+                        //  width: widthMedia * 0.15,
+                        //  color: Colors.yellow,
+                        // height: heightMedia * 0.12,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Color(0xFFCB102F),
-                                size: 16,
+                              SizedBox(
+                                height: heightMedia * 0.019,
                               ),
                               Text(
-                                'Kerala , India',
+                                'Booking ID : 583028',
                                 style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
-                                  color: Color(0xFFA19B9B),
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.black,
                                   fontSize: 12,
                                 )),
-                              )
+                              ),
+                              SizedBox(
+                                height: heightMedia * 0.006,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: Color(0xFFCB102F),
+                                    size: 16,
+                                  ),
+                                  Text(
+                                    'Kerala , India',
+                                    style: GoogleFonts.inter(
+                                        textStyle: const TextStyle(
+                                      color: Color(0xFFA19B9B),
+                                      fontSize: 12,
+                                    )),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: heightMedia * 0.006,
+                              ),
+                              const BookingTextWidget(
+                                  colorCheck: true,
+                                  text1: 'Name',
+                                  text2: "Anshif"),
+                              SizedBox(
+                                height: heightMedia * 0.006,
+                              ),
+                              const BookingTextWidget(
+                                  text1: 'Wed, 8 Now', text2: " Fri, 10 Nov"),
+                              SizedBox(
+                                height: heightMedia * 0.006,
+                              ),
+                              const BookingTextWidget(
+                                  text1: 'Room 1', text2: 'Adult 2')
                             ],
                           ),
-                          SizedBox(
-                            height: heightMedia * 0.006,
-                          ),
-                          const BookingTextWidget(
-                              colorCheck: true, text1: 'Name', text2: "Anshif"),
-                          SizedBox(
-                            height: heightMedia * 0.006,
-                          ),
-                          const BookingTextWidget(
-                              text1: 'Wed, 8 Now', text2: " Fri, 10 Nov"),
-                          SizedBox(
-                            height: heightMedia * 0.006,
-                          ),
-                          const BookingTextWidget(
-                              text1: 'Room 1', text2: 'Adult 2')
-                        ],
-                      ),
-                    ),
-                  ))),
+                        ),
+                      ))),
               Expanded(
-                  flex: 1,
+                  flex: 3,
                   child: Container(
                       //  color: Colors.blue,
                       child: SizedBox(

@@ -1,8 +1,15 @@
-import 'package:flutter/foundation.dart';
+import 'dart:ui';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/model/get_rooms_model.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
+
 import 'package:hotel_booking_app/widgets/comman/location_text_widget.dart';
 import 'package:hotel_booking_app/widgets/hotel_details_widgets/hotel_details_text_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../constance/colors.dart';
 import '../widgets/hotel_details_widgets/amenties_widget.dart';
@@ -10,94 +17,133 @@ import '../widgets/hotel_details_widgets/details_images_widget.dart';
 import '../widgets/hotel_details_widgets/room_info.dart';
 
 class ScreenRoomDetails extends StatelessWidget {
-  const ScreenRoomDetails({super.key});
+  final VendorRoomModel data;
+  final String propertyName;
+  final VendorController vendorController = Get.find<VendorController>();
+  ScreenRoomDetails(
+      {super.key, required this.data, required this.propertyName});
 
   @override
   Widget build(BuildContext context) {
+    vendorController.imageToShowDetailsScreen.value = data.imageList![0];
+
     double heightMedia = MediaQuery.sizeOf(context).height;
     double widthMedia = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-          child: Stack(
-        children: [
-          Column(
-            children: [
-              Container(
-                height: heightMedia * 0.37,
-                color: Colors.red,
+        child: Stack(
+          children: [
+            IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 30,
               ),
-              Container(
-                //  height: heightMedia,
-                //    color: Colors.blue,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: heightMedia * 0.05,
+            ),
+            Column(
+              children: [
+                Container(
+                  height: heightMedia * 0.37,
+                  child: Obx(
+                    () => CachedNetworkImage(
+                      imageUrl: vendorController.imageToShowDetailsScreen.value,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.yellow,
+                            image: vendorController
+                                        .imageToShowDetailsScreen.value !=
+                                    ''
+                                ? DecorationImage(
+                                    image: NetworkImage(
+                                      vendorController
+                                          .imageToShowDetailsScreen.value,
+                                    ),
+                                    fit: BoxFit.cover)
+                                : null,
+                          ),
+                          alignment: Alignment.topLeft,
+                          padding: const EdgeInsets.only(top: 15),
+                        ),
                       ),
-                      HotelDetailsTextWidget(
-                        text: 'Hotel Details',
-                        sizeCheck: true,
-                      ),
-                      SizedBox(
-                        height: heightMedia * 0.02,
-                      ),
-                      HotelDetailsTextWidget(
-                        text:
-                            'And this is all thanks to the sanitisation & safety measures followed at our properties, from disinfecting surfaces with high-quality cleaning products and maintaining social distance to using',
-                        colorCheck: true,
-                      ),
-                      SizedBox(
-                        height: heightMedia * 0.01,
-                      ),
-                      RoomDetailsImagesWidget(
-                        heightMedia: heightMedia,
-                        widthMedia: widthMedia,
-                        image1: '',
-                        image2: '',
-                        image3: '',
-                        image4: '',
-                      ),
-                      SizedBox(
-                        height: heightMedia * 0.02,
-                      ),
-                      HotelDetailsTextWidget(
-                        text: 'Amenties',
-                        sizeCheck: true,
-                      ),
-                      SizedBox(
-                        height: heightMedia * 0.02,
-                      ),
-                      AmentiesWidget(),
-                      SizedBox(
-                        height: heightMedia * 0.02,
-                      ),
-                      Text(
-                        'Room Info',
-                        style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        )),
-                      ),
-                      SizedBox(
-                        height: heightMedia * 0.02,
-                      ),
-                      RoomInfoWidget(
-                          heightMedia: heightMedia, widthMedia: widthMedia),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
+                Container(
+                  //  height: heightMedia,
+                  //    color: Colors.blue,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: heightMedia * 0.05,
+                        ),
+                        HotelDetailsTextWidget(
+                          text: 'Hotel Details',
+                          sizeCheck: true,
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.02,
+                        ),
+                        HotelDetailsTextWidget(
+                          text: data.description!,
+                          colorCheck: true,
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.03,
+                        ),
+                        RoomDetailsImagesWidget(
+                          heightMedia: heightMedia,
+                          widthMedia: widthMedia,
+                          images: data.imageList!,
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.02,
+                        ),
+                        HotelDetailsTextWidget(
+                          text: 'Amenties',
+                          sizeCheck: true,
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.02,
+                        ),
+                        AmentiesWidget(itemsName: data.amenities!),
+                        SizedBox(
+                          height: heightMedia * 0.02,
+                        ),
+                        Text(
+                          'Room Info',
+                          style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          )),
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.02,
+                        ),
+                        RoomInfoWidget(
+                            data: data,
+                            heightMedia: heightMedia,
+                            widthMedia: widthMedia),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
               top: heightMedia * 0.3,
               height: heightMedia * .1,
               left: 0,
@@ -121,7 +167,7 @@ class ScreenRoomDetails extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Galaxy Hotel',
+                              propertyName,
                               style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
                                 color: Colors.black,
@@ -150,13 +196,29 @@ class ScreenRoomDetails extends StatelessWidget {
                         SizedBox(
                           height: heightMedia * 0.004,
                         ),
-                        LocationTextWidget(text1: 'Kerala', text2: 'India')
+                        LocationTextWidget(
+                            text1: data.location!, text2: data.city!),
                       ]),
                 ),
                 //  height: heightMedia,
-              )),
-        ],
-      )),
+              ),
+            ),
+            Positioned(
+              top: heightMedia * 0.02,
+              left: widthMedia * 0.01,
+              child: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
