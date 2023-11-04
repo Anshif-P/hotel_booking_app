@@ -1,10 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view/screen_coupon.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widgets/drawer_widgets/drawer_dialog.dart';
 
 class ScreenDrawer extends StatelessWidget {
-  const ScreenDrawer({super.key});
+  ScreenDrawer({super.key});
+  final VendorController vendorController = Get.find<VendorController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,26 +27,53 @@ class ScreenDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(width: 25),
-                Container(
-                  width: 60,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                ),
+                vendorController.vendorDetails.image != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(7),
+                        child: CachedNetworkImage(
+                          imageUrl: vendorController.vendorDetails.image!,
+                          width: 60,
+                          height: 55,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey.shade300,
+                            highlightColor: Colors.grey.shade100,
+                            child: Container(
+                              width: 60,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  borderRadius: BorderRadius.circular(7),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      vendorController.vendorDetails.image!,
+                                    ),
+                                  )),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(
+                        width: 60,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                      ),
                 const SizedBox(width: 14),
-                const Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 8),
                     Text(
-                      'Anshif',
+                      vendorController.vendorDetails.name,
                       style:
                           TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
                     ),
                     Text(
-                      'anshif@gmail.com',
+                      vendorController.vendorDetails.email,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
@@ -72,7 +105,9 @@ class ScreenDrawer extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.card_membership),
           title: Text('Add Coupons'),
-          onTap: () {},
+          onTap: () {
+            Get.to(() => ScreenCoupon());
+          },
         ),
         ListTile(
           leading: Icon(

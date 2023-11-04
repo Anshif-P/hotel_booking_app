@@ -8,4 +8,8 @@ class Urls {
   static String getVendorOneRoomDetails = '/api/vendor/getVendorRoom/:roomId';
   static String deleteRoon = '/api/vendor/delteRoom/';
   static String editRoom = '/api/vendor/editRoomDetails/';
+  static String editVendorDetails = '/api/vendor/editVendorProfile';
+  static String addCoupon = '/api/vendor/createCoupon';
+  static String getVendorCoupons = '/api/vendor/viewcoupon';
+  static String deleteCoupon = '/api/vendor/deletecoupn/';
 }

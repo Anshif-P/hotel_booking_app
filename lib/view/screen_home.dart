@@ -1,14 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/view/screen_drawer.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/homewidgets/recently_room.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widgets/homewidgets/booking_recently.dart';
 import '../widgets/homewidgets/customer_bookings.dart';
 // import 'package:hotel_booking_app/view/screen_drawer.dart';
 
 class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
+  ScreenHome({super.key});
+  final VendorController vendorController = Get.find<VendorController>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,14 +92,45 @@ class ScreenHome extends StatelessWidget {
                           SizedBox(
                             width: widthMedia * 0.55,
                           ),
-                          Container(
-                            width: widthMedia * 0.09,
-                            height: heightMedia * 0.04,
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
+                          vendorController.vendorDetails.image != null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(7),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        vendorController.vendorDetails.image!,
+                                    width: widthMedia * 0.09,
+                                    height: heightMedia * 0.04,
+                                    fit: BoxFit.cover,
+                                    placeholder: (context, url) =>
+                                        Shimmer.fromColors(
+                                      baseColor: Colors.grey.shade300,
+                                      highlightColor: Colors.grey.shade100,
+                                      child: Container(
+                                        width: widthMedia * 0.09,
+                                        height: heightMedia * 0.04,
+                                        decoration: BoxDecoration(
+                                            color: Colors.amber,
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                vendorController
+                                                    .vendorDetails.image!,
+                                              ),
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  width: widthMedia * 0.09,
+                                  height: heightMedia * 0.04,
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber,
+                                    borderRadius: BorderRadius.circular(7),
+                                  ),
+                                ),
                         ],
                       ),
                     ),
@@ -187,11 +223,13 @@ class ScreenHome extends StatelessWidget {
               ),
             ]),
             RecentAddedRoomWidget(
-                heightMedia: heightMedia, widthMedia: widthMedia),
+                heightMedia: heightMedia,
+                widthMedia: widthMedia,
+                vendorController: vendorController),
           ],
         ),
       ),
-      drawer: const Drawer(child: ScreenDrawer()),
+      drawer: Drawer(child: ScreenDrawer()),
     );
   }
 }

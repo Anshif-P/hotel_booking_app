@@ -35,15 +35,6 @@ class ScreenRoomDetails extends StatelessWidget {
       body: SingleChildScrollView(
         child: Stack(
           children: [
-            IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 30,
-              ),
-            ),
             Column(
               children: [
                 Container(
@@ -76,69 +67,65 @@ class ScreenRoomDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  //  height: heightMedia,
-                  //    color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: heightMedia * 0.05,
-                        ),
-                        HotelDetailsTextWidget(
-                          text: 'Hotel Details',
-                          sizeCheck: true,
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.02,
-                        ),
-                        HotelDetailsTextWidget(
-                          text: data.description!,
-                          colorCheck: true,
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.03,
-                        ),
-                        RoomDetailsImagesWidget(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: heightMedia * 0.05,
+                      ),
+                      const HotelDetailsTextWidget(
+                        text: 'Hotel Details',
+                        sizeCheck: true,
+                      ),
+                      SizedBox(
+                        height: heightMedia * 0.02,
+                      ),
+                      HotelDetailsTextWidget(
+                        text: data.description!,
+                        colorCheck: true,
+                      ),
+                      SizedBox(
+                        height: heightMedia * 0.03,
+                      ),
+                      RoomDetailsImagesWidget(
+                        heightMedia: heightMedia,
+                        widthMedia: widthMedia,
+                        images: data.imageList!,
+                      ),
+                      SizedBox(
+                        height: heightMedia * 0.02,
+                      ),
+                      HotelDetailsTextWidget(
+                        text: 'Amenties',
+                        sizeCheck: true,
+                      ),
+                      SizedBox(
+                        height: heightMedia * 0.02,
+                      ),
+                      AmentiesWidget(itemsName: data.amenities!),
+                      SizedBox(
+                        height: heightMedia * 0.02,
+                      ),
+                      Text(
+                        'Room Info',
+                        style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        )),
+                      ),
+                      SizedBox(
+                        height: heightMedia * 0.02,
+                      ),
+                      RoomInfoWidget(
+                          data: data,
                           heightMedia: heightMedia,
-                          widthMedia: widthMedia,
-                          images: data.imageList!,
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.02,
-                        ),
-                        HotelDetailsTextWidget(
-                          text: 'Amenties',
-                          sizeCheck: true,
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.02,
-                        ),
-                        AmentiesWidget(itemsName: data.amenities!),
-                        SizedBox(
-                          height: heightMedia * 0.02,
-                        ),
-                        Text(
-                          'Room Info',
-                          style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          )),
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.02,
-                        ),
-                        RoomInfoWidget(
-                            data: data,
-                            heightMedia: heightMedia,
-                            widthMedia: widthMedia),
-                      ],
-                    ),
+                          widthMedia: widthMedia),
+                    ],
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 class VendorRoomModel {
   final String? id;
+  final String? propertyName;
   final String? propertyType;
   final String? totalRoom;
   final String? price;
@@ -18,6 +19,7 @@ class VendorRoomModel {
 
   VendorRoomModel(
       {required this.totalRoom,
+      this.propertyName,
       required this.id,
       required this.isApproved,
       required this.propertyType,
@@ -33,11 +35,12 @@ class VendorRoomModel {
       required this.imageList,
       required this.category,
       required this.location});
-  factory VendorRoomModel.toJson(map) {
+  factory VendorRoomModel.toJson(map, propertyName) {
     print('this. is in Model');
 
     print(map['_id']);
     return VendorRoomModel(
+        propertyName: propertyName,
         id: map['_id'],
         isApproved: map['isApproved'],
         propertyType: map['propertyType'],

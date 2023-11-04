@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:hotel_booking_app/service/api_service.dart';
-import 'package:hotel_booking_app/view/screen_bottom_navigation.dart';
 import 'package:hotel_booking_app/view/screen_temp_bottom_navigation.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
@@ -35,7 +34,7 @@ class LoginController extends GetxController {
   }
 
   loginButtonFunction() async {
-    if (loginValidateKey.currentState?.validate() ?? false) {
+    if (loginValidateKey.currentState!.validate()) {
       loadingCheck.value = true;
       Map<String, String> loginDetails = {
         "email": emailController.text,

@@ -3,12 +3,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view_model/addroom_controller.dart';
-
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/map_select_location.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/textfield_widget.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/button_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../widgets/addroom_widgets/checkbox_widget.dart';
 import '../widgets/addroom_widgets/drop_downselection.dart';
 import '../widgets/addroom_widgets/select_photos_widget.dart';
@@ -16,13 +15,15 @@ import '../widgets/comman/heading_text.dart';
 
 class ScreenAddRoom extends StatelessWidget {
   final VendorRoomModel? data;
-  const ScreenAddRoom({super.key, this.editCheck = false, this.data});
+  ScreenAddRoom({super.key, this.editCheck = false, this.data});
   final bool editCheck;
+  final VendorController vendorRoomModel = Get.find<VendorController>();
 
   @override
   Widget build(BuildContext context) {
-    final addRoomController =
-        Get.put(AddRoomController(roomObjForEdit: data), permanent: false);
+    final addRoomController = Get.put(
+      AddRoomController(roomObjForEdit: data),
+    );
 
     double heightMedia = MediaQuery.sizeOf(context).height;
     double widthMedia = MediaQuery.sizeOf(context).width;
@@ -39,7 +40,10 @@ class ScreenAddRoom extends StatelessWidget {
                   Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                     Row(children: [
                       InkWell(
-                          onTap: () => Get.back(),
+                          onTap: () {
+                            addRoomController.onClose();
+                            Get.back();
+                          },
                           child: const Icon(Icons.arrow_back)),
                       SizedBox(width: widthMedia * 0.2)
                     ]),
@@ -260,6 +264,7 @@ class ScreenAddRoom extends StatelessWidget {
                   MapWidget(),
                   const SizedBox(height: 20),
                   editCheck
+                      // same button used for add room pourpose
                       ? LoginSignButton(
                           loadingCheck: addRoomController.loadingCheck,
                           onpressFunction: () =>

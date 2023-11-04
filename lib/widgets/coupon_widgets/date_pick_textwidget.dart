@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:intl/intl.dart';
 
 class DatePickingWidget extends StatelessWidget {
@@ -7,7 +8,7 @@ class DatePickingWidget extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final double widthMedia;
-
+  final VendorController vendorController;
   final FormFieldValidator validator;
 
   const DatePickingWidget({
@@ -17,6 +18,7 @@ class DatePickingWidget extends StatelessWidget {
     required this.hintText,
     required this.controller,
     required this.validator,
+    required this.vendorController,
   });
 
   @override
@@ -88,17 +90,30 @@ class DatePickingWidget extends StatelessWidget {
     );
   }
 
-  void _showDate1(BuildContext context, TextEditingController date) async {
+  void _showDate1(
+      BuildContext context, TextEditingController controller) async {
+    DateTime? tempDate;
+    if (vendorController.startDateController.text != '') {
+      print(
+          '--------------start d--------------------${vendorController.startDateController.text}');
+
+      tempDate = DateFormat('E, d MMM y')
+          .parse(vendorController.startDateController.text);
+      print(
+          'fo---------------------formated starting date new --------------$tempDate');
+    }
+
     await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
+      initialDate: tempDate == null ? DateTime.now() : tempDate,
+      firstDate: tempDate == null ? DateTime.now() : tempDate,
       lastDate: DateTime(2025),
     ).then((value) {
       if (value == null) {
         return;
       } else {
-        date.text = DateFormat('E, d MMM y').format(value);
+        controller.text = DateFormat('E, d MMM y').format(value);
+        print(controller.text);
       }
     });
   }

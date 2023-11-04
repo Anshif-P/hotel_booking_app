@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/sharepref_model.dart';
-import 'package:hotel_booking_app/view/screen_bottom_navigation.dart';
-
 import 'package:hotel_booking_app/view/screen_login.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-
 import 'screen_temp_bottom_navigation.dart';
 
 class ScreenSplash extends StatefulWidget {
@@ -108,8 +104,8 @@ class _ScreenSplashState extends State<ScreenSplash> {
     final token = SharedPrefModel.instance.getData('token');
     if (token != null) {
       await venderController.getVendorDetails();
-
       await venderController.getVndorRooms();
+      await venderController.getVendorCoupons();
       loadingCheck.value = true;
 
       Get.to(() => TempBottomNavigation());

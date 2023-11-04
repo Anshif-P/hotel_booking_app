@@ -100,4 +100,63 @@ class Api {
     print(response.body);
     return response;
   }
+
+  Future<http.Response> updateVendorDetails(Map<String, dynamic> map) async {
+    final token = SharedPrefModel.instance.getData('token');
+    final url = '${Urls.baseUrl}${Urls.editVendorDetails}';
+    final uri = Uri.parse(url);
+    final Map<String, String> header = {
+      'Content-Type': 'application/json',
+      'vendortoken': '$token'
+    };
+    print(map);
+    final body = jsonEncode(map);
+    final response = await http.patch(uri, body: body, headers: header);
+    print(response);
+    return response;
+  }
+
+  Future<http.Response> addCoupons(Map<String, dynamic> map) async {
+    final token = SharedPrefModel.instance.getData('token');
+    final url = '${Urls.baseUrl}${Urls.addCoupon}';
+    final uri = Uri.parse(url);
+    final body = jsonEncode(map);
+    final header = {
+      'Content-Type': 'application/json',
+      'vendortoken': '$token'
+    };
+    final response = await http.post(uri, body: body, headers: header);
+    print('---------------------response body ----------------coupon');
+    print(response.statusCode);
+    print(response.body);
+    return response;
+  }
+
+  Future<http.Response> getVendorCoupons() async {
+    final token = SharedPrefModel.instance.getData('token');
+    final url = '${Urls.baseUrl}${Urls.getVendorCoupons}';
+    final uri = Uri.parse(url);
+    final header = {
+      'Content-Type': 'application/json',
+      'vendortoken': '$token'
+    };
+    final response = await http.get(uri, headers: header);
+    print(response.statusCode);
+    print(response.body);
+    return response;
+  }
+
+  Future<http.Response> deleteCoupon(String id) async {
+    final token = SharedPrefModel.instance.getData('token');
+    final url = '${Urls.baseUrl}${Urls.deleteCoupon}${id}';
+    final uri = Uri.parse(url);
+    final header = {
+      'Content-Type': 'application/json',
+      'vendortoken': '$token'
+    };
+    final response = await http.delete(uri, headers: header);
+    print(response.statusCode);
+    print(response.body);
+    return response;
+  }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
 class EditProfileTextFeildWdiget extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController textEditingController;
   final double screenHeight;
   final double screenwidth;
   final FormFieldValidator validation;
@@ -11,21 +13,24 @@ class EditProfileTextFeildWdiget extends StatelessWidget {
   final String hintText;
   final bool feildControll;
   final bool dividerCheck;
+  final VendorController vendorController;
   const EditProfileTextFeildWdiget(
       {super.key,
+      required this.vendorController,
       required this.validation,
       this.dividerCheck = false,
       required this.screenHeight,
       required this.screenwidth,
-      required this.controller,
+      required this.textEditingController,
       this.feildControll = false,
       required this.hintText,
       required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      //  height: screenHeight * 0.064,
+    return Container(
+      // color: Colors.red,
+      // height: screenHeight * 0.064,
       child: Column(
         children: [
           Row(
@@ -40,22 +45,30 @@ class EditProfileTextFeildWdiget extends StatelessWidget {
                 ),
               )),
               Expanded(
-                child: TextFormField(
-                  style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontSize: 14, color: Colors.black)),
-                  validator: validation,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintTextDirection: TextDirection.rtl,
-                    isDense: true,
-                    constraints:
-                        const BoxConstraints(maxHeight: 70, minHeight: 35),
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
-                    hintText: hintText,
-                    hintStyle: const TextStyle(color: Color(0xFF999999)),
+                child: GetBuilder<VendorController>(
+                  builder: (controller) => TextFormField(
+                    controller: textEditingController,
+                    style: GoogleFonts.inter(
+                        textStyle:
+                            TextStyle(fontSize: 14, color: Colors.black)),
+                    validator: validation,
+                    decoration: InputDecoration(
+                      // errorBorder: InputBorder.none,
+                      //  errorStyle: const TextStyle(color: Colors.red),
+
+                      border: InputBorder.none,
+                      hintTextDirection: TextDirection.rtl,
+                      isDense: true,
+                      constraints:
+                          const BoxConstraints(maxHeight: 70, minHeight: 35),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 7, horizontal: 10),
+                      hintText: hintText,
+                      hintStyle: const TextStyle(color: Color(0xFF999999)),
+                    ),
+                    // textAlign: TextAlign.end,
+                    textDirection: TextDirection.rtl,
                   ),
-                  controller: controller,
                 ),
               ),
             ],

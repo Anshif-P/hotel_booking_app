@@ -31,8 +31,7 @@ class TextFieldWidget extends StatelessWidget {
           // width: textFieldSizeCheck ? 162 : null,
           child: TextFormField(
             onEditingComplete: () {
-              FocusScope.of(context)
-                  .nextFocus(); // Move focus to the next field
+              FocusScope.of(context).nextFocus();
             },
             validator: validator,
             controller: controller,
@@ -40,24 +39,19 @@ class TextFieldWidget extends StatelessWidget {
               isDense: true,
               constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
+                borderSide: const BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
+                borderSide: const BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.black), // Set the border color when focused
+                borderSide: const BorderSide(color: Colors.black),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Color(
-                        0xFFD1D1D1)), // Set the border color when not focused
+                borderSide: const BorderSide(color: Color(0xFFD1D1D1)),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               prefixIcon: Icon(

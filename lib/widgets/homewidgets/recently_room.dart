@@ -1,11 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 class RecentAddedRoomWidget extends StatelessWidget {
   final double widthMedia;
   final double heightMedia;
+  final VendorController vendorController;
   const RecentAddedRoomWidget({
     super.key,
+    required this.vendorController,
     required this.heightMedia,
     required this.widthMedia,
   });
@@ -41,23 +46,42 @@ class RecentAddedRoomWidget extends StatelessWidget {
               height: heightMedia * 0.195,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 2,
+                  itemCount: vendorController.vendorRooms.length,
                   itemBuilder: (context, index) {
+                    final data = vendorController.vendorRooms[index];
                     return Padding(
                       padding: const EdgeInsets.only(right: 15),
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              // color: Colors.yellow,
-                              width: heightMedia * 0.217,
-                              //   height: heightMedia * 0.139,
-                              // width: 171,
-                              // height: 110,
-                              child: Image.asset(
-                                'lib/image/Rectangle 3820.png',
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(7),
+                              child: CachedNetworkImage(
                                 fit: BoxFit.cover,
+                                imageUrl: data.imageList![index],
+                                width: heightMedia * 0.217,
+                                height: heightMedia * 0.139,
+                                placeholder: (context, url) =>
+                                    Shimmer.fromColors(
+                                  baseColor: Colors.grey.shade300,
+                                  highlightColor: Colors.grey.shade100,
+                                  child: Container(
+                                    width: heightMedia * 0.217,
+                                    height: heightMedia * 0.139,
+                                    // width: 171,
+                                    // height: 110,
+                                    decoration: BoxDecoration(
+                                      color: Colors.yellow,
+                                      borderRadius: BorderRadius.circular(7),
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                            data.imageList![index],
+                                          ),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -65,7 +89,7 @@ class RecentAddedRoomWidget extends StatelessWidget {
                               // height: 10,
                             ),
                             Text(
-                              'Greeny Hotel',
+                              'Galaxy ${data.propertyType}',
                               style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
                                 color: Colors.black,
@@ -81,7 +105,7 @@ class RecentAddedRoomWidget extends StatelessWidget {
                                   size: 17,
                                 ),
                                 Text(
-                                  'Kerala , India',
+                                  '${data.state}${data.city}',
                                   style: GoogleFonts.inter(
                                       textStyle: const TextStyle(
                                           color: Color(0xFFA19B9B),

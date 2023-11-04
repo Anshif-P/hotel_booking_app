@@ -1,12 +1,18 @@
-import 'package:flutter/foundation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view/screen_edit_profile.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/comman/button_text.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../widgets/profile_widgets/listtile_widget.dart';
 
 class ScreenProfile extends StatelessWidget {
-  const ScreenProfile({super.key});
+  ScreenProfile({super.key});
+  final VendorController vendorController = Get.find<VendorController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +46,38 @@ class ScreenProfile extends StatelessWidget {
                   bottom: heightMidia * 0.04,
                   left: widhtMidia * 0.07,
                   // width: 100,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.yellow,
-                        borderRadius: BorderRadius.circular(7)),
-                    width: widhtMidia * 0.25,
-                    height: heightMidia * 0.115,
+                  child: GetBuilder<VendorController>(
+                    builder: (controller) => ClipRRect(
+                      borderRadius: BorderRadius.circular(7),
+                      child: vendorController.vendorDetails.image != null
+                          ? CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              width: widhtMidia * 0.25,
+                              height: heightMidia * 0.115,
+                              imageUrl: vendorController.vendorDetails.image!,
+                              placeholder: (context, url) => Shimmer.fromColors(
+                                baseColor: Colors.grey.shade300,
+                                highlightColor: Colors.grey.shade100,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(vendorController
+                                              .vendorDetails.image!)),
+                                      color: Colors.yellow,
+                                      borderRadius: BorderRadius.circular(7)),
+                                  width: widhtMidia * 0.25,
+                                  height: heightMidia * 0.115,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius: BorderRadius.circular(7)),
+                              width: widhtMidia * 0.25,
+                              height: heightMidia * 0.115,
+                            ),
+                    ),
                   ),
                 ),
                 Positioned(
@@ -55,7 +87,12 @@ class ScreenProfile extends StatelessWidget {
                       width: widhtMidia * 0.4,
                       height: heightMidia * 0.038,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await vendorController.getVendorDetails();
+                            Get.to(() => ScreenEdit(
+                                  data: vendorController.vendorDetails,
+                                ));
+                          },
                           style: ButtonStyle(
                               elevation: MaterialStateProperty.all(0),
                               backgroundColor: MaterialStateProperty.all(

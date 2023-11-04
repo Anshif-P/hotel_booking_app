@@ -1,11 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/model/coupon_model.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
+import '../coupon_widget/delete_dialog.dart';
 import 'textwidget_coupon.dart';
 
 class CouponCardWidget extends StatelessWidget {
-  const CouponCardWidget({super.key});
+  final String coupon;
+  final String discount;
+  final String startDate;
+  final String endDate;
+  final CouponModel data;
+  final VendorController vendorController;
+  const CouponCardWidget({
+    super.key,
+    required this.data,
+    required this.vendorController,
+    required this.coupon,
+    required this.discount,
+    required this.endDate,
+    required this.startDate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +75,7 @@ class CouponCardWidget extends StatelessWidget {
                       SizedBox(
                         height: heightMedia * 0.01,
                       ),
-                      CouponTextWidget(text: 'Coupon Code : GRN6784F'),
+                      CouponTextWidget(text: 'Coupon Code : $coupon'),
                       SizedBox(
                         height: heightMedia * 0.006,
                       ),
@@ -71,7 +88,7 @@ class CouponCardWidget extends StatelessWidget {
                               children: [
                                 CouponTextWidget(text: 'Discount :'),
                                 Text(
-                                  ' ₹400',
+                                  ' ₹$discount',
                                   style: GoogleFonts.inter(
                                       textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
@@ -90,10 +107,22 @@ class CouponCardWidget extends StatelessWidget {
                                 SizedBox(
                                   width: widthMedia * 0.2,
                                 ),
-                                Icon(
-                                  Icons.delete,
-                                  size: 19,
-                                  color: CustomColors.mainColor,
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return DeleteCouponDialog(
+                                            controller: vendorController,
+                                            data: data,
+                                          );
+                                        });
+                                  },
+                                  child: Icon(
+                                    Icons.delete,
+                                    size: 19,
+                                    color: CustomColors.mainColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -103,7 +132,7 @@ class CouponCardWidget extends StatelessWidget {
                       SizedBox(
                         height: heightMedia * 0.006,
                       ),
-                      CouponTextWidget(text: 'Wed,8 Now - Fri,12 Nov')
+                      CouponTextWidget(text: '${startDate} - ${endDate}')
                     ],
                   ),
                 ),

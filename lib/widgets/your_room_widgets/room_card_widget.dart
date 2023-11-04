@@ -1,17 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view/screen_add_room.dart';
 import 'package:hotel_booking_app/view/screen_details.dart';
-import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/your_room_widgets/delete_diolog.dart';
 import 'package:shimmer/shimmer.dart';
-
 import 'card_text_widget.dart';
 
 class RoomCardWidget extends StatelessWidget {
@@ -45,15 +42,15 @@ class RoomCardWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-            width: widthMedia * 0.9,
-
-            // height: 120,
-            height: heightMedia * 0.15,
-            decoration: BoxDecoration(
-                //color: Colors.yellow,
-                borderRadius: BorderRadius.circular(9),
-                border: Border.all(color: CustomColors.lightGreyColor)),
-            child: Row(children: [
+          width: widthMedia * 0.9,
+          // height: 120,
+          height: heightMedia * 0.15,
+          decoration: BoxDecoration(
+              //color: Colors.yellow,
+              borderRadius: BorderRadius.circular(9),
+              border: Border.all(color: CustomColors.lightGreyColor)),
+          child: Row(
+            children: [
               Expanded(
                 flex: 3,
                 child: Row(
@@ -115,23 +112,22 @@ class RoomCardWidget extends StatelessWidget {
                           SizedBox(
                             height: heightMedia * 0.006,
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Color(0xFFCB102F),
-                                size: 16,
-                              ),
-                              Text(
-                                location,
-                                style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
+                          Row(children: [
+                            const Icon(
+                              Icons.location_on,
+                              color: Color(0xFFCB102F),
+                              size: 16,
+                            ),
+                            Text(
+                              location,
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
                                   color: Color(0xFFA19B9B),
                                   fontSize: 12,
-                                )),
-                              )
-                            ],
-                          ),
+                                ),
+                              ),
+                            )
+                          ]),
                           SizedBox(
                             height: heightMedia * 0.006,
                           ),
@@ -255,8 +251,10 @@ class RoomCardWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
-            ])),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

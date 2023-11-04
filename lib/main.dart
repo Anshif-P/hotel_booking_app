@@ -6,6 +6,7 @@ import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:hotel_booking_app/view/screen_splash.dart';
 
 import 'firebase_options.dart';
+import 'view/screen_login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

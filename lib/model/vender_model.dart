@@ -3,32 +3,31 @@ class VendorModel {
   final String? token;
   final String name;
   final String email;
-  final String password;
+
   final String propertyName;
   final String propertyLocation;
-  final String phone;
+
   final bool isBanned;
+  final String? image;
 
   VendorModel(
       {required this.id,
       this.token,
       required this.name,
       required this.email,
-      required this.password,
       required this.propertyName,
       required this.propertyLocation,
-      required this.phone,
-      required this.isBanned});
+      required this.isBanned,
+      required this.image});
   factory VendorModel.toJson(Map<String, dynamic> map) {
     return VendorModel(
         token: map['token'],
+        image: map['image'],
         id: map['_id'],
         name: map['name'],
         email: map['email'],
-        password: map['password'],
         propertyName: map['propertyName'],
         propertyLocation: map['propertyLocation'],
-        phone: map['phone'],
         isBanned: map['isBanned']);
   }
 }

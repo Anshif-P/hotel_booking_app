@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
 class EditNameEmailTextFeild extends StatelessWidget {
   final TextEditingController controller;
   final double screenHeight;
   final double screenwidth;
   final FormFieldValidator validation;
-
+  final VendorController vendorController;
   final String hintText;
 
   const EditNameEmailTextFeild({
     super.key,
+    required this.vendorController,
     required this.validation,
     required this.screenHeight,
     required this.screenwidth,
@@ -24,10 +26,12 @@ class EditNameEmailTextFeild extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
+          // key: vendorController.editProfileDetailsFormKey,
           style: GoogleFonts.inter(
               textStyle: TextStyle(fontSize: 14, color: Colors.black)),
           validator: validation,
           decoration: InputDecoration(
+            errorStyle: TextStyle(color: Colors.red),
             border: InputBorder.none,
             isDense: true,
             constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),

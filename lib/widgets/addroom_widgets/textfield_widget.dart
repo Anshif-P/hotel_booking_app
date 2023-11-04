@@ -41,10 +41,9 @@ class TextFeildAddRoomWidget extends StatelessWidget {
           height: 6,
         ),
         Container(
-          constraints: BoxConstraints(minHeight: 45),
           // color: Colors.yellow,
           height:
-              descriptionSizeCheck ? heightMedia * 0.14 : heightMedia * 0.054,
+              descriptionSizeCheck ? heightMedia * 0.14 : heightMedia * 0.056,
           width: textFieldSizeCheck ? widthMedia * 0.41 : widthMedia * 0.889,
           child: GetBuilder<AddRoomController>(
             builder: (controllers) => TextFormField(
@@ -55,33 +54,33 @@ class TextFeildAddRoomWidget extends StatelessWidget {
               maxLines: descriptionSizeCheck ? 5 : 1,
               controller: controller,
               decoration: InputDecoration(
-                constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      color: Colors.red), // Set the border color when focused
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      color: Colors.red), // Set the border color when focused
-                  borderRadius: BorderRadius.circular(4),
-                ),
+                isDense: true,
+                constraints: descriptionSizeCheck != true
+                    ? const BoxConstraints(maxHeight: 45, minHeight: 35)
+                    : null,
+                // focusedErrorBorder: OutlineInputBorder(
+                //   borderSide: const BorderSide(color: Colors.red),
+                //   borderRadius: BorderRadius.circular(4),
+                // ),
+
+                // errorBorder: OutlineInputBorder(
+                //   borderSide: const BorderSide(color: Colors.red),
+                //   borderRadius: BorderRadius.circular(4),
+                // ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      color: Colors.black), // Set the border color when focused
+                  borderSide: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      color: Color(
-                          0xFFD1D1D1)), // Set the border color when not focused
+                  borderSide: const BorderSide(color: Color(0xFFD1D1D1)),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 contentPadding: descriptionSizeCheck
-                    ? const EdgeInsets.only(top: 20, left: 15)
-                    : const EdgeInsets.only(
-                        left: 10,
-                      ),
+                    ? const EdgeInsets.only(
+                        top: 20,
+                        left: 15,
+                      )
+                    : const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
                 hintText: hintText,
                 hintStyle: GoogleFonts.inter(
                     textStyle: const TextStyle(

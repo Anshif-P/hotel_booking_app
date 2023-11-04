@@ -110,8 +110,8 @@ class AddRoomController extends GetxController {
     }
   }
 
-  List<String> getSelectedAmenties() {
-    List<String> amenitiesList = [];
+  List<String>? getSelectedAmenties() {
+    List<String>? amenitiesList = [];
 
     amentiesMap.forEach((key, value) {
       if (value) {
@@ -125,22 +125,12 @@ class AddRoomController extends GetxController {
   //--------- End -------------//
 
   //---------- Image Section ----------//
-  addImageForToFeildForEdit(List imagesList) {
-    image1 = File('');
-    image2 = File('');
-    image3 = File('');
-    image4 = File('');
-  }
 
   File? image1;
   File? image2;
   File? image3;
   File? image4;
   var imageTemp;
-  // bool image1UseCheck = true;
-  // bool image2UseCheck = true;
-  // bool image3UseCheck = true;
-  // bool image4UseCheck = true;
 
   //--------implement image add function for edit------------------//
 
@@ -194,6 +184,9 @@ class AddRoomController extends GetxController {
     String? imageFirebaseUrl;
     //late List firebaseImageUrlsList;
     if (editCheck.value != true) {
+      print(
+          '------------------Edit check false-------------------------------');
+      print(imagesList);
       for (int i = 0; i < 4; i++) {
         String uniqueName = DateTime.now().millisecond.toString();
         Reference fireBaseRootReference = FirebaseStorage.instance.ref();
@@ -203,12 +196,15 @@ class AddRoomController extends GetxController {
           await toUploadImgReference.putFile(File(imagesList![i]));
           firebaseImageUrlsList[i] =
               await toUploadImgReference.getDownloadURL();
+          print(i);
         } catch (e) {
           print('hai---------------------');
           print(e);
         }
       }
+      return firebaseImageUrlsList;
     } else {
+      print('------------------Edit check True-------------------------------');
       String uniqueName = DateTime.now().millisecond.toString();
       Reference fireBaseRootReference = FirebaseStorage.instance.ref();
       Reference toUploadImgReference =
@@ -216,6 +212,7 @@ class AddRoomController extends GetxController {
       try {
         await toUploadImgReference.putFile(File(image));
         imageFirebaseUrl = await toUploadImgReference.getDownloadURL();
+        return imageFirebaseUrl;
       } catch (e) {
         print('hai---------------------');
         print(e);
@@ -224,14 +221,41 @@ class AddRoomController extends GetxController {
     print(
         '-----------------------------------------in side the fnc firebase send image ----------------------');
     print(imageFirebaseUrl);
-    return imageFirebaseUrl;
+    print(firebaseImageUrlsList);
+  }
+
+  //------------Edit fnc for replace old object form the roomobjList -------------//
+  Future<VendorRoomModel> createNewEditedObj(
+      VendorRoomModel data, List<dynamic> amenitiesList, List imageList) async {
+    final VendorRoomModel vendorRoomObj = VendorRoomModel(
+      totalRoom: totalRoomController.text,
+      id: data.id,
+      isApproved: data.isApproved,
+      propertyType: propertyTypeController.text,
+      price: totalRoomPriceController.text,
+      adultRate: adultPriceController.text,
+      capacity: capacityController.text,
+      address: propertyAddressController.text,
+      city: cityController.text,
+      state: stateController.text,
+      zip: pinCodeController.text,
+      description: descriptionController.text,
+      amenities: amenitiesList,
+      imageList: imageList,
+      category: selectedType.value.toString(),
+      location: selectedState.value.toString(),
+    );
+    return vendorRoomObj;
   }
 
   //-----------image section ended------------//
 
   //-----------TextField Validations-----------//
   textFieldValidation(value) {
-    if (value != null) {
+    print(
+        'validation text ------------------------------------inside the validaation funtion ');
+    print(value);
+    if (value != '') {
       return null;
     } else {
       return 'fill the field';
@@ -262,103 +286,133 @@ class AddRoomController extends GetxController {
     loadingCheck.value = true;
 
     amenitiesList = getSelectedAmenties();
-    List imageList = [image1?.path, image2?.path, image3?.path, image4?.path];
+    List<dynamic> imageList = [
+      image1?.path,
+      image2?.path,
+      image3?.path,
+      image4?.path
+    ];
 
-    if (editCheck.value) {
-      for (int i = 0; i < 4; i++) {
-        if (imageList[i] != null) {
-          imageList[i] = await getImageUrlFromFirebase(null, imageList[i]);
-        } else {
-          imageList[i] = data!.imageList![i];
-        }
-      }
-    } else {
-      imageList = await getImageUrlFromFirebase(
-          [image1!.path, image2!.path, image3!.path, image4!.path], null);
-    }
     print(
         'hai hello this is firebase urls ----------------------------  firebase url list');
-    print(imageList);
-    Map<String, dynamic> roomDetails = {
-      "property": propertyTypeController.text.trim(),
-      "roomNo": totalRoomController.text.trim(),
-      "price": totalRoomPriceController.text.trim(),
-      "adultRate": adultPriceController.text.trim(),
-      "OneRoom": singleRoomPriceController.text.trim(),
-      "capacity": capacityController.text.trim(),
-      "address": propertyAddressController.text.trim(),
-      "city": cityController.text.trim(),
-      "state": stateController.text.trim(),
-      "zip": pinCodeController.text.trim(),
-      "description": descriptionController.text.trim(),
-      "amenities": amenitiesList,
-      "image": imageList,
-      "category": selectedType.value.toString(),
-      "location": selectedState.value.toString(),
-      "longitude": "yes",
-      "latitude": 0.23
-    };
-    print('=========================room details ==========================');
-    print(roomDetails);
+
     bool imageCheck = imageValidation(data);
-    if (imageCheck && addRoomFormKey.currentState!.validate()) {
-      print(roomDetails['image']);
-      final response = editCheck.value
-          ? await apiObj.updateRoom(roomDetails, roomObjForEdit!.id!)
-          : await apiObj.addRoom(roomDetails);
+    try {
+      if (imageCheck && addRoomFormKey.currentState!.validate()) {
+        if (editCheck.value) {
+          for (int i = 0; i < 4; i++) {
+            if (imageList[i] != null) {
+              imageList[i] = await getImageUrlFromFirebase(null, imageList[i]);
+            } else {
+              imageList[i] = data!.imageList![i];
+            }
+          }
+        } else if (image1?.path != null &&
+            image2?.path != null &&
+            image3?.path != null &&
+            image4?.path != null) {
+          imageList = await getImageUrlFromFirebase(
+              [image1?.path, image2?.path, image3?.path, image4?.path], null);
+        } else {
+          Get.snackbar('Image Error', 'add all the images');
+          loadingCheck.value = false;
+        }
+        Map<String, dynamic> roomDetails = {
+          "property": propertyTypeController.text.trim(),
+          "roomNo": totalRoomController.text.trim(),
+          "price": totalRoomPriceController.text.trim(),
+          "adultRate": adultPriceController.text.trim(),
+          "OneRoom": singleRoomPriceController.text.trim(),
+          "capacity": capacityController.text.trim(),
+          "address": propertyAddressController.text.trim(),
+          "city": cityController.text.trim(),
+          "state": stateController.text.trim(),
+          "zip": pinCodeController.text.trim(),
+          "description": descriptionController.text.trim(),
+          "amenities": amenitiesList,
+          "image": imageList,
+          "category": selectedType.value.toString(),
+          "location": selectedState.value.toString(),
+          "longitude": "yes",
+          "latitude": 0.23
+        };
+        print(
+            '========================= room details ==========================');
+        print(roomDetails);
 
-      try {
-        if (response.statusCode == 200) {
-          final body = jsonDecode(response.body);
-          if (body['status'] == 'success') {
-            print('success');
-            loadingCheck.value = false;
-            Get.back();
-            editCheck.value
-                ? Get.snackbar(
-                    'Success',
-                    'Room Added Successfuly',
-                  )
-                : Get.snackbar(
-                    'Success',
-                    'Room updated Successfuly',
-                  );
+        print(
+            'validation success-----------------------------success validation why without adding  ');
+        print(roomDetails['image']);
+        final response = editCheck.value
+            ? await apiObj.updateRoom(roomDetails, roomObjForEdit!.id!)
+            : await apiObj.addRoom(roomDetails);
 
-            await vendorController.getVndorRooms();
-            update();
-            loadingCheck.value = false;
+        try {
+          if (response.statusCode == 200) {
+            final body = jsonDecode(response.body);
+            if (body['status'] == 'success') {
+              print('success');
+              loadingCheck.value = false;
+              if (editCheck.value) {
+                print(
+                    '====================================================helooooooooooooooooooooooo=================');
+                final newRoomObj =
+                    await createNewEditedObj(data!, amenitiesList!, imageList);
+                await vendorController.changeVendorRoomAfterEditFnc(newRoomObj);
+              }
+              await vendorController.getVndorRooms();
+              update();
+              Get.back();
+              editCheck.value
+                  ? Get.snackbar(
+                      'Success',
+                      'Room Added Successfuly',
+                    )
+                  : Get.snackbar(
+                      'Success',
+                      'Room updated Successfuly',
+                    );
 
-            onClose();
+              editCheck.value = false;
+
+              loadingCheck.value = false;
+
+              onClose();
+            } else {
+              Get.snackbar(
+                'Error Occure',
+                'Check Your Details',
+                backgroundColor: Colors.red,
+              );
+              loadingCheck.value = false;
+            }
           } else {
             Get.snackbar(
               'Error Occure',
-              'Check Your Details',
+              'Somthing Went Wrong',
               backgroundColor: Colors.red,
             );
             loadingCheck.value = false;
           }
-        } else {
-          Get.snackbar(
-            'Error Occure',
-            'Somthing Went Wrong',
-            backgroundColor: Colors.red,
-          );
-          loadingCheck.value = false;
+        } catch (e) {
+          if (e is SocketException) {
+            Get.snackbar(
+              'NetWork Error',
+              'Check Your Network',
+              backgroundColor: Colors.red,
+            );
+            loadingCheck.value = false;
+          }
         }
-      } catch (e) {
-        if (e is SocketException) {
-          Get.snackbar(
-            'NetWork Error',
-            'Check Your Network',
-            backgroundColor: Colors.red,
-          );
-          loadingCheck.value = false;
-        }
-      }
-    } else {
-      Get.snackbar('Error', 'Complete All Field', backgroundColor: Colors.red);
+      } else {
+        Get.snackbar('Error', 'Complete All Field',
+            backgroundColor: Colors.red);
 
-      loadingCheck.value = false;
+        loadingCheck.value = false;
+      }
+    } catch (e) {
+      print('validation else case----------------------------');
+      print(e);
     }
   }
 

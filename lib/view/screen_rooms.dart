@@ -61,15 +61,19 @@ class ScreenRooms extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  ScreenApprovedRoom(
-                    vendorController: vendorController,
-                    heightMedia: heightMedia,
-                    widthMedia: widthMedia,
+                  GetBuilder<VendorController>(
+                    builder: (cotroller) => ScreenApprovedRoom(
+                      vendorController: vendorController,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
                   ),
-                  ScreenPendingApproval(
-                    vendorController: vendorController,
-                    heightMedia: heightMedia,
-                    widthMedia: widthMedia,
+                  GetBuilder<VendorController>(
+                    builder: (controller) => ScreenPendingApproval(
+                      vendorController: vendorController,
+                      heightMedia: heightMedia,
+                      widthMedia: widthMedia,
+                    ),
                   ),
                 ],
               ),

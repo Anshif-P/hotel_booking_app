@@ -25,7 +25,7 @@ class _TempBottomNavigationState extends State<TempBottomNavigation> {
     const ScreenBooking(),
     const SizedBox(),
     ScreenRooms(),
-    const ScreenProfile(),
+    ScreenProfile(),
   ];
   @override
   Widget build(BuildContext context) {
