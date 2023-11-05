@@ -11,8 +11,8 @@ class SharedPrefModel {
     sharePrefObj = await SharedPreferences.getInstance();
   }
 
-  insertData(String key, String value) {
-    sharePrefObj.setString(key, value);
+  insertData(String key, String value) async {
+    await sharePrefObj.setString(key, value);
   }
 
   getData(String key) {

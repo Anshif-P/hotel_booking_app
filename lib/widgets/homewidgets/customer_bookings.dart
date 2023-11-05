@@ -28,6 +28,7 @@ class RevenueCustomerBookingsTextfielWidget extends StatelessWidget {
     return Container(
       width: sizeCheck ? widthMedia * 0.885 : widthMedia * 0.405,
       height: heightMedia * 0.065,
+      constraints: const BoxConstraints(minHeight: 50),
       // width: 160,4AA
       // height: 51,
       decoration: const BoxDecoration(
@@ -39,7 +40,7 @@ class RevenueCustomerBookingsTextfielWidget extends StatelessWidget {
               flex: 1,
               child: Row(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                   Icon(icon),
@@ -70,7 +71,7 @@ class RevenueCustomerBookingsTextfielWidget extends StatelessWidget {
                         fontSize: 12,
                       )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     sizeCheck

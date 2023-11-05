@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/service/api_service.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-
 import 'package:image_picker/image_picker.dart';
-
 import '../model/get_rooms_model.dart';
 
 class AddRoomController extends GetxController {
@@ -17,13 +14,8 @@ class AddRoomController extends GetxController {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
-    print('in side the constroctor');
-    print(roomObjForEdit);
     if (roomObjForEdit != null) {
-      print('hello this. is in side the controctor if case');
-      print(roomObjForEdit!.price!);
       propertyTypeController.text = roomObjForEdit!.propertyType!;
       totalRoomController.text = roomObjForEdit!.totalRoom!;
       singleRoomPriceController.text = roomObjForEdit!.totalRoom!;
@@ -32,16 +24,13 @@ class AddRoomController extends GetxController {
       capacityController.text = roomObjForEdit!.capacity!;
       propertyAddressController.text = roomObjForEdit!.address!;
       cityController.text = roomObjForEdit!.city!;
-      stateController.text = roomObjForEdit!.state!;
+      selectedState.value = roomObjForEdit!.state!;
       pinCodeController.text = roomObjForEdit!.zip!;
-      categoryController.text = roomObjForEdit!.category!;
+      selectedType.value = roomObjForEdit!.category!;
       descriptionController.text = roomObjForEdit!.description!;
       amenitiesList = roomObjForEdit!.amenities!;
       addSelectedAmentiesForEdit();
       editCheck = true.obs;
-
-      //addImageForToFeildForEdit(images);
-
       update();
     }
   }
@@ -105,9 +94,7 @@ class AddRoomController extends GetxController {
         },
       );
       update();
-    } else {
-      print('error');
-    }
+    } else {}
   }
 
   List<String>? getSelectedAmenties() {
@@ -130,53 +117,43 @@ class AddRoomController extends GetxController {
   File? image2;
   File? image3;
   File? image4;
+  // ignore: prefer_typing_uninitialized_variables
   var imageTemp;
 
   //--------implement image add function for edit------------------//
 
   Future pickImage(File? image, int caseNo) async {
     imageTemp = await ImagePicker().pickImage(source: ImageSource.gallery);
-    print('ImagePicker result: $imageTemp');
-
     if (imageTemp?.path != null) {
       try {
         switch (caseNo) {
           case (1):
             {
-              print('case 1');
               image1 = File(imageTemp!.path);
-
               update();
               break;
             }
           case (2):
             {
-              print('case 2');
               image2 = File(imageTemp!.path);
-
               break;
             }
           case (3):
             {
               image3 = File(imageTemp!.path);
-
               break;
             }
           case (4):
             {
               image4 = File(imageTemp!.path);
-
               break;
             }
         }
       } catch (e) {
-        print('error is thi');
-        print(e);
+        return null;
       }
       update();
-    } else {
-      print('path is emty');
-    }
+    } else {}
   }
 
   Future getImageUrlFromFirebase(List? imagesList, image) async {
@@ -184,9 +161,6 @@ class AddRoomController extends GetxController {
     String? imageFirebaseUrl;
     //late List firebaseImageUrlsList;
     if (editCheck.value != true) {
-      print(
-          '------------------Edit check false-------------------------------');
-      print(imagesList);
       for (int i = 0; i < 4; i++) {
         String uniqueName = DateTime.now().millisecond.toString();
         Reference fireBaseRootReference = FirebaseStorage.instance.ref();
@@ -196,15 +170,12 @@ class AddRoomController extends GetxController {
           await toUploadImgReference.putFile(File(imagesList![i]));
           firebaseImageUrlsList[i] =
               await toUploadImgReference.getDownloadURL();
-          print(i);
         } catch (e) {
-          print('hai---------------------');
-          print(e);
+          return null;
         }
       }
       return firebaseImageUrlsList;
     } else {
-      print('------------------Edit check True-------------------------------');
       String uniqueName = DateTime.now().millisecond.toString();
       Reference fireBaseRootReference = FirebaseStorage.instance.ref();
       Reference toUploadImgReference =
@@ -214,17 +185,13 @@ class AddRoomController extends GetxController {
         imageFirebaseUrl = await toUploadImgReference.getDownloadURL();
         return imageFirebaseUrl;
       } catch (e) {
-        print('hai---------------------');
-        print(e);
+        return null;
       }
     }
-    print(
-        '-----------------------------------------in side the fnc firebase send image ----------------------');
-    print(imageFirebaseUrl);
-    print(firebaseImageUrlsList);
   }
 
   //------------Edit fnc for replace old object form the roomobjList -------------//
+
   Future<VendorRoomModel> createNewEditedObj(
       VendorRoomModel data, List<dynamic> amenitiesList, List imageList) async {
     final VendorRoomModel vendorRoomObj = VendorRoomModel(
@@ -252,9 +219,6 @@ class AddRoomController extends GetxController {
 
   //-----------TextField Validations-----------//
   textFieldValidation(value) {
-    print(
-        'validation text ------------------------------------inside the validaation funtion ');
-    print(value);
     if (value != '') {
       return null;
     } else {
@@ -293,9 +257,6 @@ class AddRoomController extends GetxController {
       image4?.path
     ];
 
-    print(
-        'hai hello this is firebase urls ----------------------------  firebase url list');
-
     bool imageCheck = imageValidation(data);
     try {
       if (imageCheck && addRoomFormKey.currentState!.validate()) {
@@ -326,7 +287,7 @@ class AddRoomController extends GetxController {
           "capacity": capacityController.text.trim(),
           "address": propertyAddressController.text.trim(),
           "city": cityController.text.trim(),
-          "state": stateController.text.trim(),
+          "state": selectedState.value.toString(),
           "zip": pinCodeController.text.trim(),
           "description": descriptionController.text.trim(),
           "amenities": amenitiesList,
@@ -336,13 +297,6 @@ class AddRoomController extends GetxController {
           "longitude": "yes",
           "latitude": 0.23
         };
-        print(
-            '========================= room details ==========================');
-        print(roomDetails);
-
-        print(
-            'validation success-----------------------------success validation why without adding  ');
-        print(roomDetails['image']);
         final response = editCheck.value
             ? await apiObj.updateRoom(roomDetails, roomObjForEdit!.id!)
             : await apiObj.addRoom(roomDetails);
@@ -351,11 +305,8 @@ class AddRoomController extends GetxController {
           if (response.statusCode == 200) {
             final body = jsonDecode(response.body);
             if (body['status'] == 'success') {
-              print('success');
               loadingCheck.value = false;
               if (editCheck.value) {
-                print(
-                    '====================================================helooooooooooooooooooooooo=================');
                 final newRoomObj =
                     await createNewEditedObj(data!, amenitiesList!, imageList);
                 await vendorController.changeVendorRoomAfterEditFnc(newRoomObj);
@@ -411,8 +362,7 @@ class AddRoomController extends GetxController {
         loadingCheck.value = false;
       }
     } catch (e) {
-      print('validation else case----------------------------');
-      print(e);
+      return null;
     }
   }
 
@@ -437,9 +387,7 @@ class AddRoomController extends GetxController {
         },
       );
       update();
-    } else {
-      print('error');
-    }
+    } else {}
 
     // Dispose of any other resources or streams here
 

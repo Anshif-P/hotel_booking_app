@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/button_widget.dart';
 import 'date_pick_textwidget.dart';
 import 'textfeild_coupon_widget.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  BottomSheetWidget(
+  const BottomSheetWidget(
       {super.key,
       required this.widthMedia,
       required this.heightMedia,
@@ -58,7 +57,7 @@ class BottomSheetWidget extends StatelessWidget {
                       vendorController.textFieldValidation(value),
                   widthMedia: widthMedia,
                 )),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Expanded(
                   child: DatePickingWidget(
                     controller: vendorController.endDateController,

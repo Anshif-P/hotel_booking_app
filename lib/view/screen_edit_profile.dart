@@ -1,17 +1,13 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/model/vender_model.dart';
-
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/comman/heading_text.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../widgets/edit_profile_widgets/edit_profile_name_email_textfeld.dart';
 import '../widgets/edit_profile_widgets/edit_profile_textfeild_widget.dart';
 

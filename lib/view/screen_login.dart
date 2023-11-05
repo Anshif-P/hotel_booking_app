@@ -10,7 +10,7 @@ import 'package:hotel_booking_app/widgets/loginsign_widgets/textField_widget.dar
 class ScreenLogin extends StatelessWidget {
   ScreenLogin({super.key});
 
-  final loginController = Get.put<LoginController>(LoginController());
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {

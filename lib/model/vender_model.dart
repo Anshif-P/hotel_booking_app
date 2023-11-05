@@ -3,13 +3,10 @@ class VendorModel {
   final String? token;
   final String name;
   final String email;
-
   final String propertyName;
   final String propertyLocation;
-
   final bool isBanned;
   final String? image;
-
   VendorModel(
       {required this.id,
       this.token,

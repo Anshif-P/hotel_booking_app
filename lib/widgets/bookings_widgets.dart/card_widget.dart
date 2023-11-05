@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view/screen_detail_booking.dart';
 import 'package:hotel_booking_app/widgets/bookings_widgets.dart/booking_text_widget.dart';
 
 class BookingCardWidget extends StatelessWidget {
@@ -141,7 +143,9 @@ class BookingCardWidget extends StatelessWidget {
                                 backgroundColor: MaterialStateProperty.all(
                                     CustomColors.mainColor),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(() => ScreenBookingDetails());
+                              },
                               child: Text(
                                 'View',
                                 style: GoogleFonts.inter(

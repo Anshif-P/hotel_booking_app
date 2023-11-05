@@ -35,10 +35,7 @@ class VendorRoomModel {
       required this.imageList,
       required this.category,
       required this.location});
-  factory VendorRoomModel.toJson(map, propertyName) {
-    print('this. is in Model');
-
-    print(map['_id']);
+  factory VendorRoomModel.fromJson(map, propertyName) {
     return VendorRoomModel(
         propertyName: propertyName,
         id: map['_id'],

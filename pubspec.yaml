@@ -63,11 +63,12 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/image/undraw_my_password_re_ydq7 1.svg
-    - lib/image/Rectangle 3820.png
-    - lib/image/profile_background_img.png
-    - lib/image/coupon_img.png
-    - lib/image/lottie.json
+    - lib/image/
+    # - lib/image/Rectangle 3820.png
+    # - lib/image/profile_background_img.png
+    # - lib/image/coupon_img.png
+    # - lib/image/lottie.json
+    # - lib/image/Rectangle 3822.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

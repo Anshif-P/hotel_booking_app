@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/button_widget.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/textField_widget.dart';
-
 import '../view_model/signup_controller.dart';
 import '../widgets/loginsign_widgets/divider_widget.dart';
 import '../widgets/loginsign_widgets/mobilenumber_widget.dart';
@@ -60,7 +59,7 @@ class ScreenSignUp extends StatelessWidget {
                   validator: (value) =>
                       signupController.textFeildValidation(value),
                   text: 'Name',
-                  hintText: 'Anshif',
+                  hintText: 'enter name',
                   controller: signupController.nameController,
                   icon: Icons.person),
               SizedBox(

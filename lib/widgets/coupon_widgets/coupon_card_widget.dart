@@ -75,7 +75,7 @@ class CouponCardWidget extends StatelessWidget {
                       SizedBox(
                         height: heightMedia * 0.01,
                       ),
-                      CouponTextWidget(text: 'Coupon Code : $coupon'),
+                      CouponTextWidget(text: 'Code : $coupon'),
                       SizedBox(
                         height: heightMedia * 0.006,
                       ),

@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'details_text_widget.dart';
 
 class CheckinDayTotalRoomInfoWidget extends StatelessWidget {
@@ -27,7 +25,7 @@ class CheckinDayTotalRoomInfoWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Container(
+          child: SizedBox(
             // color: Colors.blue,
             height: heightMedia * 0.08,
             child: Column(
@@ -48,7 +46,7 @@ class CheckinDayTotalRoomInfoWidget extends StatelessWidget {
           color: const Color(0xFFD1D1D1),
         ),
         Expanded(
-          child: Container(
+          child: SizedBox(
             //   color: Colors.red,
             height: heightMedia * 0.08,
             child: Column(

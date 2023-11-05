@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:hotel_booking_app/view/screen_login.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
 import '../../constance/colors.dart';
 
 class LogoutDialog extends StatelessWidget {
+  final VendorController vendorController = Get.find<VendorController>();
+
   LogoutDialog({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

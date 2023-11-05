@@ -37,7 +37,7 @@ class SelectPhotosWidgts extends StatelessWidget {
             },
             child: imagePath?.path != null
                 ? Container(
-                    width: widthMedia * 0.17,
+                    constraints: const BoxConstraints(minHeight: 40),
                     height: heightMedia * 0.07,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -49,7 +49,6 @@ class SelectPhotosWidgts extends StatelessWidget {
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: CachedNetworkImage(
-                      width: widthMedia * 0.17,
                       height: heightMedia * 0.07,
                       fit: BoxFit.cover,
                       imageUrl: netWorkImage!,
@@ -57,15 +56,14 @@ class SelectPhotosWidgts extends StatelessWidget {
                         baseColor: Colors.grey.shade300,
                         highlightColor: Colors.grey.shade100,
                         child: Container(
-                            width: widthMedia * 0.17,
                             height: heightMedia * 0.07,
+                            constraints: const BoxConstraints(minHeight: 40),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: CustomColors.lightGreyColor,
                               image: netWorkImage != null
                                   ? DecorationImage(
-                                      image: NetworkImage(netWorkImage!)
-                                          as ImageProvider,
+                                      image: NetworkImage(netWorkImage!),
                                       fit: BoxFit.cover)
                                   : null,
                             )),
@@ -77,14 +75,14 @@ class SelectPhotosWidgts extends StatelessWidget {
               addRoomController.pickImage(imagePath, caseNo);
             },
             child: Container(
-              width: widthMedia * 0.17,
               height: heightMedia * 0.07,
+              constraints: const BoxConstraints(minHeight: 40),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: CustomColors.lightGreyColor,
               ),
               child: imagePath == null
-                  ? Center(
+                  ? const Center(
                       child: Icon(Icons.add),
                     )
                   : InkWell(
@@ -92,8 +90,8 @@ class SelectPhotosWidgts extends StatelessWidget {
                         addRoomController.pickImage(imagePath, caseNo);
                       },
                       child: Container(
-                        width: double.infinity,
-                        height: double.infinity,
+                        width: double.maxFinite,
+                        height: double.maxFinite,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             image: DecorationImage(

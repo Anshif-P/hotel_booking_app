@@ -34,7 +34,8 @@ class ScreenApprovedRoom extends StatelessWidget {
                   padding: EdgeInsets.only(top: heightMedia * 0.005),
                   itemCount: approvedRoomList.length,
                   itemBuilder: (context, index) {
-                    final data = approvedRoomList[index];
+                    final data =
+                        approvedRoomList[approvedRoomList.length - index];
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

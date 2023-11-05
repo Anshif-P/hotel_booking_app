@@ -12,9 +12,11 @@ class TextFeildAddRoomWidget extends StatelessWidget {
   final TextEditingController controller;
   final bool descriptionSizeCheck;
   final bool textFieldSizeCheck;
+  final bool keyboardType;
 
   const TextFeildAddRoomWidget(
       {super.key,
+      this.keyboardType = false,
       required this.validationFunction,
       required this.text,
       required this.hintText,
@@ -53,6 +55,7 @@ class TextFeildAddRoomWidget extends StatelessWidget {
               validator: validationFunction,
               maxLines: descriptionSizeCheck ? 5 : 1,
               controller: controller,
+              keyboardType: keyboardType ? TextInputType.number : null,
               decoration: InputDecoration(
                 isDense: true,
                 constraints: descriptionSizeCheck != true
@@ -67,6 +70,7 @@ class TextFeildAddRoomWidget extends StatelessWidget {
                 //   borderSide: const BorderSide(color: Colors.red),
                 //   borderRadius: BorderRadius.circular(4),
                 // ),
+
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.circular(4),

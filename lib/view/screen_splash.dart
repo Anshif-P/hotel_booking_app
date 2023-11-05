@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:hotel_booking_app/view/screen_login.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-import 'screen_temp_bottom_navigation.dart';
+import 'screen_parent_bottom_navigation.dart';
 
 class ScreenSplash extends StatefulWidget {
-  ScreenSplash({super.key});
+  const ScreenSplash({super.key});
 
   @override
   State<ScreenSplash> createState() => _ScreenSplashState();
@@ -74,7 +74,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
               Obx(
                 () => SizedBox(
                     child: loadingCheck.value
-                        ? SizedBox()
+                        ? const SizedBox()
                         : Transform.scale(
                             scale: .5,
                             child: const CircularProgressIndicator(
@@ -99,18 +99,22 @@ class _ScreenSplashState extends State<ScreenSplash> {
   }
 
   loginCheck(VendorController venderController) async {
-    await Future.delayed(const Duration(seconds: 2));
-
     final token = SharedPrefModel.instance.getData('token');
+    final isLogged = await venderController.getVendorDetails();
+
+    if (!isLogged) {
+      Get.to(() => ScreenLogin());
+    }
+
     if (token != null) {
-      await venderController.getVendorDetails();
       await venderController.getVndorRooms();
       await venderController.getVendorCoupons();
-      loadingCheck.value = true;
+      Get.off(() => ScreenParentNavigation());
 
-      Get.to(() => TempBottomNavigation());
+      loadingCheck.value = true;
     } else {
-      Get.to(() => ScreenLogin());
+      Future.delayed(const Duration(seconds: 1));
+      Get.off(() => ScreenLogin());
     }
   }
 }

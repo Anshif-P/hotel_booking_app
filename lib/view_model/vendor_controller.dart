@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,36 +41,27 @@ class VendorController extends GetxController {
   Rx<bool> profileEditLoadingCheck = false.obs;
   final GlobalKey<FormState> editProfileDetailsFormKey = GlobalKey<FormState>();
 
-  getVendorDetails() async {
+  Future<bool> getVendorDetails() async {
     try {
       final response = await apiObj.getVendorDetails();
       if (response.statusCode == 200) {
         final responseTemp = jsonDecode(response.body);
-        print('this. is vendorget fnc');
-        print(responseTemp);
-        print('this. is body');
+        if (responseTemp['status'] == 'failed') return false;
         final body = responseTemp['vendorDetails'];
-        print(body);
 
         vendorDetails = VendorModel.toJson(body);
-
-        print(
-            '------------------------------------body------------------------------------');
-        print(body);
-        print(vendorDetails.propertyLocation);
-        print(vendorDetails.propertyName);
         nameController.text = vendorDetails.name;
         emailController.text = vendorDetails.email;
         propertyNameController.text = vendorDetails.propertyName;
         propertyLocationController.text = vendorDetails.propertyLocation;
         netWorkProfileImage = vendorDetails.image;
-        // passwordController.text;
-        // conformPasswordController.text;
+        update();
+        return true;
       } else {
-        print('error occure');
+        return false;
       }
     } catch (e) {
-      print(e);
+      return false;
     }
   }
 
@@ -96,54 +85,42 @@ class VendorController extends GetxController {
   }
 
   changeVendorRoomAfterEditFnc(VendorRoomModel data) async {
-    print('this is in side the new image fnc');
-    print(data.imageList);
     for (int i = 0; i < vendorRooms.length; i++) {
       if (vendorRooms[i].id == data.id) {
         vendorRooms[i] = data;
-        print('after adding new obj image list');
-        ;
 
-        print(vendorRooms[i].imageList);
         update();
         break; // Stop searching once a match is found and replaced
       }
     }
   }
 
+  getProfileDetailsForEdit() async {
+    nameController.text = vendorDetails.name;
+    emailController.text = vendorDetails.email;
+    propertyNameController.text = vendorDetails.propertyName;
+    propertyLocationController.text = vendorDetails.propertyLocation;
+    netWorkProfileImage = vendorDetails.image;
+    update();
+  }
+
   getVndorRooms() async {
     vendorRooms.clear();
-    print('in side the getroomController');
     try {
       final response = await apiObj.getVenderRooms();
       if (response.statusCode == 200) {
-        final tempResponse = jsonDecode(response.body);
-        print('status code success');
-        print(tempResponse);
-
-        if (tempResponse is Map && tempResponse.containsKey('roomView')) {
-          print('in if case');
-
-          final body = tempResponse['roomView'];
-          print('status code after');
-          print(body);
-
-          for (int i = 0; i < body.length; i++) {
-            final roomObj =
-                VendorRoomModel.toJson(body[i], vendorDetails.propertyName);
-            vendorRooms.add(roomObj);
-          }
-          update();
-        } else {
-          print('error');
-        }
-        // final obj = vendorRooms[0];
-        // print(obj.amenities);
-        print(
-            '===========================================================================');
+        final responseData = jsonDecode(response.body);
+        final roomList = responseData['roomView'] as List;
+        vendorRooms = roomList
+            .map((e) => VendorRoomModel.fromJson(e, vendorDetails.propertyName))
+            .toList();
+        update();
       }
     } catch (e) {
-      print(e);
+      if (e is SocketException) {
+        Get.snackbar('NetWork Error', 'please check your network ');
+      }
+      Get.snackbar('Error Occure', 'somthing went wrong');
     }
   }
 
@@ -161,7 +138,6 @@ class VendorController extends GetxController {
         }
       }
     } catch (e) {
-      print(e);
       Get.snackbar('Error Occure', 'check your network');
     }
   }
@@ -174,8 +150,7 @@ class VendorController extends GetxController {
     }
   }
 
-  Future<String?> getImageUrlFromFirebase(String image) async {
-    print('------------------Edit check True-------------------------------');
+  getImageUrlFromFirebase(String image) async {
     String uniqueName = DateTime.now().millisecond.toString();
     Reference fireBaseRootReference = FirebaseStorage.instance.ref();
     Reference toUploadImgReference =
@@ -185,8 +160,7 @@ class VendorController extends GetxController {
       image = await toUploadImgReference.getDownloadURL();
       return image;
     } catch (e) {
-      print('hai---------------------');
-      print(e);
+      return null;
     }
   }
 
@@ -228,14 +202,13 @@ class VendorController extends GetxController {
             Get.back();
 
             Get.snackbar('Profile Edited', 'Successfully');
-            print('-------------edit -------------------------body ');
-
-            print(vendorDetails.name);
             update();
             disposeController();
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        return null;
+      }
     } else {
       profileEditLoadingCheck.value = false;
       Get.snackbar('Error', 'Fill the Feild Properly');
@@ -243,8 +216,6 @@ class VendorController extends GetxController {
   }
 
   void disposeController() {
-    print(
-        'controller disposed -----------------------------------------------  disposed ');
     profileImage = null;
     nameController.text = '';
     emailController.text = '';
@@ -261,9 +232,6 @@ class VendorController extends GetxController {
         "startDate": startDateController.text,
         "endDate": endDateController.text
       };
-      print(
-          '--------------------------before adding coupon -----------------------------');
-      print(couponMap);
       final response = await apiObj.addCoupons(couponMap);
       try {
         if (response.statusCode == 200) {
@@ -274,11 +242,15 @@ class VendorController extends GetxController {
             couponsList.add(couponObj);
             Get.back();
             Get.snackbar('Coupon Added ', 'Successfully');
+            couponController.clear();
+            discountAmountController.clear();
+            startDateController.clear();
+            endDateController.clear();
+            couponAddLoadingCheck.value = false;
             update();
           }
         } else {
           couponAddLoadingCheck.value = false;
-
           Get.snackbar("Error Occure", "somthing went wrong",
               backgroundColor: CustomColors.mainColor);
         }
@@ -290,10 +262,6 @@ class VendorController extends GetxController {
               backgroundColor: CustomColors.mainColor);
         } else {
           couponAddLoadingCheck.value = false;
-
-          print(e);
-          // Get.snackbar('Error occure', 'somthing went wrong',
-          //     backgroundColor: CustomColors.mainColor);
         }
       }
     } else {
@@ -307,27 +275,19 @@ class VendorController extends GetxController {
     final response = await apiObj.getVendorCoupons();
     try {
       if (response.statusCode == 200) {
-        print('1');
         final List body = jsonDecode(response.body);
-
-        print('2');
-        print(body);
-        for (int i = 0; i < body.length; i++) {
-          final couponObj = CouponModel.fromJson(body[i]);
-          couponsList.add(couponObj);
-        }
-
-        print(
-            '------------------------------coupon list------------------------------');
-        print(couponsList[0].startDate);
-        print(couponsList[0].endDate);
+        if (body.isNotEmpty) {
+          for (int i = 0; i < body.length; i++) {
+            final couponObj = CouponModel.fromJson(body[i]);
+            couponsList.add(couponObj);
+          }
+        } else {}
       }
     } catch (e) {
       if (e is SocketException) {
         Get.snackbar("Net Work Issue", "check your network",
             backgroundColor: CustomColors.mainColor);
       } else {
-        print(e);
         Get.snackbar('Error occure', 'somthing went wrong',
             backgroundColor: CustomColors.mainColor);
       }
@@ -352,7 +312,27 @@ class VendorController extends GetxController {
         Get.snackbar("Net Work Issue", "check your network",
             backgroundColor: CustomColors.mainColor);
       } else {
-        print(e);
+        Get.snackbar('Error occure', 'somthing went wrong',
+            backgroundColor: CustomColors.mainColor);
+      }
+    }
+  }
+
+  getVendorBookdings() async {
+    final response = await apiObj.getVendorBookings();
+    try {
+      if (response.statusCode == 200) {
+        var body = jsonDecode(response.body);
+        if (body['status'] == 'success') {
+          body = body['viewBookings'];
+          for (int i = 0; i < body.length; i++) {}
+        }
+      }
+    } catch (e) {
+      if (e is SocketException) {
+        Get.snackbar("Net Work Issue", "check your network",
+            backgroundColor: CustomColors.mainColor);
+      } else {
         Get.snackbar('Error occure', 'somthing went wrong',
             backgroundColor: CustomColors.mainColor);
       }

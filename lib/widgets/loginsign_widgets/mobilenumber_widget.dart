@@ -37,28 +37,28 @@ class _MobileNoTextFieldState extends State<MobileNoTextField> {
         SizedBox(
           // height: heightMedia * 0.07,
           child: TextFormField(
+            keyboardType: TextInputType.number,
             validator: widget.validation,
             controller: widget.controller,
             decoration: InputDecoration(
               isDense: true,
               constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
+                borderSide: const BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(10.0),
               ),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(color: Color(0xFFD1D1D1))),
               errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Colors.red), // Set the border color when focused
+                borderSide: const BorderSide(color: Colors.red),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 10),
               hintText: 'Enter mobile number',
               hintStyle: const TextStyle(color: Color(0xFF999999)),
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                    color: Color(
-                        0xFFD1D1D1)), // Set the border color when not focused
+                borderSide: const BorderSide(color: Color(0xFFD1D1D1)),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               prefixIcon: SizedBox(

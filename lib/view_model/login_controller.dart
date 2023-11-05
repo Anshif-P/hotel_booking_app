@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:hotel_booking_app/service/api_service.dart';
-import 'package:hotel_booking_app/view/screen_temp_bottom_navigation.dart';
+import 'package:hotel_booking_app/view/screen_parent_bottom_navigation.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-
 import '../view/screen_signup.dart';
 
 class LoginController extends GetxController {
-  final vendorController = Get.find<VendorController>();
+  final VendorController vendorController = Get.put(VendorController());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> loginValidateKey = GlobalKey<FormState>();
@@ -45,16 +44,13 @@ class LoginController extends GetxController {
         if (response!.statusCode == 200) {
           final body = jsonDecode(response.body);
           if (body['status'] == 'success') {
-            print('login controller');
-            SharedPrefModel.instance.insertData('token', body['token']);
+            await SharedPrefModel.instance.insertData('token', body['token']);
+
             await vendorController.getVendorDetails();
-            print('hellow');
             await vendorController.getVndorRooms();
 
-            // final token = sharePref.get('token');
-            // print(token);
             loadingCheck.value = false;
-            Get.to(() => TempBottomNavigation());
+            Get.off(() => ScreenParentNavigation());
           } else {
             loadingCheck.value = false;
             Get.snackbar('Erorr', 'username and password not match',
@@ -72,7 +68,7 @@ class LoginController extends GetxController {
         } else {
           loadingCheck.value = false;
           Get.snackbar(
-            'Erro',
+            'Error',
             'somthing went wrong',
             backgroundColor: Colors.red,
           );

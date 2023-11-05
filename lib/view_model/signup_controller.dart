@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:hotel_booking_app/service/api_service.dart';
-
+import 'package:hotel_booking_app/view/screen_parent_bottom_navigation.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import '../model/sharepref_model.dart';
-import '../view/screen_bottom_navigation.dart';
 
 class SignUpController extends GetxController {
   TextEditingController nameController = TextEditingController();
@@ -17,8 +15,8 @@ class SignUpController extends GetxController {
   TextEditingController propertyController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController numberController = TextEditingController();
-
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+  final VendorController vendorController = Get.find<VendorController>();
 
   Api apiObj = Api();
   RxBool loadingCheck = false.obs;
@@ -78,9 +76,9 @@ class SignUpController extends GetxController {
 
             // final token = sharePref.get('token');
             // print(token);
-            apiObj.getVendorDetails();
+            await vendorController.getVendorDetails();
             loadingCheck.value = false;
-            Get.to(ScreenBottomNavigation());
+            Get.off(() => ScreenParentNavigation());
           } else {
             loadingCheck.value = false;
             Get.snackbar('Alert', 'username already taken',

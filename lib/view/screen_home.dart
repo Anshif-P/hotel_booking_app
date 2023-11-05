@@ -6,14 +6,12 @@ import 'package:hotel_booking_app/view/screen_drawer.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/homewidgets/recently_room.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../widgets/homewidgets/booking_recently.dart';
 import '../widgets/homewidgets/customer_bookings.dart';
-// import 'package:hotel_booking_app/view/screen_drawer.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
-  final VendorController vendorController = Get.find<VendorController>();
+  final VendorController vendorController = Get.put(VendorController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,52 +19,34 @@ class ScreenHome extends StatelessWidget {
     double widthMedia = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(children: [
-              Container(
-                height: heightMedia * 0.67,
-                color: const Color(0xFFF2F2F2),
-              ),
-              Transform.rotate(
-                angle: 73 * (3.14159265359 / 180),
-                child: Container(
-                  height: heightMedia * 0.6339,
-                  width: widthMedia * 0.5,
-                  color: const Color(0xFFCB102F),
-                  // color: Colors.blue,
-                ),
-              ),
-              Container(
-                height: heightMedia * 0.2,
-                width: double.infinity,
-                color: const Color(0xFFCB102F),
-                // color: Colors.yellow
-              ),
-              Transform.rotate(
-                angle: -0.295,
-                child: Container(
-                  height: heightMedia * 0.4,
-                  width: double.infinity,
-                  color: const Color(0xFFCB102F),
-                  // color: Colors.green,
-                ),
-              ),
-              Positioned(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Stack(children: [
+            Container(
+              color: const Color(0xffF2F2F2),
+              height: heightMedia * 0.67,
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Container(
+                    height: heightMedia * .48,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('lib/image/Frame 43.png'),
+                            fit: BoxFit.cover))),
+              ]),
+            ),
+            Positioned(
                 top: heightMedia * 0.028,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 9),
-                      child: Row(
-                        children: [
-                          Builder(
-                            builder: (BuildContext context) {
-                              return IconButton(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 9),
+                        child: Row(children: [
+                          Builder(builder: (BuildContext context) {
+                            return IconButton(
                                 onPressed: () {
                                   Scaffold.of(context).openDrawer();
                                 },
@@ -74,162 +54,127 @@ class ScreenHome extends StatelessWidget {
                                   Icons.menu,
                                   color: Colors.white,
                                   size: 35,
-                                ),
-                              );
-                            },
-                          ),
-                          SizedBox(
-                            width: widthMedia * 0.04,
-                          ),
-                          Text(
-                            'qb',
-                            style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 33,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                          SizedBox(
-                            width: widthMedia * 0.55,
-                          ),
-                          vendorController.vendorDetails.image != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(7),
-                                  child: CachedNetworkImage(
-                                    imageUrl:
-                                        vendorController.vendorDetails.image!,
-                                    width: widthMedia * 0.09,
-                                    height: heightMedia * 0.04,
-                                    fit: BoxFit.cover,
-                                    placeholder: (context, url) =>
-                                        Shimmer.fromColors(
-                                      baseColor: Colors.grey.shade300,
-                                      highlightColor: Colors.grey.shade100,
-                                      child: Container(
+                                ));
+                          }),
+                          SizedBox(width: widthMedia * 0.04),
+                          Text('qb',
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 33,
+                                      fontWeight: FontWeight.bold))),
+                          SizedBox(width: widthMedia * 0.55),
+                          GetBuilder<VendorController>(builder: (controller) {
+                            return vendorController.vendorDetails.image != null
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(7),
+                                    child: CachedNetworkImage(
+                                        imageUrl: vendorController
+                                            .vendorDetails.image!,
                                         width: widthMedia * 0.09,
                                         height: heightMedia * 0.04,
-                                        decoration: BoxDecoration(
-                                            color: Colors.amber,
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                vendorController
-                                                    .vendorDetails.image!,
-                                              ),
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Container(
-                                  width: widthMedia * 0.09,
-                                  height: heightMedia * 0.04,
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius: BorderRadius.circular(7),
-                                  ),
-                                ),
-                        ],
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) =>
+                                            Shimmer.fromColors(
+                                                baseColor: Colors.grey.shade300,
+                                                highlightColor:
+                                                    Colors.grey.shade100,
+                                                child: Container(
+                                                    width: widthMedia * 0.09,
+                                                    height: heightMedia * 0.04,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.amber,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(7),
+                                                        image: DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: NetworkImage(
+                                                                vendorController
+                                                                    .vendorDetails
+                                                                    .image!)))))),
+                                  )
+                                : Container(
+                                    width: widthMedia * 0.09,
+                                    height: heightMedia * 0.04,
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(7),
+                                    ));
+                          })
+                        ]),
                       ),
-                    ),
-                    SizedBox(
-                      height: heightMedia * 0.027,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 22),
-                      child: Container(
-                        height: 0.5,
-                        width: widthMedia * 0.87,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      height: heightMedia * 0.033,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          width: widthMedia * 0.05,
-                        ),
-                        RevenueCustomerBookingsTextfielWidget(
-                          contextHome: context,
-                          icon: Icons.person,
-                          text: 'Customers',
-                          value: '2',
-                        ),
-                        SizedBox(
-                          width: widthMedia * 0.07,
-                        ),
-                        RevenueCustomerBookingsTextfielWidget(
-                          contextHome: context,
-                          icon: Icons.date_range_outlined,
-                          text: 'Bookings',
-                          value: '45',
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: heightMedia * 0.03,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: RevenueCustomerBookingsTextfielWidget(
-                        contextHome: context,
-                        icon: Icons.attach_money,
-                        text: 'Revenue',
-                        value: '4540',
-                        sizeCheck: true,
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 19, top: 15, bottom: 15),
-                      child: Text(
-                        'Recent Booking',
-                        style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        )),
-                      ),
-                    ),
-                    RecentBookingWidget(
-                      heightMedia: heightMedia,
-                      widthMedia: widthMedia,
-                      amount: '1200',
-                      checkInDate: 'Wed, 8 Nov 2023',
-                      checkOutDate: 'Wed, 8 Nov 2023',
-                      customerName: 'Anshif',
-                      id: '68737483',
-                    ),
-                    SizedBox(
-                      height: heightMedia * 0.01,
-                    ),
-                    RecentBookingWidget(
-                      heightMedia: heightMedia,
-                      widthMedia: widthMedia,
-                      amount: '1200',
-                      checkInDate: 'Wed, 8 Nov 2023',
-                      checkOutDate: 'Wed, 8 Nov 2023',
-                      customerName: 'Anshif',
-                      id: '68737483',
-                    )
-                  ],
-                ),
-              ),
-            ]),
-            RecentAddedRoomWidget(
-                heightMedia: heightMedia,
-                widthMedia: widthMedia,
-                vendorController: vendorController),
-          ],
-        ),
-      ),
-      drawer: Drawer(child: ScreenDrawer()),
-    );
+                      SizedBox(height: heightMedia * 0.027),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 22),
+                          child: Container(
+                            height: 0.5,
+                            width: widthMedia * 0.87,
+                            color: Colors.white,
+                          )),
+                      SizedBox(height: heightMedia * 0.033),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(width: widthMedia * 0.05),
+                            RevenueCustomerBookingsTextfielWidget(
+                              contextHome: context,
+                              icon: Icons.person,
+                              text: 'Customers',
+                              value: '2',
+                            ),
+                            SizedBox(width: widthMedia * 0.07),
+                            RevenueCustomerBookingsTextfielWidget(
+                              contextHome: context,
+                              icon: Icons.date_range_outlined,
+                              text: 'Bookings',
+                              value: '45',
+                            )
+                          ]),
+                      SizedBox(height: heightMedia * 0.03),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: RevenueCustomerBookingsTextfielWidget(
+                            contextHome: context,
+                            icon: Icons.attach_money,
+                            text: 'Revenue',
+                            value: '4540',
+                            sizeCheck: true,
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.only(
+                              left: 19, top: 15, bottom: 15),
+                          child: Text('Recent Booking',
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14)))),
+                      RecentBookingWidget(
+                          heightMedia: heightMedia,
+                          widthMedia: widthMedia,
+                          amount: '1200',
+                          checkInDate: 'Wed, 8 Nov 2023',
+                          checkOutDate: 'Wed, 8 Nov 2023',
+                          customerName: 'Anshif',
+                          id: '68737483'),
+                      SizedBox(height: heightMedia * 0.01),
+                      RecentBookingWidget(
+                          heightMedia: heightMedia,
+                          widthMedia: widthMedia,
+                          amount: '1200',
+                          checkInDate: 'Wed, 8 Nov 2023',
+                          checkOutDate: 'Wed, 8 Nov 2023',
+                          customerName: 'Anshif',
+                          id: '68737483')
+                    ]))
+          ]),
+          GetBuilder<VendorController>(
+              builder: (controller) => RecentAddedRoomWidget(
+                  heightMedia: heightMedia,
+                  widthMedia: widthMedia,
+                  vendorController: vendorController))
+        ])),
+        drawer: Drawer(child: ScreenDrawer()));
   }
 }

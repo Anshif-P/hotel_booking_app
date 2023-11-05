@@ -12,4 +12,5 @@ class Urls {
   static String addCoupon = '/api/vendor/createCoupon';
   static String getVendorCoupons = '/api/vendor/viewcoupon';
   static String deleteCoupon = '/api/vendor/deletecoupn/';
+  static String getVendorBooking = '/api/vendor/viewbooking';
 }

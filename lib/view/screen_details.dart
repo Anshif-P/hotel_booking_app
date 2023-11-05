@@ -1,16 +1,12 @@
-import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-
 import 'package:hotel_booking_app/widgets/comman/location_text_widget.dart';
 import 'package:hotel_booking_app/widgets/hotel_details_widgets/hotel_details_text_widget.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../constance/colors.dart';
 import '../widgets/hotel_details_widgets/amenties_widget.dart';
 import '../widgets/hotel_details_widgets/details_images_widget.dart';
@@ -37,7 +33,7 @@ class ScreenRoomDetails extends StatelessWidget {
           children: [
             Column(
               children: [
-                Container(
+                SizedBox(
                   height: heightMedia * 0.37,
                   child: Obx(
                     () => CachedNetworkImage(
@@ -144,62 +140,71 @@ class ScreenRoomDetails extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: heightMedia * 0.04,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              propertyName,
-                              style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 24,
-                              )),
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star_rate_rounded,
-                                  color: CustomColors.mainColor,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '(4.0)',
-                                  style: GoogleFonts.inter(
-                                      textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 20,
-                                  )),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: heightMedia * 0.004,
-                        ),
-                        LocationTextWidget(
-                            text1: data.location!, text2: data.city!),
-                      ]),
+                  child: SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: heightMedia * 0.04,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                propertyName,
+                                style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 24,
+                                )),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_rate_rounded,
+                                    color: CustomColors.mainColor,
+                                    size: 20,
+                                  ),
+                                  Text(
+                                    '(4.0)',
+                                    style: GoogleFonts.inter(
+                                        textStyle: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    )),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: heightMedia * 0.004,
+                          ),
+                          LocationTextWidget(
+                              text1: data.location!, text2: data.city!),
+                        ]),
+                  ),
                 ),
                 //  height: heightMedia,
               ),
             ),
             Positioned(
-              top: heightMedia * 0.02,
-              left: widthMedia * 0.01,
-              child: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  size: 30,
+              top: heightMedia * 0.03,
+              left: widthMedia * 0.04,
+              child: InkWell(
+                onTap: () => Get.back(),
+                child: Container(
+                  width: 40,
+                  height: 35,
+                  decoration: BoxDecoration(
+                      color: CustomColors.mainColor,
+                      borderRadius: BorderRadius.circular(14)),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                    size: 26,
+                  ),
                 ),
               ),
             ),

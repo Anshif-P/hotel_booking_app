@@ -6,4 +6,5 @@ class CustomColors {
   static Color extraLightGrey = const Color(0xFFF2F2F2);
   static Color greenColor = const Color(0xFF1AB65C);
   static Color blueColor = const Color(0xFF0066FF);
+  static Color bottomAddButtomGeyColor = const Color(0xFFD9D9D9);
 }

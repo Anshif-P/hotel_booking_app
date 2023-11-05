@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
-import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/hotel_details_widgets/hotel_details_text_widget.dart';
 
 class RoomInfoWidget extends StatelessWidget {
@@ -24,7 +22,7 @@ class RoomInfoWidget extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: heightMedia * 0.09,
                 //  color: Colors.yellow,
                 child: Column(
@@ -42,7 +40,7 @@ class RoomInfoWidget extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          HotelDetailsTextWidget(text: 'Adult rate :'),
+                          const HotelDetailsTextWidget(text: 'Adult rate :'),
                           Text(
                             ' ₹${data.adultRate}',
                             style: GoogleFonts.inter(
@@ -63,7 +61,7 @@ class RoomInfoWidget extends StatelessWidget {
               color: CustomColors.lightGreyColor,
             ),
             Expanded(
-                child: Container(
+                child: SizedBox(
               height: heightMedia * 0.09,
               //  color: Colors.red,
               child:
@@ -77,7 +75,7 @@ class RoomInfoWidget extends StatelessWidget {
                 SizedBox(
                   height: heightMedia * 0.01,
                 ),
-                HotelDetailsTextWidget(text: 'Extra : Parking')
+                const HotelDetailsTextWidget(text: 'Extra : Parking')
               ]),
             ))
           ],
@@ -102,7 +100,7 @@ class RoomInfoWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            HotelDetailsTextWidget(text: 'Zip :'),
+            const HotelDetailsTextWidget(text: 'Zip :'),
             Text(
               ' ${data.zip}',
               style: GoogleFonts.inter(
@@ -118,7 +116,7 @@ class RoomInfoWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            HotelDetailsTextWidget(text: 'Price :'),
+            const HotelDetailsTextWidget(text: 'Price :'),
             Text(
               ' ₹${data.price}',
               style: GoogleFonts.inter(

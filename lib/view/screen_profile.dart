@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
@@ -7,7 +6,6 @@ import 'package:hotel_booking_app/view/screen_edit_profile.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/comman/button_text.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../widgets/profile_widgets/listtile_widget.dart';
 
 class ScreenProfile extends StatelessWidget {
@@ -88,7 +86,7 @@ class ScreenProfile extends StatelessWidget {
                       height: heightMidia * 0.038,
                       child: ElevatedButton(
                           onPressed: () async {
-                            await vendorController.getVendorDetails();
+                            await vendorController.getProfileDetailsForEdit();
                             Get.to(() => ScreenEdit(
                                   data: vendorController.vendorDetails,
                                 ));

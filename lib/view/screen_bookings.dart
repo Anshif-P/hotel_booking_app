@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/bookings_widgets.dart/cancelled_widget.dart';
 import 'package:hotel_booking_app/widgets/bookings_widgets.dart/history_widget.dart';
-
 import 'package:hotel_booking_app/widgets/comman/heading_text.dart';
 
 class ScreenBooking extends StatelessWidget {
@@ -43,22 +44,26 @@ class ScreenBooking extends StatelessWidget {
                   labelColor: Colors.black,
                   tabs: const [
                     Tab(
-                      text: 'History',
+                      text: 'Active',
                     ),
                     Tab(
-                      text: 'Cancelled',
+                      text: 'History',
                     ),
                   ]),
             ),
             Expanded(
                 child: TabBarView(children: [
-              HistoryWidget(
-                heightMedia: heightMedia,
-                widthMedia: widthMedia,
+              GetBuilder<VendorController>(
+                builder: (controller) => HistoryWidget(
+                  heightMedia: heightMedia,
+                  widthMedia: widthMedia,
+                ),
               ),
-              CancelledWidget(
-                heightMedia: heightMedia,
-                widthMedia: widthMedia,
+              GetBuilder<VendorController>(
+                builder: (controller) => CancelledWidget(
+                  heightMedia: heightMedia,
+                  widthMedia: widthMedia,
+                ),
               )
             ])),
           ],
