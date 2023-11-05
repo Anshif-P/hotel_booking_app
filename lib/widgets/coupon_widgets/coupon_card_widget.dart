@@ -42,7 +42,7 @@ class CouponCardWidget extends StatelessWidget {
             children: [
               Expanded(
                   flex: 1,
-                  child: Container(
+                  child: SizedBox(
                     height: heightMedia * 0.13,
 
                     //color: Colors.blue,
@@ -53,7 +53,7 @@ class CouponCardWidget extends StatelessWidget {
                           width: widthMedia * 0.24,
                           height: heightMedia * 0.09,
                           decoration: BoxDecoration(
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                   image: AssetImage(
                                     'lib/image/coupon_img.png',
                                   ),
@@ -66,7 +66,7 @@ class CouponCardWidget extends StatelessWidget {
                   )),
               Expanded(
                 flex: 2,
-                child: Container(
+                child: SizedBox(
                   height: heightMedia * 0.1,
                   //  color: Colors.yellow,
                   child: Column(
@@ -82,57 +82,51 @@ class CouponCardWidget extends StatelessWidget {
                       Row(
                         children: [
                           Expanded(
-                              child: Container(
-                            //       color: Colors.red,
-                            child: Row(
-                              children: [
-                                CouponTextWidget(text: 'Discount :'),
-                                Text(
-                                  ' ₹$discount',
-                                  style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    color: CustomColors.greenColor,
-                                    fontSize: 14,
-                                  )),
-                                ),
-                              ],
-                            ),
+                              child: Row(
+                            children: [
+                              const CouponTextWidget(text: 'Discount :'),
+                              Text(
+                                ' ₹$discount',
+                                style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: CustomColors.greenColor,
+                                  fontSize: 14,
+                                )),
+                              ),
+                            ],
                           )),
                           Expanded(
-                              child: Container(
-                            //      color: Colors.grey,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: widthMedia * 0.2,
+                              child: Row(
+                            children: [
+                              SizedBox(
+                                width: widthMedia * 0.2,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return DeleteCouponDialog(
+                                          controller: vendorController,
+                                          data: data,
+                                        );
+                                      });
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  size: 19,
+                                  color: CustomColors.mainColor,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return DeleteCouponDialog(
-                                            controller: vendorController,
-                                            data: data,
-                                          );
-                                        });
-                                  },
-                                  child: Icon(
-                                    Icons.delete,
-                                    size: 19,
-                                    color: CustomColors.mainColor,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           )),
                         ],
                       ),
                       SizedBox(
                         height: heightMedia * 0.006,
                       ),
-                      CouponTextWidget(text: '${startDate} - ${endDate}')
+                      CouponTextWidget(text: '$startDate - $endDate')
                     ],
                   ),
                 ),

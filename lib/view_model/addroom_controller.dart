@@ -86,13 +86,11 @@ class AddRoomController extends GetxController {
 
   addSelectedAmentiesForEdit() {
     if (amenitiesList != null) {
-      amenitiesList!.forEach(
-        (element) {
-          if (amentiesMap.containsKey(element)) {
-            amentiesMap[element] = true;
-          }
-        },
-      );
+      for (var element in amenitiesList!) {
+        if (amentiesMap.containsKey(element)) {
+          amentiesMap[element] = true;
+        }
+      }
       update();
     } else {}
   }
@@ -379,13 +377,11 @@ class AddRoomController extends GetxController {
     image4 = null;
 
     if (amenitiesList != null) {
-      amenitiesList!.forEach(
-        (element) {
-          if (amentiesMap.containsKey(element)) {
-            amentiesMap[element] = false;
-          }
-        },
-      );
+      for (var element in amenitiesList!) {
+        if (amentiesMap.containsKey(element)) {
+          amentiesMap[element] = false;
+        }
+      }
       update();
     } else {}
 

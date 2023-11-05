@@ -109,9 +109,7 @@ class BookingCardWidget extends StatelessWidget {
                       ))),
               Expanded(
                   flex: 3,
-                  child: Container(
-                      //  color: Colors.blue,
-                      child: SizedBox(
+                  child: SizedBox(
                     width: widthMedia * 0.12,
                     //    color: Colors.green,
                     height: heightMedia * 0.14,
@@ -138,13 +136,13 @@ class BookingCardWidget extends StatelessWidget {
                             ),
                             ElevatedButton(
                               style: ButtonStyle(
-                                minimumSize:
-                                    MaterialStateProperty.all(Size(10, 25)),
+                                minimumSize: MaterialStateProperty.all(
+                                    const Size(10, 25)),
                                 backgroundColor: MaterialStateProperty.all(
                                     CustomColors.mainColor),
                               ),
                               onPressed: () {
-                                Get.to(() => ScreenBookingDetails());
+                                Get.to(() => const ScreenBookingDetails());
                               },
                               child: Text(
                                 'View',
@@ -171,7 +169,7 @@ class BookingCardWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ))),
+                  )),
             ],
           ),
         ),

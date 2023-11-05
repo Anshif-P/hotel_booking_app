@@ -15,8 +15,8 @@ class ProfileListTileWidget extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text('Security'),
-          leading: Icon(Icons.security, color: Colors.black),
+          title: const Text('Security'),
+          leading: const Icon(Icons.security, color: Colors.black),
           trailing: Icon(
             Icons.keyboard_arrow_right_outlined,
             color: CustomColors.lightGreyColor,
@@ -29,8 +29,8 @@ class ProfileListTileWidget extends StatelessWidget {
           thickness: 0.5,
         ),
         ListTile(
-          leading: Icon(Icons.help_outline_outlined, color: Colors.black),
-          title: Text('Help'),
+          leading: const Icon(Icons.help_outline_outlined, color: Colors.black),
+          title: const Text('Help'),
           trailing: Icon(
             Icons.keyboard_arrow_right_outlined,
             color: CustomColors.lightGreyColor,
@@ -43,11 +43,11 @@ class ProfileListTileWidget extends StatelessWidget {
           thickness: 0.5,
         ),
         ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.card_membership,
             color: Colors.black,
           ),
-          title: Text('Add Coupon'),
+          title: const Text('Add Coupon'),
           trailing: Icon(
             Icons.keyboard_arrow_right_outlined,
             color: CustomColors.lightGreyColor,

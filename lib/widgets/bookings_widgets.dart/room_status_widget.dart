@@ -25,7 +25,7 @@ class RoomStatusWidget extends StatelessWidget {
       child: Text(
         text,
         style: GoogleFonts.inter(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
           color: Colors.white,
           fontSize: 10,
         )),

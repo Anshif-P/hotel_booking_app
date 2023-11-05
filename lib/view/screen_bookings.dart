@@ -25,7 +25,7 @@ class ScreenBooking extends StatelessWidget {
                 SizedBox(
                   width: widthMedia * 0.05,
                 ),
-                HeadingTextWidget(text: 'Bookings'),
+                const HeadingTextWidget(text: 'Bookings'),
               ],
             ),
             SizedBox(height: heightMedia * 0.02),

@@ -13,7 +13,7 @@ class TextBookingWidget extends StatelessWidget {
       text,
       style: GoogleFonts.inter(
           textStyle: TextStyle(
-        color: sizeColorCheck ? Color(0xFF787878) : Colors.black,
+        color: sizeColorCheck ? const Color(0xFF787878) : Colors.black,
         fontSize: sizeColorCheck ? 10 : 12,
       )),
     );

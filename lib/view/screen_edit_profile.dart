@@ -32,7 +32,7 @@ class ScreenEdit extends StatelessWidget {
             label: vendorController.profileEditLoadingCheck.value
                 ? Transform.scale(
                     scale: .5,
-                    child: CircularProgressIndicator(
+                    child: const CircularProgressIndicator(
                       strokeWidth: 5,
                       color: Colors.white,
                     ),
@@ -58,11 +58,11 @@ class ScreenEdit extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(Icons.arrow_back)),
+                      icon: const Icon(Icons.arrow_back)),
                   SizedBox(
                     width: screenWidth * 0.05,
                   ),
-                  HeadingTextWidget(
+                  const HeadingTextWidget(
                     text: 'Edit Profile',
                     sizeCheck: true,
                   ),
@@ -81,7 +81,7 @@ class ScreenEdit extends StatelessWidget {
                         children: [
                           Expanded(
                               flex: 1,
-                              child: Container(
+                              child: SizedBox(
                                 //  color: Colors.yellow,
                                 width: double.maxFinite,
                                 height: screenheight * 0.24,
@@ -98,7 +98,8 @@ class ScreenEdit extends StatelessWidget {
                                                         90, // Adjust the width to your desired avatar size
                                                     height:
                                                         90, // Adjust the height to your desired avatar size
-                                                    decoration: BoxDecoration(
+                                                    decoration:
+                                                        const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color: Colors
                                                           .grey, // Background color of the circle
@@ -199,7 +200,7 @@ class ScreenEdit extends StatelessWidget {
                           ),
                           Expanded(
                             flex: 2,
-                            child: Container(
+                            child: SizedBox(
                               //  color: Colors.blue,
                               width: double.maxFinite,
                               height: screenheight * 0.24,
@@ -249,44 +250,39 @@ class ScreenEdit extends StatelessWidget {
                 height: screenheight * 0.02,
               ),
               Card(
-                child: Container(
-                  // color: Colors.yellow,
-                  //  height: screenheight * 0.15,
-
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                        EditProfileTextFeildWdiget(
-                            vendorController: vendorController,
-                            feildControll: true,
-                            text: 'Property name',
-                            validation: (value) =>
-                                vendorController.textFieldValidation(value),
-                            screenHeight: screenheight,
-                            screenwidth: screenWidth,
-                            textEditingController:
-                                vendorController.propertyNameController,
-                            hintText: 'enter property name'),
-                        EditProfileTextFeildWdiget(
-                            vendorController: vendorController,
-                            text: 'Property location',
-                            validation: (value) =>
-                                vendorController.textFieldValidation(value),
-                            screenHeight: screenheight,
-                            screenwidth: screenWidth,
-                            textEditingController:
-                                vendorController.propertyLocationController,
-                            dividerCheck: true,
-                            hintText: 'enter property loaction'),
-                        SizedBox(
-                          height: screenheight * 0.02,
-                        ),
-                      ]),
-                    ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SingleChildScrollView(
+                    child: Column(children: [
+                      SizedBox(
+                        height: screenheight * 0.02,
+                      ),
+                      EditProfileTextFeildWdiget(
+                          vendorController: vendorController,
+                          feildControll: true,
+                          text: 'Property name',
+                          validation: (value) =>
+                              vendorController.textFieldValidation(value),
+                          screenHeight: screenheight,
+                          screenwidth: screenWidth,
+                          textEditingController:
+                              vendorController.propertyNameController,
+                          hintText: 'enter property name'),
+                      EditProfileTextFeildWdiget(
+                          vendorController: vendorController,
+                          text: 'Property location',
+                          validation: (value) =>
+                              vendorController.textFieldValidation(value),
+                          screenHeight: screenheight,
+                          screenwidth: screenWidth,
+                          textEditingController:
+                              vendorController.propertyLocationController,
+                          dividerCheck: true,
+                          hintText: 'enter property loaction'),
+                      SizedBox(
+                        height: screenheight * 0.02,
+                      ),
+                    ]),
                   ),
                 ),
               )

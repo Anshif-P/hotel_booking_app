@@ -4,7 +4,7 @@ import 'package:hotel_booking_app/constance/colors.dart';
 import '../widgets/comman/heading_text.dart';
 
 class VendorAppInfoPage extends StatelessWidget {
-  VendorAppInfoPage({super.key});
+  const VendorAppInfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,14 @@ class VendorAppInfoPage extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               size: 25,
                             )),
                         SizedBox(
                           width: widthMdida * 0.04,
                         ),
-                        HeadingTextWidget(text: 'Coupons'),
+                        const HeadingTextWidget(text: 'Coupons'),
                       ],
                     ),
                   ),

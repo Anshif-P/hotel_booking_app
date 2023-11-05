@@ -58,7 +58,7 @@ class RecentBookingWidget extends StatelessWidget {
                           const SizedBox(
                             height: 6,
                           ),
-                          TextBookingWidget(text: 'Check-in'),
+                          const TextBookingWidget(text: 'Check-in'),
                           const SizedBox(
                             height: 6,
                           ),
@@ -130,7 +130,7 @@ class RecentBookingWidget extends StatelessWidget {
                       const SizedBox(
                         height: 24,
                       ),
-                      TextBookingWidget(text: 'Check-out'),
+                      const TextBookingWidget(text: 'Check-out'),
                       const SizedBox(
                         height: 6,
                       ),

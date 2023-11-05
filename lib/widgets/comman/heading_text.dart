@@ -3,9 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 
 class HeadingTextWidget extends StatelessWidget {
-  final text;
+  final String text;
   final bool sizeCheck;
-  HeadingTextWidget({super.key, required this.text, this.sizeCheck = false});
+  const HeadingTextWidget(
+      {super.key, required this.text, this.sizeCheck = false});
 
   @override
   Widget build(BuildContext context) {

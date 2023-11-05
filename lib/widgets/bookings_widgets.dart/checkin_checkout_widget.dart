@@ -23,7 +23,7 @@ class CheckInCheckOutWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BookingDetailsTextWidget(
+            const BookingDetailsTextWidget(
               text: 'Check-in',
               sizeCheck: true,
             ),
@@ -33,7 +33,7 @@ class CheckInCheckOutWidget extends StatelessWidget {
             Text(
               checkInData,
               style: GoogleFonts.inter(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
               )),
@@ -78,7 +78,7 @@ class CheckInCheckOutWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            BookingDetailsTextWidget(
+            const BookingDetailsTextWidget(
               text: 'Check-Out',
               sizeCheck: true,
             ),
@@ -88,7 +88,7 @@ class CheckInCheckOutWidget extends StatelessWidget {
             Text(
               checkOutData,
               style: GoogleFonts.inter(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
               )),

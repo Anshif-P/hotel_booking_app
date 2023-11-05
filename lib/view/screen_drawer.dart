@@ -68,21 +68,21 @@ class ScreenDrawer extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
                         vendorController.vendorDetails.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.w800, fontSize: 14),
                       ),
                       Text(
                         vendorController.vendorDetails.email,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           color: Color(0xFFB5B5B5),
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                     ],
                   ),
                 ],
@@ -91,25 +91,25 @@ class ScreenDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          leading: Icon(Icons.info_outline),
-          title: Text('App info'),
+          leading: const Icon(Icons.info_outline),
+          title: const Text('App info'),
           onTap: () {
-            Get.to(() => VendorAppInfoPage());
+            Get.to(() => const VendorAppInfoPage());
           },
         ),
         ListTile(
-          leading: Icon(Icons.lock),
-          title: Text('Privacy & policy'),
+          leading: const Icon(Icons.lock),
+          title: const Text('Privacy & policy'),
           onTap: () {},
         ),
         ListTile(
-          leading: Icon(Icons.question_mark),
-          title: Text('Help'),
+          leading: const Icon(Icons.question_mark),
+          title: const Text('Help'),
           onTap: () {},
         ),
         ListTile(
-          leading: Icon(Icons.card_membership),
-          title: Text('Add Coupons'),
+          leading: const Icon(Icons.card_membership),
+          title: const Text('Add Coupons'),
           onTap: () {
             Get.to(() => ScreenCoupon());
           },

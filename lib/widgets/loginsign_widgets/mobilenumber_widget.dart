@@ -31,7 +31,7 @@ class _MobileNoTextFieldState extends State<MobileNoTextField> {
           padding: const EdgeInsets.only(left: 3),
           child: Text(widget.text),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         SizedBox(

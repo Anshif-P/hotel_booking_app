@@ -45,7 +45,8 @@ class ScreenAddRoom extends StatelessWidget {
                                           child: const Icon(Icons.arrow_back)),
                                       SizedBox(width: widthMedia * 0.2)
                                     ]),
-                                    HeadingTextWidget(text: 'Add your room')
+                                    const HeadingTextWidget(
+                                        text: 'Add your room')
                                   ]),
                               SizedBox(height: heightMedia * 0.027),
                               Text('Select photos',

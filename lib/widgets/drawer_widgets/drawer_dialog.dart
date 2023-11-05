@@ -22,7 +22,7 @@ class LogoutDialog extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      content: Text(
+      content: const Text(
         'Do you want to sign out',
         style: TextStyle(color: Color(0xFF6D6D6D)),
       ),

@@ -26,12 +26,11 @@ class EditNameEmailTextFeild extends StatelessWidget {
     return Column(
       children: [
         TextFormField(
-          // key: vendorController.editProfileDetailsFormKey,
           style: GoogleFonts.inter(
-              textStyle: TextStyle(fontSize: 14, color: Colors.black)),
+              textStyle: const TextStyle(fontSize: 14, color: Colors.black)),
           validator: validation,
           decoration: InputDecoration(
-            errorStyle: TextStyle(color: Colors.red),
+            errorStyle: const TextStyle(color: Colors.red),
             border: InputBorder.none,
             isDense: true,
             constraints: const BoxConstraints(maxHeight: 70, minHeight: 35),

@@ -44,7 +44,8 @@ class DatePickingWidget extends StatelessWidget {
               FocusScope.of(context)
                   .nextFocus(); // Move focus to the next field
             },
-            style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 13.6)),
+            style:
+                GoogleFonts.inter(textStyle: const TextStyle(fontSize: 13.6)),
             validator: validator,
             controller: controller,
             decoration: InputDecoration(
@@ -57,7 +58,7 @@ class DatePickingWidget extends StatelessWidget {
                   onPressed: () {
                     _showDate1(context, controller);
                   },
-                  icon: Icon(Icons.date_range)),
+                  icon: const Icon(Icons.date_range)),
               focusedErrorBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                     color: Colors.red), // Set the border color when focused
@@ -94,26 +95,19 @@ class DatePickingWidget extends StatelessWidget {
       BuildContext context, TextEditingController controller) async {
     DateTime? tempDate;
     if (vendorController.startDateController.text != '') {
-      print(
-          '--------------start d--------------------${vendorController.startDateController.text}');
-
       tempDate = DateFormat('E, d MMM y')
           .parse(vendorController.startDateController.text);
-      print(
-          'fo---------------------formated starting date new --------------$tempDate');
     }
-
     await showDatePicker(
       context: context,
-      initialDate: tempDate == null ? DateTime.now() : tempDate,
-      firstDate: tempDate == null ? DateTime.now() : tempDate,
+      initialDate: tempDate ?? DateTime.now(),
+      firstDate: tempDate ?? DateTime.now(),
       lastDate: DateTime(2025),
     ).then((value) {
       if (value == null) {
         return;
       } else {
         controller.text = DateFormat('E, d MMM y').format(value);
-        print(controller.text);
       }
     });
   }

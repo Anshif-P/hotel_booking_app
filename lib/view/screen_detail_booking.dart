@@ -31,15 +31,15 @@ class ScreenBookingDetails extends StatelessWidget {
                     onPressed: () {
                       Get.back();
                     },
-                    icon: Icon(Icons.arrow_back)),
+                    icon: const Icon(Icons.arrow_back)),
                 SizedBox(width: widthMedia * 0.1),
-                HeadingTextWidget(text: 'Booking Details')
+                const HeadingTextWidget(text: 'Booking Details')
               ]),
               SizedBox(height: heightMedia * 0.03),
               Container(
                   height: heightMedia * 0.19,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           image: AssetImage(
                             'lib/image/Rectangle 3822.png',
                           ),
@@ -72,7 +72,7 @@ class ScreenBookingDetails extends StatelessWidget {
               ]),
               SizedBox(height: heightMedia * 0.015),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                BookingDetailsTextWidget(text: 'Status :'),
+                const BookingDetailsTextWidget(text: 'Status :'),
                 RoomStatusWidget(
                     heightMedia: heightMedia,
                     widthMedia: widthMedia,
@@ -96,7 +96,7 @@ class ScreenBookingDetails extends StatelessWidget {
                 roomType: 'Classic',
                 totalRoom: '3',
               ),
-              BookingDetailsTextWidget(
+              const BookingDetailsTextWidget(
                 text: 'Cusomer Information',
                 sizeCheck: true,
               ),

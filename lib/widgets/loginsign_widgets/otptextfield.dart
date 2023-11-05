@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OTPScreen extends StatefulWidget {
+  const OTPScreen({super.key});
+
   @override
   OtpTextFieldWidget createState() => OtpTextFieldWidget();
 }
@@ -41,11 +43,6 @@ class OtpTextFieldWidget extends State<OTPScreen> {
                     _focusNodes[index + 1].requestFocus();
                   } else {
                     // All OTP fields are filled
-                    String otp = '';
-                    for (var controller in _controllers) {
-                      otp += controller.text;
-                    }
-                    print('Entered OTP: $otp');
                   }
                 } else if (index > 0) {
                   _focusNodes[index - 1].requestFocus();

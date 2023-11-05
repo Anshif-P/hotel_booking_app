@@ -28,59 +28,53 @@ class EditProfileTextFeildWdiget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // color: Colors.red,
-      // height: screenHeight * 0.064,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: Container(
-                //color: Colors.yellow,
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
                 child: Text(
-                  text,
+              text,
+              style: GoogleFonts.inter(
+                  textStyle:
+                      const TextStyle(fontSize: 14, color: Colors.black)),
+            )),
+            Expanded(
+              child: GetBuilder<VendorController>(
+                builder: (controller) => TextFormField(
+                  controller: textEditingController,
                   style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontSize: 14, color: Colors.black)),
-                ),
-              )),
-              Expanded(
-                child: GetBuilder<VendorController>(
-                  builder: (controller) => TextFormField(
-                    controller: textEditingController,
-                    style: GoogleFonts.inter(
-                        textStyle:
-                            TextStyle(fontSize: 14, color: Colors.black)),
-                    validator: validation,
-                    decoration: InputDecoration(
-                      // errorBorder: InputBorder.none,
-                      //  errorStyle: const TextStyle(color: Colors.red),
+                      textStyle:
+                          const TextStyle(fontSize: 14, color: Colors.black)),
+                  validator: validation,
+                  decoration: InputDecoration(
+                    // errorBorder: InputBorder.none,
+                    //  errorStyle: const TextStyle(color: Colors.red),
 
-                      border: InputBorder.none,
-                      hintTextDirection: TextDirection.rtl,
-                      isDense: true,
-                      constraints:
-                          const BoxConstraints(maxHeight: 70, minHeight: 35),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 7, horizontal: 10),
-                      hintText: hintText,
-                      hintStyle: const TextStyle(color: Color(0xFF999999)),
-                    ),
-                    // textAlign: TextAlign.end,
-                    textDirection: TextDirection.rtl,
+                    border: InputBorder.none,
+                    hintTextDirection: TextDirection.rtl,
+                    isDense: true,
+                    constraints:
+                        const BoxConstraints(maxHeight: 70, minHeight: 35),
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+                    hintText: hintText,
+                    hintStyle: const TextStyle(color: Color(0xFF999999)),
                   ),
+                  // textAlign: TextAlign.end,
+                  textDirection: TextDirection.rtl,
                 ),
               ),
-            ],
-          ),
-          dividerCheck
-              ? SizedBox()
-              : Divider(
-                  thickness: 1,
-                  color: CustomColors.lightGreyColor,
-                ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        dividerCheck
+            ? const SizedBox()
+            : Divider(
+                thickness: 1,
+                color: CustomColors.lightGreyColor,
+              ),
+      ],
     );
   }
 }

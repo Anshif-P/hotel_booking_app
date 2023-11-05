@@ -33,7 +33,7 @@ class ScreenProfile extends StatelessWidget {
                   child: Container(
                     //  color: Colors.red,
                     height: heightMidia * 0.12,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(
                                 'lib/image/profile_background_img.png'),
@@ -95,7 +95,8 @@ class ScreenProfile extends StatelessWidget {
                               elevation: MaterialStateProperty.all(0),
                               backgroundColor: MaterialStateProperty.all(
                                   CustomColors.mainColor)),
-                          child: ButtonTextCommanWidget(text: 'Edit Profile')),
+                          child: const ButtonTextCommanWidget(
+                              text: 'Edit Profile')),
                     )),
                 Positioned(
                     bottom: heightMidia * 0.0,

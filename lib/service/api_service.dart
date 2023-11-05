@@ -121,7 +121,7 @@ class Api {
 
   Future<http.Response> deleteCoupon(String id) async {
     final token = SharedPrefModel.instance.getData('token');
-    final url = '${Urls.baseUrl}${Urls.deleteCoupon}${id}';
+    final url = '${Urls.baseUrl}${Urls.deleteCoupon}$id';
     final uri = Uri.parse(url);
     final header = {
       'Content-Type': 'application/json',

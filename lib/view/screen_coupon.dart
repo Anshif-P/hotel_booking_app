@@ -60,14 +60,14 @@ class ScreenCoupon extends StatelessWidget {
                             onPressed: () {
                               Get.back();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back,
                               size: 25,
                             )),
                         SizedBox(
                           width: widthMdida * 0.04,
                         ),
-                        HeadingTextWidget(text: 'Coupons'),
+                        const HeadingTextWidget(text: 'Coupons'),
                       ],
                     ),
                   ),
@@ -108,7 +108,7 @@ class ScreenCoupon extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Lottie.asset('lib/image/lottie.json'),
-                                  Text('No Coupons Found')
+                                  const Text('No Coupons Found')
                                 ],
                               ),
                             )),

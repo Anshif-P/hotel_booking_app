@@ -74,7 +74,7 @@ class ScreenApprovedRoom extends StatelessWidget {
                       child: Column(
                         children: [
                           Lottie.asset('lib/image/lottie.json'),
-                          Text('No data found')
+                          const Text('No data found')
                         ],
                       ),
                     )),

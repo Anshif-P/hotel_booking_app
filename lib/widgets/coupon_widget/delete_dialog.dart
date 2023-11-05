@@ -19,7 +19,7 @@ class DeleteCouponDialog extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      content: Text(
+      content: const Text(
         'Do you want to Delete',
         style: TextStyle(color: Color(0xFF6D6D6D)),
       ),

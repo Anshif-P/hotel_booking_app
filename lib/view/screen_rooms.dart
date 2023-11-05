@@ -24,8 +24,8 @@ class ScreenRooms extends StatelessWidget {
             SizedBox(
               height: heightMedia * 0.06,
             ),
-            Padding(
-              padding: const EdgeInsets.only(
+            const Padding(
+              padding: EdgeInsets.only(
                 left: 15,
               ),
               child: Row(
@@ -50,7 +50,7 @@ class ScreenRooms extends StatelessWidget {
                 isScrollable: true,
                 dividerColor: Colors.black,
                 indicatorSize: TabBarIndicatorSize.label,
-                tabs: [
+                tabs: const [
                   Tab(
                     text: 'Confirmed',
                   ),

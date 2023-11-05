@@ -94,7 +94,7 @@ class ScreenRoomDetails extends StatelessWidget {
                       SizedBox(
                         height: heightMedia * 0.02,
                       ),
-                      HotelDetailsTextWidget(
+                      const HotelDetailsTextWidget(
                         text: 'Amenties',
                         sizeCheck: true,
                       ),
@@ -141,7 +141,7 @@ class ScreenRoomDetails extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: SingleChildScrollView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -200,7 +200,7 @@ class ScreenRoomDetails extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: CustomColors.mainColor,
                       borderRadius: BorderRadius.circular(14)),
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                     size: 26,

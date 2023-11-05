@@ -56,9 +56,7 @@ class RevenueCustomerBookingsTextfielWidget extends StatelessWidget {
               )),
           Expanded(
               flex: sizeCheck ? 5 : 2,
-              child: Container(
-                  // color: Colors.green,
-                  child: Padding(
+              child: Padding(
                 padding: const EdgeInsets.only(left: 10, top: 7),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +104,7 @@ class RevenueCustomerBookingsTextfielWidget extends StatelessWidget {
                           ),
                   ],
                 ),
-              ))),
+              )),
         ],
       ),
     );

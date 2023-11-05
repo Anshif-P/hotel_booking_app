@@ -27,7 +27,7 @@ class CouponTextFeildWidget extends StatelessWidget {
         ),
         SizedBox(
           child: TextFormField(
-            style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 14)),
+            style: GoogleFonts.inter(textStyle: const TextStyle(fontSize: 14)),
             onEditingComplete: () {
               FocusScope.of(context)
                   .nextFocus(); // Move focus to the next field

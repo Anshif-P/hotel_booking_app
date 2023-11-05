@@ -42,7 +42,7 @@ class TextFeildAddRoomWidget extends StatelessWidget {
         const SizedBox(
           height: 6,
         ),
-        Container(
+        SizedBox(
           // color: Colors.yellow,
           height:
               descriptionSizeCheck ? heightMedia * 0.14 : heightMedia * 0.056,

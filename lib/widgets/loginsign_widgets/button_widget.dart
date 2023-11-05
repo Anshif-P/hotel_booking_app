@@ -26,7 +26,7 @@ class LoginSignButton extends StatelessWidget {
       child: ElevatedButton(
         style: ButtonStyle(
           minimumSize:
-              MaterialStateProperty.all(Size.fromWidth(double.maxFinite)),
+              MaterialStateProperty.all(const Size.fromWidth(double.maxFinite)),
           elevation: MaterialStateProperty.all(0),
           side: borderCheck
               ? MaterialStateProperty.all<BorderSide>(const BorderSide(

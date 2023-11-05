@@ -66,14 +66,12 @@ class ScreenPendingApproval extends StatelessWidget {
                   height: heightMedia * 0.2,
                 ),
                 SizedBox(
-                  // color: Colors.red,
-                  // height: heightMedia * 0.3,
                   width: 200,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Lottie.asset('lib/image/lottie.json'),
-                        Text('No data found')
+                        const Text('No data found')
                       ],
                     ),
                   ),
