@@ -4,7 +4,7 @@ import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/model/coupon_model.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 
-import '../coupon_widget/delete_dialog.dart';
+import 'delete_dialog.dart';
 import 'textwidget_coupon.dart';
 
 class CouponCardWidget extends StatelessWidget {

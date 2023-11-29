@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
-import 'package:hotel_booking_app/widgets/bookings_widgets.dart/cancelled_widget.dart';
-import 'package:hotel_booking_app/widgets/bookings_widgets.dart/history_widget.dart';
+import 'package:hotel_booking_app/widgets/bookings_widgets.dart/booking_history_widget.dart';
+import 'package:hotel_booking_app/widgets/bookings_widgets.dart/active_booking_widget.dart';
 import 'package:hotel_booking_app/widgets/comman/heading_text.dart';
 
 class ScreenBooking extends StatelessWidget {
-  const ScreenBooking({super.key});
+  ScreenBooking({super.key});
 
+  final VendorController vendorController = Get.find<VendorController>();
   @override
   Widget build(BuildContext context) {
     double heightMedia = MediaQuery.sizeOf(context).height;
@@ -54,13 +55,15 @@ class ScreenBooking extends StatelessWidget {
             Expanded(
                 child: TabBarView(children: [
               GetBuilder<VendorController>(
-                builder: (controller) => HistoryWidget(
+                builder: (controller) => ActiveBookingWidget(
+                  bookingList: vendorController.bookingsList,
                   heightMedia: heightMedia,
                   widthMedia: widthMedia,
                 ),
               ),
               GetBuilder<VendorController>(
-                builder: (controller) => CancelledWidget(
+                builder: (controller) => BookingHistoryWidget(
+                  bookingList: vendorController.bookingsList,
                   heightMedia: heightMedia,
                   widthMedia: widthMedia,
                 ),

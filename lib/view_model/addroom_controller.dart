@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/service/api_service.dart';
+import 'package:hotel_booking_app/view_model/map_controller.dart';
+
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:image_picker/image_picker.dart';
 import '../model/get_rooms_model.dart';
@@ -11,6 +14,7 @@ import '../model/get_rooms_model.dart';
 class AddRoomController extends GetxController {
   AddRoomController({this.roomObjForEdit});
   VendorRoomModel? roomObjForEdit;
+  MapBoxController mapBoxController = Get.find<MapBoxController>();
 
   @override
   void onReady() {
@@ -214,6 +218,16 @@ class AddRoomController extends GetxController {
   }
 
   //-----------image section ended------------//
+  //--------------Map box location empty validation -----------//
+  bool mapLocationSelectedOrNotValidation() {
+    print(mapBoxController.searchResults);
+    print(mapBoxController.place.value);
+    if (mapBoxController.place.value != '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   //-----------TextField Validations-----------//
   textFieldValidation(value) {
@@ -256,8 +270,11 @@ class AddRoomController extends GetxController {
     ];
 
     bool imageCheck = imageValidation(data);
+    bool mapLocationCheck = mapLocationSelectedOrNotValidation();
     try {
-      if (imageCheck && addRoomFormKey.currentState!.validate()) {
+      if (mapLocationCheck &&
+          imageCheck &&
+          addRoomFormKey.currentState!.validate()) {
         if (editCheck.value) {
           for (int i = 0; i < 4; i++) {
             if (imageList[i] != null) {
@@ -291,9 +308,9 @@ class AddRoomController extends GetxController {
           "amenities": amenitiesList,
           "image": imageList,
           "category": selectedType.value.toString(),
-          "location": selectedState.value.toString(),
-          "longitude": "yes",
-          "latitude": 0.23
+          "location": mapBoxController.place.value,
+          "longitude": mapBoxController.latlong.longitude,
+          "latitude": mapBoxController.latlong.latitude
         };
         final response = editCheck.value
             ? await apiObj.updateRoom(roomDetails, roomObjForEdit!.id!)
@@ -315,11 +332,11 @@ class AddRoomController extends GetxController {
               editCheck.value
                   ? Get.snackbar(
                       'Success',
-                      'Room Added Successfuly',
+                      'Room Updated Successfuly',
                     )
                   : Get.snackbar(
                       'Success',
-                      'Room updated Successfuly',
+                      'Room Added Successfuly',
                     );
 
               editCheck.value = false;

@@ -17,7 +17,7 @@ class ScreenParentNavigation extends StatelessWidget {
 
   final List<Widget> _screens = [
     ScreenHome(),
-    const ScreenBooking(),
+    ScreenBooking(),
     const SizedBox(),
     ScreenRooms(),
     ScreenProfile(),

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
+import 'package:hotel_booking_app/view/screen_temp_map.dart';
 import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/map_select_location.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/textfield_widget.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/button_widget.dart';
+import '../constance/colors.dart';
+import '../view_model/map_controller.dart';
 import '../widgets/addroom_widgets/checkbox_widget.dart';
 import '../widgets/addroom_widgets/drop_downselection.dart';
 import '../widgets/addroom_widgets/select_photos_widget.dart';
@@ -17,6 +20,8 @@ class ScreenAddRoom extends StatelessWidget {
   ScreenAddRoom({super.key, this.editCheck = false, this.data});
   final bool editCheck;
   final VendorController vendorRoomModel = Get.find<VendorController>();
+  final MapBoxController mapController = Get.put(MapBoxController());
+
   @override
   Widget build(BuildContext context) {
     final addRoomController = Get.put(
@@ -278,7 +283,7 @@ class ScreenAddRoom extends StatelessWidget {
                                       textStyle: const TextStyle(
                                           color: Colors.black, fontSize: 12))),
                               const SizedBox(height: 10),
-                              const MapWidget(),
+                              MapWidget(),
                               const SizedBox(height: 20),
                               editCheck
                                   ? LoginSignButton(

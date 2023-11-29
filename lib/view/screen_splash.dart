@@ -100,6 +100,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   loginCheck(VendorController venderController) async {
     final token = SharedPrefModel.instance.getData('token');
+    print(token);
     final isLogged = await venderController.getVendorDetails();
 
     if (!isLogged) {
@@ -109,6 +110,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     if (token != null) {
       await venderController.getVndorRooms();
       await venderController.getVendorCoupons();
+      await venderController.getVendorBookdings();
       Get.off(() => ScreenParentNavigation());
 
       loadingCheck.value = true;

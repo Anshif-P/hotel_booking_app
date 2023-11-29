@@ -10,6 +10,8 @@ import 'package:hotel_booking_app/model/vender_model.dart';
 import 'package:hotel_booking_app/service/api_service.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../model/booking_model.dart';
+
 class VendorController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -35,6 +37,7 @@ class VendorController extends GetxController {
   Api apiObj = Api();
   late VendorModel vendorDetails;
   List<VendorRoomModel> vendorRooms = [];
+  List<BookingModel> bookingsList = [];
   late VendorController vendorRoomObj;
   Rx<String> imageToShowDetailsScreen = ''.obs;
   String? netWorkProfileImage;
@@ -323,16 +326,24 @@ class VendorController extends GetxController {
     try {
       if (response.statusCode == 200) {
         var body = jsonDecode(response.body);
-        if (body['status'] == 'success') {
-          body = body['viewBookings'];
-          for (int i = 0; i < body.length; i++) {}
+        if (body['status'] != 'failed') {
+          List<dynamic> totalBookings = body['viewBookings'];
+
+          bookingsList = totalBookings
+              .map((element) => BookingModel.fromJson(element))
+              .toList();
+          print(
+              ' hhhhhhhhhhhhhhhhhhhhhhhhhhiiiiiiiiiiiiiiiiiiii${bookingsList[0].checkIn}');
         }
       }
     } catch (e) {
       if (e is SocketException) {
+        print('error$e');
         Get.snackbar("Net Work Issue", "check your network",
             backgroundColor: CustomColors.mainColor);
       } else {
+        print('error$e');
+
         Get.snackbar('Error occure', 'somthing went wrong',
             backgroundColor: CustomColors.mainColor);
       }
