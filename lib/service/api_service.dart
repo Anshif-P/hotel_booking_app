@@ -142,4 +142,17 @@ class Api {
     final response = await http.get(uri, headers: header);
     return response;
   }
+
+  getDashBoardDetails() async {
+    final token = SharedPrefModel.instance.getData('token');
+    final url = '${Urls.baseUrl}${Urls.getHomeDashDetails}';
+    final uri = Uri.parse(url);
+    final header = {
+      'Content-Type': 'application/json',
+      'vendortoken': '$token'
+    };
+    final response = await http.get(uri, headers: header);
+
+    return response;
+  }
 }

@@ -111,6 +111,8 @@ class _ScreenSplashState extends State<ScreenSplash> {
       await venderController.getVndorRooms();
       await venderController.getVendorCoupons();
       await venderController.getVendorBookdings();
+      await venderController.getDashBoardData();
+
       Get.off(() => ScreenParentNavigation());
 
       loadingCheck.value = true;

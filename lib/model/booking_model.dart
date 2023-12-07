@@ -477,7 +477,6 @@ class RoomId {
   });
 
   factory RoomId.fromJson(Map<dynamic, dynamic> json) {
-    print("roomId  ${json}");
     return RoomId(
       id: json['_id'],
       vendorId: json['vendorId'],
@@ -531,8 +530,6 @@ class UserId {
   });
 
   factory UserId.fromJson(Map<dynamic, dynamic> json) {
-    print("userId  ${json}");
-
     return UserId(
       id: json['_id'],
       name: json['name'],
@@ -557,6 +554,7 @@ class BookingModel {
   final dynamic location;
   final DateTime checkIn;
   final DateTime checkOut;
+  // ignore: prefer_typing_uninitialized_variables
   final roomPrice;
   final dynamic type;
   final int total;
@@ -593,8 +591,6 @@ class BookingModel {
   });
 
   factory BookingModel.fromJson(Map<dynamic, dynamic> json) {
-    print("BookingModel  ${json}");
-
     return BookingModel(
       id: json['_id'],
       roomId: RoomId.fromJson(json['roomId']),

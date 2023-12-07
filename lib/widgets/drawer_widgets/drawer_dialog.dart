@@ -42,7 +42,7 @@ class LogoutDialog extends StatelessWidget {
         TextButton(
           onPressed: () async {
             SharedPrefModel.instance.removeData('token');
-            Get.to(() => ScreenLogin());
+            Get.offAll(() => ScreenLogin());
           },
           child: Text(
             'Sign out',

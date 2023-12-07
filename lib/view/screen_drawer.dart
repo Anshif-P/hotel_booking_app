@@ -60,7 +60,7 @@ class ScreenDrawer extends StatelessWidget {
                           width: 60,
                           height: 55,
                           decoration: BoxDecoration(
-                            color: Colors.amber,
+                            color: CustomColors.lightGreyColor,
                             borderRadius: BorderRadius.circular(7),
                           ),
                         ),

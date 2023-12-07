@@ -69,8 +69,13 @@ class ScreenProfile extends StatelessWidget {
                               ),
                             )
                           : Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                'Add Image',
+                                style: TextStyle(fontWeight: FontWeight.w300),
+                              ),
                               decoration: BoxDecoration(
-                                  color: Colors.yellow,
+                                  color: CustomColors.lightGreyColor,
                                   borderRadius: BorderRadius.circular(7)),
                               width: widhtMidia * 0.25,
                               height: heightMidia * 0.115,

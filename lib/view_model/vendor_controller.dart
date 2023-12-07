@@ -23,6 +23,7 @@ class VendorController extends GetxController {
       TextEditingController();
   final GlobalKey<FormState> validationKey = GlobalKey<FormState>();
   final TextEditingController couponController = TextEditingController();
+  Map<String, String> dashBoard = {};
 
   final TextEditingController discountAmountController =
       TextEditingController();
@@ -332,8 +333,6 @@ class VendorController extends GetxController {
           bookingsList = totalBookings
               .map((element) => BookingModel.fromJson(element))
               .toList();
-          print(
-              ' hhhhhhhhhhhhhhhhhhhhhhhhhhiiiiiiiiiiiiiiiiiiii${bookingsList[0].checkIn}');
         }
       }
     } catch (e) {
@@ -345,6 +344,35 @@ class VendorController extends GetxController {
         print('error$e');
 
         Get.snackbar('Error occure', 'somthing went wrong',
+            backgroundColor: CustomColors.mainColor);
+      }
+    }
+  }
+
+  getDashBoardData() async {
+    final response = await apiObj.getDashBoardDetails();
+
+    try {
+      if (response.statusCode == 200) {
+        var body = jsonDecode(response.body);
+
+        if (body['status'] != 'failed') {
+          dashBoard['Bookings'] = body['totalBookings'].toString();
+          dashBoard['revenue'] = body['bookingAmount'].toString();
+          dashBoard['customer'] = body['customer'].toString();
+          dashBoard['totalRooms'] = body.length.toString();
+          update();
+        }
+      }
+    } catch (e) {
+      if (e is SocketException) {
+        print('error$e');
+        Get.snackbar("Net Work Issue", "check your network",
+            backgroundColor: CustomColors.mainColor);
+      } else {
+        print('error$e');
+
+        Get.snackbar('Error occure', '$e',
             backgroundColor: CustomColors.mainColor);
       }
     }

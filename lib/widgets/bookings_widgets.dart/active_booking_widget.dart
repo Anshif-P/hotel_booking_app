@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../model/booking_model.dart';
 import 'card_widget.dart';
@@ -36,18 +37,36 @@ class ActiveBookingWidget extends StatelessWidget {
                 ? ListView.separated(
                     itemCount: bookingHistoryList.length,
                     separatorBuilder: (context, index) => const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                     itemBuilder: (context, index) {
                       final data = bookingHistoryList[index];
                       return BookingCardWidget(
+                        activeDeactiveCheck: false,
                         data: data,
                         heightMedia: heightMedia,
                         widthMedia: widthMedia,
                       );
                     })
-                : const SizedBox(
-                    child: Center(child: Text('No Bookings Found')),
+                : SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                            width: 200,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Lottie.asset('lib/image/lottie.json'),
+                                  const Text('No data found')
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
                   ))
       ],
     );

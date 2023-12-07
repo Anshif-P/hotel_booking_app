@@ -49,6 +49,7 @@ class LoginController extends GetxController {
             await vendorController.getVendorDetails();
             await vendorController.getVndorRooms();
             await vendorController.getVendorBookdings();
+            await vendorController.getDashBoardData();
 
             loadingCheck.value = false;
             Get.off(() => ScreenParentNavigation());

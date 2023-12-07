@@ -13,4 +13,5 @@ class Urls {
   static String getVendorCoupons = '/api/vendor/viewcoupon';
   static String deleteCoupon = '/api/vendor/deletecoupn/';
   static String getVendorBooking = '/api/vendor/viewbooking';
+  static String getHomeDashDetails = '/api/vendor/vendorDash';
 }

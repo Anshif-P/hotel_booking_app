@@ -16,6 +16,7 @@ class TextBookingWidget extends StatelessWidget {
         color: sizeColorCheck ? const Color(0xFF787878) : Colors.black,
         fontSize: sizeColorCheck ? 10 : 12,
       )),
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

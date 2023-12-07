@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
-import 'package:hotel_booking_app/view/screen_temp_map.dart';
 import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/map_select_location.dart';
 import 'package:hotel_booking_app/widgets/addroom_widgets/textfield_widget.dart';
 import 'package:hotel_booking_app/widgets/loginsign_widgets/button_widget.dart';
-import '../constance/colors.dart';
+
 import '../view_model/map_controller.dart';
 import '../widgets/addroom_widgets/checkbox_widget.dart';
 import '../widgets/addroom_widgets/drop_downselection.dart';
