@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/view/screen_app_info.dart';
 import 'package:hotel_booking_app/view/screen_coupon.dart';
+import 'package:hotel_booking_app/view/screen_privacy_policy.dart';
 
 import '../drawer_widgets/drawer_dialog.dart';
 
@@ -15,13 +17,15 @@ class ProfileListTileWidget extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: const Text('Security'),
-          leading: const Icon(Icons.security, color: Colors.black),
+          title: const Text('App Info'),
+          leading: const Icon(Icons.info_outline, color: Colors.black),
           trailing: Icon(
             Icons.keyboard_arrow_right_outlined,
             color: CustomColors.lightGreyColor,
           ),
-          onTap: () {},
+          onTap: () {
+            Get.to(() => const ScreenAppInfo());
+          },
         ),
         Divider(
           height: 1,
@@ -29,13 +33,15 @@ class ProfileListTileWidget extends StatelessWidget {
           thickness: 0.5,
         ),
         ListTile(
-          leading: const Icon(Icons.help_outline_outlined, color: Colors.black),
-          title: const Text('Help'),
+          leading: const Icon(Icons.lock_open_outlined, color: Colors.black),
+          title: const Text('Privacy Policy'),
           trailing: Icon(
             Icons.keyboard_arrow_right_outlined,
             color: CustomColors.lightGreyColor,
           ),
-          onTap: () {},
+          onTap: () {
+            Get.to(() => const ScreenPrivacyPolicy());
+          },
         ),
         Divider(
           height: 1,

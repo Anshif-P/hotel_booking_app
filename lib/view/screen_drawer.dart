@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/view/screen_app_info.dart';
 import 'package:hotel_booking_app/view/screen_coupon.dart';
+import 'package:hotel_booking_app/view/screen_privacy_policy.dart';
+import 'package:hotel_booking_app/view/screen_terms_and_condition.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -94,18 +96,22 @@ class ScreenDrawer extends StatelessWidget {
           leading: const Icon(Icons.info_outline),
           title: const Text('App info'),
           onTap: () {
-            Get.to(() => const VendorAppInfoPage());
+            Get.to(() => const ScreenAppInfo());
           },
         ),
         ListTile(
           leading: const Icon(Icons.lock),
           title: const Text('Privacy & policy'),
-          onTap: () {},
+          onTap: () {
+            Get.to(() => const ScreenPrivacyPolicy());
+          },
         ),
         ListTile(
-          leading: const Icon(Icons.question_mark),
-          title: const Text('Help'),
-          onTap: () {},
+          leading: const Icon(Icons.receipt_outlined),
+          title: const Text('Terms & Condition'),
+          onTap: () {
+            Get.to(() => const ScreenTermsAndConditions());
+          },
         ),
         ListTile(
           leading: const Icon(Icons.card_membership),

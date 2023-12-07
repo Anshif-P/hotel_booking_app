@@ -1,133 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking_app/constance/colors.dart';
-import '../widgets/comman/heading_text.dart';
 
-class VendorAppInfoPage extends StatelessWidget {
-  const VendorAppInfoPage({super.key});
+import '../util/string/app_info.dart';
+
+class ScreenAppInfo extends StatelessWidget {
+  const ScreenAppInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double heightMdida = MediaQuery.sizeOf(context).height;
-    double widthMdida = MediaQuery.sizeOf(context).width;
-
     return Scaffold(
-      body: Container(
-        color: CustomColors.extraLightGrey,
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: heightMdida * 0.04,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back,
-                              size: 25,
-                            )),
-                        SizedBox(
-                          width: widthMdida * 0.04,
-                        ),
-                        const HeadingTextWidget(text: 'Coupons'),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: heightMdida * 0.015,
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Welcome to the Vendor App!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Instructions for Adding Rooms:',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '1. Log in with your vendor credentials.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '2. Navigate to the "Add Rooms" section in the app.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '3. Fill in the details of the room you want to add, including room type, price, capacity, and amenities.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '4. Upload images of the room for better visibility.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '5. Ensure that you provide accurate location details for your property.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '6. Review the information and click "Submit" to add the room to our platform.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Tips for Success:',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    '- High-quality images and detailed descriptions can attract more guests.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '- Keep your room information up-to-date to avoid any inconvenience to guests.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    '- Ensure that you follow our guidelines and maintain a high level of service quality.',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ],
-              ),
-            ),
-          ],
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: const Text(
+          'About',
+          style: TextStyle(color: Colors.black),
         ),
+        leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: const Icon(Icons.arrow_back, color: Colors.black)),
       ),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          Text(AppInfo.welcome,
+              style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+          const SizedBox(height: 20),
+          title('Key Features'),
+          info('Room Management', AppInfo.roomManagement),
+          info('Booking Platform', AppInfo.bookingPlatforme),
+          info('Integrated Map', AppInfo.integratedMap),
+          info('Revenue Tracking', AppInfo.revenueTracking),
+          info('Coupon Management', AppInfo.couponManagement),
+          const SizedBox(height: 10),
+          title('How It Works'),
+          info('Room Listing', AppInfo.roomListing),
+          info('Booking Management', AppInfo.bookingManagement),
+          info('Revenue Insights', AppInfo.revenueInsights),
+          info('Coupon Campaigns', AppInfo.couponCampaign),
+          info('Contact Us', AppInfo.contact),
+          const SizedBox(height: 10),
+          const Text(
+            'Thank you for choosing QuickBook-Vendor  Your Partner in Hotel Management',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          )
+        ],
+      ),
+    );
+  }
+
+  Column title(String title) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title,
+            style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.w600)),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Column info(String title, String description) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[800])),
+        const SizedBox(height: 6),
+        Text(
+          description,
+          style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600]),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
