@@ -10,6 +10,7 @@ import 'package:hotel_booking_app/widgets/bookings_widgets.dart/booking_text_wid
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
+// ignore: must_be_immutable
 class BookingCardWidget extends StatelessWidget {
   final double widthMedia;
   final double heightMedia;
@@ -75,77 +76,74 @@ class BookingCardWidget extends StatelessWidget {
                         ),
                       ),
                     )),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
                     flex: 6,
                     child: Container(
-                      // color: Colors.yellow,
-                      child: Container(
-                          alignment: Alignment.center,
-                          //     color: Colors.green,
-                          child: SizedBox(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: heightMedia * 0.019,
-                                  ),
-                                  Text(
-                                    'Booking ID : ${data.id}',
-                                    style: GoogleFonts.inter(
-                                        textStyle: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                    )),
-                                  ),
-                                  SizedBox(
-                                    height: heightMedia * 0.006,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.location_on,
-                                        color: Color(0xFFCB102F),
-                                        size: 16,
-                                      ),
-                                      Text(
-                                        '${data.roomId.location} , India',
-                                        style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                          color: Color(0xFFA19B9B),
-                                          fontSize: 12,
-                                        )),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: heightMedia * 0.006,
-                                  ),
-                                  BookingTextWidget(
-                                      colorCheck: true,
-                                      text1: 'Name',
-                                      text2: data.userId.name),
-                                  SizedBox(
-                                    height: heightMedia * 0.006,
-                                  ),
-                                  BookingTextWidget(
-                                      text1: checkIn, text2: checkOut),
-                                  SizedBox(
-                                    height: heightMedia * 0.006,
-                                  ),
-                                  BookingTextWidget(
-                                      text1: 'Room ${data.rooms.toString()}',
-                                      text2: 'Adult ${data.adult.toString()}')
-                                ],
-                              ),
+                        alignment: Alignment.center,
+                        //     color: Colors.green,
+                        child: SizedBox(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: heightMedia * 0.019,
+                                ),
+                                Text(
+                                  'Booking ID : ${data.id}',
+                                  style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                    overflow: TextOverflow.ellipsis,
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  )),
+                                ),
+                                SizedBox(
+                                  height: heightMedia * 0.006,
+                                ),
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.location_on,
+                                      color: Color(0xFFCB102F),
+                                      size: 16,
+                                    ),
+                                    Text(
+                                      '${data.roomId.location} , India',
+                                      style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                        color: Color(0xFFA19B9B),
+                                        fontSize: 12,
+                                      )),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: heightMedia * 0.006,
+                                ),
+                                BookingTextWidget(
+                                    colorCheck: true,
+                                    text1: 'Name',
+                                    text2: data.userId.name),
+                                SizedBox(
+                                  height: heightMedia * 0.006,
+                                ),
+                                BookingTextWidget(
+                                    text1: checkIn, text2: checkOut),
+                                SizedBox(
+                                  height: heightMedia * 0.006,
+                                ),
+                                BookingTextWidget(
+                                    text1: 'Room ${data.rooms.toString()}',
+                                    text2: 'Adult ${data.adult.toString()}')
+                              ],
                             ),
-                          )),
-                    )),
+                          ),
+                        ))),
                 Expanded(
                     flex: 1,
                     child: Container(

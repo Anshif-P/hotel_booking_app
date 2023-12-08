@@ -282,7 +282,10 @@ class ScreenAddRoom extends StatelessWidget {
                                       textStyle: const TextStyle(
                                           color: Colors.black, fontSize: 12))),
                               const SizedBox(height: 10),
-                              MapWidget(),
+                              MapWidget(
+                                editCheck: editCheck,
+                                data: data,
+                              ),
                               const SizedBox(height: 20),
                               editCheck
                                   ? LoginSignButton(

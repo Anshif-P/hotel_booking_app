@@ -114,6 +114,7 @@ class VendorController extends GetxController {
       final response = await apiObj.getVenderRooms();
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
+
         final roomList = responseData['roomView'] as List;
         vendorRooms = roomList
             .map((e) => VendorRoomModel.fromJson(e, vendorDetails.propertyName))
@@ -124,7 +125,9 @@ class VendorController extends GetxController {
       if (e is SocketException) {
         Get.snackbar('NetWork Error', 'please check your network ');
       }
-      Get.snackbar('Error Occure', 'somthing went wrong');
+
+      Get.snackbar(
+          'Error Occure', 'somthing went wrong hhhhhhhhhhhhhhhhhhhhhh$e');
     }
   }
 
@@ -337,12 +340,9 @@ class VendorController extends GetxController {
       }
     } catch (e) {
       if (e is SocketException) {
-        print('error$e');
         Get.snackbar("Net Work Issue", "check your network",
             backgroundColor: CustomColors.mainColor);
       } else {
-        print('error$e');
-
         Get.snackbar('Error occure', 'somthing went wrong',
             backgroundColor: CustomColors.mainColor);
       }
@@ -366,12 +366,9 @@ class VendorController extends GetxController {
       }
     } catch (e) {
       if (e is SocketException) {
-        print('error$e');
         Get.snackbar("Net Work Issue", "check your network",
             backgroundColor: CustomColors.mainColor);
       } else {
-        print('error$e');
-
         Get.snackbar('Error occure', '$e',
             backgroundColor: CustomColors.mainColor);
       }

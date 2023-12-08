@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
+import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view/screen_map.dart';
 import 'package:hotel_booking_app/view_model/map_controller.dart';
 
+// ignore: must_be_immutable
 class MapWidget extends StatelessWidget {
-  MapWidget({super.key});
+  MapWidget({super.key, required this.editCheck, required this.data});
   MapBoxController mapBoxController = Get.find<MapBoxController>();
+  final bool editCheck;
+  VendorRoomModel? data;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +35,19 @@ class MapWidget extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(7),
                           bottomLeft: Radius.circular(7))),
-                  child: mapBoxController.place.value != ''
-                      ? Text(mapBoxController.place.value)
-                      : const Text('Add Your Exact Location'),
+                  child: editCheck
+                      ? mapBoxController.place.value == ''
+                          ? Text(data!.location!)
+                          : Text(mapBoxController.place.value)
+                      : mapBoxController.place.value == ''
+                          ? const Text('Add Your Exact Location')
+                          : Text(mapBoxController.place.value),
+                  // editCheck
+                  //         ? Text(mapBoxController.place.value == ''
+                  //             ? data!.location!
+                  //             : mapBoxController.place.value)
+                  //         : const Text('Add Your Exact Location'))
+                  //     : const Text('Add Your Exact Location'),
                 ),
               ),
             ),
@@ -43,7 +57,7 @@ class MapWidget extends StatelessWidget {
                 height: 60,
                 decoration: BoxDecoration(
                     color: CustomColors.lightGreyColor,
-                    borderRadius:const BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(7),
                         bottomRight: Radius.circular(7))),
                 child: Row(

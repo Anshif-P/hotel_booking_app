@@ -100,7 +100,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   loginCheck(VendorController venderController) async {
     final token = SharedPrefModel.instance.getData('token');
-    print(token);
+
     final isLogged = await venderController.getVendorDetails();
 
     if (!isLogged) {

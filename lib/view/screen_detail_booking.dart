@@ -15,6 +15,7 @@ import '../widgets/bookings_widgets.dart/checkin_checkout_widget.dart';
 import '../widgets/bookings_widgets.dart/customer_information.dart';
 import '../widgets/bookings_widgets.dart/room_status_widget.dart';
 
+// ignore: must_be_immutable
 class ScreenBookingDetails extends StatelessWidget {
   ScreenBookingDetails(
       {super.key, required this.data, this.activeCheck = false});

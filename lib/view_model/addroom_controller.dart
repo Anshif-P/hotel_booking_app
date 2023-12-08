@@ -225,7 +225,6 @@ class AddRoomController extends GetxController {
         return imageFirebaseUrl;
       }
     } catch (e) {
-      print('Error uploading to Firebase Storage: $e');
       return null;
     }
   }
@@ -235,6 +234,12 @@ class AddRoomController extends GetxController {
   Future<VendorRoomModel> createNewEditedObj(
       VendorRoomModel data, List<dynamic> amenitiesList, List imageList) async {
     final VendorRoomModel vendorRoomObj = VendorRoomModel(
+      latitude: mapBoxController.latlong.longitude == 76.267303
+          ? data.latitude
+          : mapBoxController.latlong.latitude,
+      longitude: mapBoxController.latlong.longitude == 76.267303
+          ? data.longitude.toString()
+          : mapBoxController.latlong.longitude.toString(),
       totalRoom: totalRoomController.text,
       id: data.id,
       isApproved: data.isApproved,
@@ -258,9 +263,9 @@ class AddRoomController extends GetxController {
   //-----------image section ended------------//
   //--------------Map box location empty validation -----------//
   bool mapLocationSelectedOrNotValidation() {
-    print(mapBoxController.searchResults);
-    print(mapBoxController.place.value);
-    if (mapBoxController.place.value != '') {
+    if (editCheck.value) {
+      return true;
+    } else if (mapBoxController.place.value != '') {
       return true;
     } else {
       return false;
@@ -346,9 +351,21 @@ class AddRoomController extends GetxController {
           "amenities": amenitiesList,
           "image": imageList,
           "category": selectedType.value.toString(),
-          "location": mapBoxController.place.value,
-          "longitude": mapBoxController.latlong.longitude,
-          "latitude": mapBoxController.latlong.latitude
+          "location": editCheck.value
+              ? mapBoxController.place.value == ''
+                  ? data!.location
+                  : mapBoxController.place.value
+              : mapBoxController.place.value,
+          "longitude": editCheck.value
+              ? mapBoxController.latlong.longitude == 76.267303
+                  ? data!.longitude
+                  : mapBoxController.latlong.longitude
+              : mapBoxController.latlong.longitude,
+          "latitude": editCheck.value
+              ? mapBoxController.latlong.latitude == 9.931233
+                  ? data!.latitude
+                  : mapBoxController.latlong.latitude
+              : mapBoxController.latlong.latitude,
         };
         final response = editCheck.value
             ? await apiObj.updateRoom(roomDetails, roomObjForEdit!.id!)

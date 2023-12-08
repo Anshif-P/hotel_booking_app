@@ -6,6 +6,7 @@ import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:hotel_booking_app/widgets/homewidgets/text_booking_widget.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class RecentBookingWidget extends StatelessWidget {
   final double screenHeight;
   final double widthMedia;

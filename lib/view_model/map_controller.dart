@@ -23,7 +23,7 @@ class MapBoxController extends GetxController {
 
   onSubmitted(String enteredValue) async {
     searchResults = await MapBoxHelper.getSearchResults(enteredValue);
-    print(searchResults);
+
     update();
   }
 

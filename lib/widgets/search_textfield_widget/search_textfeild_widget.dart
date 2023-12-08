@@ -21,7 +21,7 @@ class SearchTextFeildWidget extends StatelessWidget {
       child: TextField(
         onSubmitted: onSubmittedFunction,
         controller: controller,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           prefixIcon: Icon(
             Icons.search_rounded,
             color: Colors.grey,

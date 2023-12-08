@@ -159,23 +159,6 @@ class ScreenRoomDetails extends StatelessWidget {
                                   fontSize: 24,
                                 )),
                               ),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.star_rate_rounded,
-                                    color: CustomColors.mainColor,
-                                    size: 20,
-                                  ),
-                                  Text(
-                                    '(4.0)',
-                                    style: GoogleFonts.inter(
-                                        textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                    )),
-                                  )
-                                ],
-                              ),
                             ],
                           ),
                           SizedBox(
@@ -186,7 +169,6 @@ class ScreenRoomDetails extends StatelessWidget {
                         ]),
                   ),
                 ),
-                //  height: heightMedia,
               ),
             ),
             Positioned(

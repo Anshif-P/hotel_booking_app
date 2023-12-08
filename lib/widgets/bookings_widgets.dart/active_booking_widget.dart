@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../model/booking_model.dart';
 import 'card_widget.dart';
 
+// ignore: must_be_immutable
 class ActiveBookingWidget extends StatelessWidget {
   final double widthMedia;
   final double heightMedia;

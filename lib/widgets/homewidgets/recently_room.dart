@@ -48,7 +48,8 @@ class RecentAddedRoomWidget extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: vendorController.vendorRooms.length,
                       itemBuilder: (context, index) {
-                        final data = vendorController.vendorRooms[index];
+                        final data = vendorController.vendorRooms[
+                            vendorController.vendorRooms.length - index - 1];
                         return Padding(
                           padding: const EdgeInsets.only(right: 15),
                           child: SingleChildScrollView(
