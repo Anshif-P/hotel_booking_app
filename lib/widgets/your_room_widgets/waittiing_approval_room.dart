@@ -24,10 +24,10 @@ class ScreenPendingApproval extends StatelessWidget {
         .where((element) => element.isApproved == false)
         .toList();
     return Column(children: [
-      Container(
-        height: 1,
-        color: CustomColors.lightGreyColor,
-      ),
+      // Container(
+      //   height: 1,
+      //   color: CustomColors.lightGreyColor,
+      // ),
       waittingForApprovelRoomList.isNotEmpty
           ? Expanded(
               child: GetBuilder<VendorController>(

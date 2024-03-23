@@ -158,45 +158,6 @@ class AddRoomController extends GetxController {
     } else {}
   }
 
-  // Future getImageUrlFromFirebase(List? imagesList, image) async {
-  //   print('-----------------------------------------image list');
-  //   print(imagesList);
-  //   print('-----------------------------------------image');
-  //   print(image);
-
-  //   List firebaseImageUrlsList = List.generate(4, (index) => '');
-  //   String? imageFirebaseUrl;
-  //   //late List firebaseImageUrlsList;
-  //   if (editCheck.value != true) {
-  //     for (int i = 0; i < 4; i++) {
-  //       String uniqueName = DateTime.now().millisecond.toString();
-  //       Reference fireBaseRootReference = FirebaseStorage.instance.ref();
-  //       Reference toUploadImgReference =
-  //           fireBaseRootReference.child('myPictures$uniqueName.png');
-  //       try {
-  //         await toUploadImgReference.putFile(File(imagesList![i]));
-  //         firebaseImageUrlsList[i] =
-  //             await toUploadImgReference.getDownloadURL();
-  //       } catch (e) {
-  //         return null;
-  //       }
-  //     }
-  //     return firebaseImageUrlsList;
-  //   } else {
-  //     String uniqueName = DateTime.now().millisecond.toString();
-  //     Reference fireBaseRootReference = FirebaseStorage.instance.ref();
-  //     Reference toUploadImgReference =
-  //         fireBaseRootReference.child('myPictures$uniqueName.png');
-  //     try {
-  //       await toUploadImgReference.putFile(File(image));
-  //       imageFirebaseUrl = await toUploadImgReference.getDownloadURL();
-  //       return imageFirebaseUrl;
-  //     } catch (e) {
-  //       return null;
-  //     }
-  //   }
-  // }
-
   Future<dynamic> getImageUrlFromFirebase(List? imagesList, image) async {
     try {
       List<String> firebaseImageUrlsList = List.generate(4, (index) => '');

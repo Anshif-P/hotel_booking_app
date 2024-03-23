@@ -40,6 +40,7 @@ class ScreenRooms extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: TabBar(
+                tabAlignment: TabAlignment.start,
                 labelStyle: GoogleFonts.inter(
                     textStyle: const TextStyle(
                   color: Colors.black,
@@ -48,7 +49,8 @@ class ScreenRooms extends StatelessWidget {
                 indicatorColor: Colors.black,
                 labelColor: Colors.black,
                 isScrollable: true,
-                dividerColor: Colors.black,
+                dividerColor: Colors.grey,
+                dividerHeight: 0.5,
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: const [
                   Tab(

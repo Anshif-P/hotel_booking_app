@@ -72,13 +72,6 @@ class ScreenBookingDetails extends StatelessWidget {
                 Text('${data.roomId.propertyType} ',
                     style: GoogleFonts.inter(
                         fontSize: 19, fontWeight: FontWeight.w600)),
-                // Row(children: [
-                //   Icon(Icons.star_rate_rounded,
-                //       color: CustomColors.mainColor, size: 18),
-                //   const BookingDetailsTextWidget(
-                //     text: '(${data.roomId.})',
-                //   ),
-                // ])
               ]),
               SizedBox(height: heightMedia * 0.005),
               LocationTextWidget(text1: '${data.place}', text2: 'India'),

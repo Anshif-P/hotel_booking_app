@@ -79,60 +79,56 @@ class RoomCardWidget extends StatelessWidget {
                   ])),
               Expanded(
                   flex: 4,
-                  child: SizedBox(
-                      width: widthMedia * 0.12,
-                      height: heightMedia * 0.12,
-                      child: Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(height: heightMedia * 0.006),
-                                Text(
-                                  propertyName,
+                  child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            Text(
+                              propertyName,
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600)),
+                            ),
+                            SizedBox(height: heightMedia * 0.006),
+                            Row(children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: Color(0xFFCB102F),
+                                size: 16,
+                              ),
+                              Text(location,
                                   style: GoogleFonts.inter(
                                       textStyle: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600)),
-                                ),
-                                SizedBox(height: heightMedia * 0.006),
-                                Row(children: [
-                                  const Icon(
-                                    Icons.location_on,
-                                    color: Color(0xFFCB102F),
-                                    size: 16,
-                                  ),
-                                  Text(location,
-                                      style: GoogleFonts.inter(
-                                          textStyle: const TextStyle(
-                                        color: Color(0xFFA19B9B),
-                                        fontSize: 12,
-                                      )))
-                                ]),
-                                SizedBox(height: heightMedia * 0.006),
-                                CardText(
-                                    text1: 'Property type',
-                                    text2: propertyType),
-                                SizedBox(height: heightMedia * 0.006),
-                                CardText(text1: 'Category', text2: category),
-                                SizedBox(height: heightMedia * 0.006),
-                                Row(children: [
-                                  Text('Price : ',
-                                      style: GoogleFonts.inter(
-                                          textStyle: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                      ))),
-                                  Text('₹$price',
-                                      style: GoogleFonts.inter(
-                                          textStyle: TextStyle(
-                                        color: CustomColors.greenColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                      )))
-                                ])
-                              ])))),
+                                    color: Color(0xFFA19B9B),
+                                    fontSize: 12,
+                                  )))
+                            ]),
+                            SizedBox(height: heightMedia * 0.006),
+                            CardText(
+                                text1: 'Property type', text2: propertyType),
+                            SizedBox(height: heightMedia * 0.006),
+                            CardText(text1: 'Category', text2: category),
+                            SizedBox(height: heightMedia * 0.006),
+                            Row(children: [
+                              Text('Price : ',
+                                  style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ))),
+                              Text('₹$price',
+                                  style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                    color: CustomColors.greenColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                  )))
+                            ])
+                          ]))),
               SizedBox(
                   width: widthMedia * 0.2,
                   child: Padding(
@@ -161,22 +157,13 @@ class RoomCardWidget extends StatelessWidget {
                                       size: 20,
                                     )),
                                 SizedBox(height: heightMedia * 0.016),
-                                // InkWell(
-                                //     onTap: () {
-                                //       Get.to(() => ScreenRoomDetails(
-                                //           data: data,
-                                //           propertyName: propertyName));
-                                //     },
-                                //     child: Text('View',
-                                //         style: GoogleFonts.inter(
-                                //             textStyle: const TextStyle(
-                                //           color: Colors.blue,
-                                //           fontWeight: FontWeight.w600,
-                                //           fontSize: 9,
-                                //         )))),
                                 SizedBox(height: heightMedia * 0.014),
                                 ElevatedButton(
                                     style: ButtonStyle(
+                                        shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)))),
                                         alignment: (Alignment.center),
                                         elevation: MaterialStateProperty.all(0),
                                         minimumSize: MaterialStateProperty.all(
@@ -195,6 +182,7 @@ class RoomCardWidget extends StatelessWidget {
                                     child: Text('Edit',
                                         style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 9,
                                         ))))

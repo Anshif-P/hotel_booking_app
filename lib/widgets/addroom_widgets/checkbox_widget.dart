@@ -27,10 +27,8 @@ class CheckBoxWidget extends StatelessWidget {
                 child: Obx(
                   () => Checkbox(
                       checkColor: Colors.black,
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white),
                       fillColor: MaterialStateColor.resolveWith(
-                          (states) => CustomColors.lightGreyColor),
+                          (states) => Colors.white),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(3)),
                       value: addRoomController

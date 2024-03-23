@@ -250,39 +250,44 @@ class ScreenEdit extends StatelessWidget {
                 height: screenheight * 0.02,
               ),
               Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: SingleChildScrollView(
-                    child: Column(children: [
-                      SizedBox(
-                        height: screenheight * 0.02,
-                      ),
-                      EditProfileTextFeildWdiget(
-                          vendorController: vendorController,
-                          feildControll: true,
-                          text: 'Property name',
-                          validation: (value) =>
-                              vendorController.textFieldValidation(value),
-                          screenHeight: screenheight,
-                          screenwidth: screenWidth,
-                          textEditingController:
-                              vendorController.propertyNameController,
-                          hintText: 'enter property name'),
-                      EditProfileTextFeildWdiget(
-                          vendorController: vendorController,
-                          text: 'Property location',
-                          validation: (value) =>
-                              vendorController.textFieldValidation(value),
-                          screenHeight: screenheight,
-                          screenwidth: screenWidth,
-                          textEditingController:
-                              vendorController.propertyLocationController,
-                          dividerCheck: true,
-                          hintText: 'enter property loaction'),
-                      SizedBox(
-                        height: screenheight * 0.02,
-                      ),
-                    ]),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                        SizedBox(
+                          height: screenheight * 0.02,
+                        ),
+                        EditProfileTextFeildWdiget(
+                            vendorController: vendorController,
+                            feildControll: true,
+                            text: 'Property name',
+                            validation: (value) =>
+                                vendorController.textFieldValidation(value),
+                            screenHeight: screenheight,
+                            screenwidth: screenWidth,
+                            textEditingController:
+                                vendorController.propertyNameController,
+                            hintText: 'enter property name'),
+                        EditProfileTextFeildWdiget(
+                            vendorController: vendorController,
+                            text: 'Property location',
+                            validation: (value) =>
+                                vendorController.textFieldValidation(value),
+                            screenHeight: screenheight,
+                            screenwidth: screenWidth,
+                            textEditingController:
+                                vendorController.propertyLocationController,
+                            dividerCheck: true,
+                            hintText: 'enter property loaction'),
+                        SizedBox(
+                          height: screenheight * 0.02,
+                        ),
+                      ]),
+                    ),
                   ),
                 ),
               )

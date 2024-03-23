@@ -36,7 +36,10 @@ class ScreenCoupon extends StatelessWidget {
               'Add Coupon ',
               style: TextStyle(color: Colors.white),
             ),
-            Icon(Icons.add)
+            Icon(
+              Icons.add,
+              color: Colors.white,
+            )
           ],
         ),
       ),

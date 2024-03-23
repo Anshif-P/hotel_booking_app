@@ -128,10 +128,10 @@ class ScreenRoomDetails extends StatelessWidget {
             ),
             Positioned(
               top: heightMedia * 0.3,
-              height: heightMedia * .1,
               left: 0,
               right: 0,
               child: Container(
+                width: double.maxFinite,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -140,34 +140,31 @@ class ScreenRoomDetails extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: heightMedia * 0.04,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                propertyName,
-                                style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 24,
-                                )),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: heightMedia * 0.004,
-                          ),
-                          LocationTextWidget(
-                              text1: data.location!, text2: data.city!),
-                        ]),
-                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: heightMedia * 0.04,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              propertyName,
+                              style: GoogleFonts.inter(
+                                  textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 24,
+                              )),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: heightMedia * 0.004,
+                        ),
+                        LocationTextWidget(
+                            text1: data.location!, text2: data.city!),
+                      ]),
                 ),
               ),
             ),

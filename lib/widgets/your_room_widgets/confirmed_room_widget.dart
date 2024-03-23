@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/model/get_rooms_model.dart';
 import 'package:hotel_booking_app/view_model/vendor_controller.dart';
 import 'package:lottie/lottie.dart';
-
 import 'room_card_widget.dart';
 
 class ScreenApprovedRoom extends StatelessWidget {
@@ -23,10 +21,6 @@ class ScreenApprovedRoom extends StatelessWidget {
         .where((element) => element.isApproved == true)
         .toList();
     return Column(children: [
-      Container(
-        height: 1,
-        color: CustomColors.lightGreyColor,
-      ),
       approvedRoomList.isNotEmpty
           ? Expanded(
               child: GetBuilder<VendorController>(

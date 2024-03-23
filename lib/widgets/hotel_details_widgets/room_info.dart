@@ -23,7 +23,6 @@ class RoomInfoWidget extends StatelessWidget {
           children: [
             Expanded(
               child: SizedBox(
-                height: heightMedia * 0.09,
                 //  color: Colors.yellow,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,6 @@ class RoomInfoWidget extends StatelessWidget {
             ),
             Expanded(
                 child: SizedBox(
-              height: heightMedia * 0.09,
               //  color: Colors.red,
               child:
                   Column(crossAxisAlignment: CrossAxisAlignment.end, children: [

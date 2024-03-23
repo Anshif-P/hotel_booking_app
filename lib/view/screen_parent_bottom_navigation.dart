@@ -29,9 +29,10 @@ class ScreenParentNavigation extends StatelessWidget {
       floatingActionButton: CircleAvatar(
         radius: 31,
         backgroundColor: CustomColors.bottomAddButtomGeyColor,
-        child: Transform.scale(
-          scale: .9,
+        child: CircleAvatar(
+          radius: 25,
           child: FloatingActionButton(
+            shape: CircleBorder(),
             elevation: 0,
             backgroundColor: CustomColors.mainColor,
             onPressed: () async {

@@ -1,6 +1,8 @@
+// ignore_for_file: deprecated_member_use, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:hotel_booking_app/constance/colors.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../details_booking_widgets/text_cusomerinfo.dart';
 
 class CustomerInformationWidget extends StatelessWidget {
@@ -42,10 +44,15 @@ class CustomerInformationWidget extends StatelessWidget {
                 SizedBox(
                   height: heightMedia * 0.015,
                 ),
-                CusomerInfoTextWidget(
-                  text1: 'Mobile No :',
-                  text2: '  $mobNo',
-                  colorCheck: true,
+                InkWell(
+                  onTap: () {
+                    _launchCall(mobNo);
+                  },
+                  child: CusomerInfoTextWidget(
+                    text1: 'Mobile No :',
+                    text2: '  $mobNo',
+                    colorCheck: true,
+                  ),
                 ),
                 SizedBox(
                   height: heightMedia * 0.015,
@@ -58,5 +65,14 @@ class CustomerInformationWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _launchCall(String phoneNumber) async {
+    final url = 'tel:$phoneNumber';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

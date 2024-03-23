@@ -29,10 +29,10 @@ class ActiveBookingWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          height: 1,
-          color: CustomColors.lightGreyColor,
-        ),
+        // Container(
+        //   height: 1,
+        //   color: CustomColors.lightGreyColor,
+        // ),
         Expanded(
             child: bookingHistoryList.isNotEmpty
                 ? ListView.separated(

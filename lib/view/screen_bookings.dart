@@ -33,6 +33,7 @@ class ScreenBooking extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: TabBar(
+                  tabAlignment: TabAlignment.start,
                   labelStyle: GoogleFonts.inter(
                       textStyle: const TextStyle(
                     color: Colors.black,
@@ -43,6 +44,8 @@ class ScreenBooking extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 7),
                   isScrollable: true,
                   labelColor: Colors.black,
+                  dividerColor: Colors.grey,
+                  dividerHeight: 0.5,
                   tabs: const [
                     Tab(
                       text: 'Active',
