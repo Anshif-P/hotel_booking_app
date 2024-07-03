@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:hotel_booking_app/model/sharepref_model.dart';
 import 'package:http/http.dart ' as http;
-
 import '../res/urls.dart';
 
 class Api {

@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hotel_booking_app/constance/colors.dart';
 import 'package:hotel_booking_app/view_model/addroom_controller.dart';
 
 class CheckBoxWidget extends StatelessWidget {
